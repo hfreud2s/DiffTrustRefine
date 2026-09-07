@@ -116,68 +116,6 @@ def generate_binary_descriptions(spec: Specification,
     )
     return prompt
 
-def generate_oracle_prompt_v2(inst: Instance,
-                              question: str,
-                              desc1: str,
-                              desc2: str,
-                              other_questions: list[str]) -> str:
-    """
-    Improved oracle prompt that prevents information leakage by:
-    1. Anchoring the oracle to the binary choice (desc1 / desc2) so it cannot
-       introduce information beyond what resolving the question requires.
-    2. Explicitly listing the other questions for the same task so the model
-       knows which topics are off-limits.
-    3. Adding a single-new-fact test so the model self-checks its output.
-
-    inst:            the Instance containing the spec, ground truth code, and test list
-    question:        the question whose answer should be embedded in the refined description
-    desc1:           the YES-branch description already generated for this question
-    desc2:           the NO-branch description already generated for this question
-    other_questions: questions asked about the same task that this oracle must NOT address
-    returns:         the prompt string
-    """
-    other_q_block = (
-        "\n".join(f"  - {q}" for q in other_questions)
-        if other_questions else "  (none)"
-    )
-    prompt = (
-        f"You are writing the oracle (ground-truth) refined specification for a Python programming task.\n\n"
-        f"Original task:\n"
-        f"{inst.spec.description}\n\n"
-        f"A yes/no question has been asked about this task:\n"
-        f"Question: {question}\n\n"
-        f"The two possible answers to this question correspond to these two descriptions:\n"
-        f"  description 1 (one possible answer): {desc1}\n"
-        f"  description 2 (other possible answer): {desc2}\n\n"
-        f"Use the ground truth implementation and test cases below to determine which answer is correct:\n"
-        f"Ground truth:\n{inst.code}\n\n"
-        f"Test cases:\n{inst.test_list}\n\n"
-        f"Other questions asked independently about this same task — do NOT address these in your answer:\n"
-        f"{other_q_block}\n\n"
-        f"Write the oracle description following these rules:\n"
-        f"1. Choose one of the two descriptions above as your starting point (or write a minimal variation of it)\n"
-        f"2. Answer ONLY the question — add nothing that is not needed to answer it\n"
-        f"3. Do NOT reveal anything covered by the other questions listed above\n"
-        f"4. Do NOT mention return types, parameter types, edge cases, or implementation details unless the question specifically asks about them\n"
-        f"5. Do NOT reference the ground truth, test cases, or how the function is implemented\n"
-        f"6. Contain no code or examples\n\n"
-        f"Self-check before writing: someone reading only the original task description and your oracle description should gain exactly ONE new piece of information — the answer to the question above, and nothing else.\n\n"
-        f"Output format:\n"
-        f"description: ...\n\n"
-        f"Example:\n"
-        f"Original task: \"Sort a list of integers.\"\n"
-        f"Question: \"Should the list be sorted in ascending order?\"\n"
-        f"description 1: \"Sort a list of integers in ascending order.\"\n"
-        f"description 2: \"Sort a list of integers in descending order.\"\n"
-        f"Other questions: \"Should the function sort in-place?\"\n"
-        f"Correct oracle output:\n"
-        f"description: Sort a list of integers in ascending order.\n\n"
-        f"Bad oracle output:\n"
-        f"description: Sort a list of integers in ascending order and return the sorted list.\n"
-        f"(Bad because 'return the sorted list' addresses the in-place question, which is off-limits.)"
-    )
-    return prompt
-
 
 def generate_oracle_prompt(inst: Instance,
                            question: str):
