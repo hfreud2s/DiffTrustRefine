@@ -229,6 +229,7 @@ class Dataset:
                 self.save()
 
 
+
 if __name__ == "__main__":
     import argparse
 
@@ -236,16 +237,85 @@ if __name__ == "__main__":
         description="Generate a HumanEvalComm dataset (pickled to .data/<name>.pkl)."
     )
     parser.add_argument("--name", default="dataset-complete", help="Output dataset name (pickle basename).")
-    parser.add_argument(
+
+    # Exactly one way to choose the tasks, and no default: 
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument(
         "--task-ids",
         default=None,
-        help="Comma-separated HumanEval task ids to include, e.g. 0,3,7. Omit to use all tasks.",
+        help="Comma-separated HumanEval task ids to include, e.g. 0,3,7.",
+    )
+    selection.add_argument(
+        "--sample",
+        type=int,
+        default=None,
+        help="Draw this many task ids at random from --pool.",
+    )
+    selection.add_argument(
+        "--all",
+        action="store_true",
+        help="Build every task in HumanEvalComm.json.",
+    )
+
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help="Seed for --sample, so the drawn subset is reproducible. Ignored without --sample.",
+    )
+    parser.add_argument(
+        "--pool",
+        default="dataset-complete",
+        help="Dataset whose task ids --sample draws from; keeps the draw to tasks known to pass check(). "
+             "Pass 'all' to draw from every task in HumanEvalComm.json instead.",
     )
     args = parser.parse_args()
 
-    task_ids = None
-    if args.task_ids:
+    if args.all:
+        task_ids = None
+    elif args.task_ids is not None:
         task_ids = [int(t) for t in args.task_ids.split(",") if t.strip()]
+        if not task_ids:
+            parser.error("--task-ids is empty.")
+    else:
+        data_path = pathlib.Path(__file__).parent / ".data"
+        # Default: draw only from tasks an earlier run already accepted, so a sample of N yields N
+        # instances. Eleven of the 164 tasks fail check(), and drawing from all of them silently
+        # shrinks the result.
+        if args.pool == "all":
+            with open((data_path / "HumanEvalComm.json").as_posix(), "r", encoding="utf-8") as f:
+                pool = sorted({int(record["name"].split("/")[1]) for record in json.load(f)})
+        else:
+            pool_pkl = data_path / f"{args.pool}.pkl"
+            if not pool_pkl.exists():
+                parser.error(f"--pool {args.pool}: {pool_pkl} not found. Build it first, or pass --pool all.")
+            with open(pool_pkl.as_posix(), "rb") as f:
+                pool = sorted({inst.task_id for inst in cloudpickle.load(f)})
+        if args.sample > len(pool):
+            parser.error(f"--sample {args.sample} exceeds the {len(pool)} tasks in pool '{args.pool}'.")
+        # A private Random instance: seeding the global one would also pin the input mutation and
+        # spec sampling that check() relies on, which we want to stay independent of the draw.
+        task_ids = random.Random(args.seed).sample(pool, args.sample)
+        print(f"sampled {args.sample} of {len(pool)} task ids from '{args.pool}' (seed={args.seed}): {sorted(task_ids)}")
 
     dataset = Dataset(args.name, task_ids=task_ids)
+
+    # Ways to call this script. Exactly one of --task-ids / --sample / --all is required, and
+    # --name is worth passing every time: it defaults to dataset-complete, which overwrites the
+    # full dataset. Output always lands in .data/<name>.pkl.
+    #
+    #   # a randomly drawn 50-task subset sampled from tasks that are known to compile
+    #   python HumanEvalComm/instance.py --name dataset-50 --sample 50 --seed 42
+    #
+    #   # sample from all 164 tasks instead, some of the draw may fail to build
+    #   python HumanEvalComm/instance.py --name dataset-raw --sample 50 --pool all
+    #
+    #   # sample from a subset you built earlier
+    #   python HumanEvalComm/instance.py --name dataset-10 --sample 10 --pool dataset-50
+    #
+    #   # named tasks, e.g. to debug one instance
+    #   python HumanEvalComm/instance.py --name mini --task-ids 0,3,7
+    #
+    #   # rebuild all 164 (this is how dataset-complete was made; 11 tasks fail check())
+    #   python HumanEvalComm/instance.py --name dataset-complete --all
     dataset.make()
