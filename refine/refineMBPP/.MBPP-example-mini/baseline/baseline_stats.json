@@ -1,0 +1,72 @@
+[
+  {
+    "task_id": 106,
+    "name": "add_lists",
+    "nb_candidates": 10,
+    "incoherence": 0.545,
+    "error": 0.609
+  },
+  {
+    "task_id": 117,
+    "name": "list_to_float",
+    "nb_candidates": 10,
+    "incoherence": 0.217,
+    "error": 0.902
+  },
+  {
+    "task_id": 407,
+    "name": "rearrange_bigger",
+    "nb_candidates": 10,
+    "incoherence": 0.236,
+    "error": 0.601
+  },
+  {
+    "task_id": 415,
+    "name": "max_Product",
+    "nb_candidates": 10,
+    "incoherence": 0.314,
+    "error": 0.457
+  },
+  {
+    "task_id": 421,
+    "name": "concatenate_tuple",
+    "nb_candidates": 10,
+    "incoherence": 0.904,
+    "error": 0.802
+  },
+  {
+    "task_id": 429,
+    "name": "and_tuples",
+    "nb_candidates": 10,
+    "incoherence": 0.231,
+    "error": 0.107
+  },
+  {
+    "task_id": 438,
+    "name": "count_bidirectional",
+    "nb_candidates": 10,
+    "incoherence": 0.303,
+    "error": 0.847
+  },
+  {
+    "task_id": 572,
+    "name": "two_unique_nums",
+    "nb_candidates": 10,
+    "incoherence": 0.512,
+    "error": 0.864
+  },
+  {
+    "task_id": 614,
+    "name": "cummulative_sum",
+    "nb_candidates": 10,
+    "incoherence": 0.656,
+    "error": 1.0
+  },
+  {
+    "task_id": 780,
+    "name": "find_combinations",
+    "nb_candidates": 10,
+    "incoherence": 0.644,
+    "error": 0.801
+  }
+]

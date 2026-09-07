@@ -1,0 +1,992 @@
+[
+    {
+        "custom_id": "descriptions_task_780_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01VeS1DAsnh6prdNXEN3YAwu",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Given a tuple list where each element is a tuple of numbers, return a list of tuples where each tuple contains the element-wise sums of all possible pairwise combinations of the tuples in the input list.\ndescription 2: Given a tuple list where each element is a tuple of numbers, return a list of lists where each list contains the element-wise sums of all possible pairwise combinations of the tuples in the input list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 308,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 101,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_780_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_011uJFnvq2Xu1assw7AooEXS",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Given a list of tuples, the function should return a list of tuples where each result tuple is the element-wise sum of every unique pair (2-element combination) of tuples from the input list.\n\ndescription 2: Given a list of tuples, the function should return a list of tuples representing the element-wise sums for all possible subset combinations of any size (from single tuples up to the full list) from the input list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 332,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 103,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_415_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01XH7tXCDzcsBExb6HTLv9cJ",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, return the pair whose elements appear earliest (by their indices) in the array.\ndescription 2: Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, any such pair may be returned."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 283,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 81,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_429_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_013SquitC72XaXqL4Us8ujgj",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Given two tuples of integers, return a tuple where each element is the bitwise AND of the corresponding elements from the two input tuples.\ndescription 2: Given two tuples of integers, return a tuple where each element is the logical AND of the corresponding elements from the two input tuples, treating each element as a truth value."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 276,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 77,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_429_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01AE38fwNr2mqQNs7PxY3uuT",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Extract the element-wise bitwise AND of the given two tuples and return the result as a single tuple of the computed values.\ndescription 2: Extract the element-wise bitwise AND of the given two tuples and return the result as a list of tuples, where each tuple pairs the original elements with their bitwise AND result or simply contains the AND values as individual tuples."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 279,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 88,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_438_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01RNhXEW8SLwh5Tmeq763b5m",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Given a list of tuples, return the count of individual tuples that have a corresponding reverse tuple also present in the list.\ndescription 2: Given a list of tuples, return the count of unique bidirectional pair combinations, where each combination consists of a tuple and its reverse both present in the list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 279,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 72,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_106_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_014jHtc7RtsYQfcpRAXzeQDV",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Append the given list to each of the given tuples individually, returning a collection of modified tuples where each original tuple has the list's elements appended to it.\ndescription 2: Append the given list to the given tuples as a whole, treating all tuples as a single collection and returning one combined tuple with the list's elements appended at the end."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 278,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 85,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_438_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01WPqyaXgtm5Hn9Ev32y7LCs",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Count the number of bidirectional tuple pairs in a list, where a bidirectional pair exists when both (a, b) and (b, a) are present, and a tuple is also considered a bidirectional pair with itself, meaning (a, a) paired with another (a, a), or (a, b) paired with a duplicate (a, b), counts as a bidirectional pair.\n\ndescription 2: Count the number of bidirectional tuple pairs in a list, where a bidirectional pair exists only when both (a, b) and (b, a) are present and a does not equal b, meaning a tuple cannot form a bidirectional pair with an identical copy of itself."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 291,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 159,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_106_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_011C7iiQYgdUZdALqhTEqyev",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Append the given list to the given tuple and return the result as a tuple.\ndescription 2: Append the given list to the given tuple and return the result as a list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 269,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 46,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_429_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_0192TeGsatKy5HbjrF1ytPDL",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Extract the elementwise bitwise AND of two tuples, returning a tuple of results. If the two input tuples have different lengths, only process elements up to the length of the shorter tuple.\ndescription 2: Extract the elementwise bitwise AND of two tuples, returning a tuple of results. Both input tuples must be of equal length, and all elements from both tuples are processed."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 282,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 90,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_415_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01LnGpowkWPLpPKSUX8Nis2A",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find a pair with the highest product from a given array of integers and return the pair of numbers themselves.\ndescription 2: Find a pair with the highest product from a given array of integers and return the product value."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 271,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 52,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_117_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Kkt8duDgZEF7qEnLDCgnzV",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Convert all possible convertible elements in a list of lists to floats, including converting None values to floats (e.g., 0.0).\ndescription 2: Convert all possible convertible elements in a list of lists to floats, leaving None values unchanged."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 276,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 64,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_421_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01WmG57bPS2KFcm9xqpwUaVj",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Concatenate each element of a tuple by the delimiter, returning an empty string when given an empty tuple.\ndescription 2: Concatenate each element of a tuple by the delimiter, raising an error or returning a non-empty default value when given an empty tuple."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 266,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 63,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_117_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01AjPcXswBidQLS6XxiMkDtR",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Convert all possible convertible elements in a list of lists to floats, including boolean values, which should be converted to their float equivalents.\ndescription 2: Convert all possible convertible elements in a list of lists to floats, but leave boolean values unchanged as their original boolean type."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 280,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 67,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_438_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01UXndjqvQbX1nba365Momah",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Count the number of bidirectional tuple pairs in a list, where each individual pairing of a tuple with a matching reverse tuple is counted separately, so multiple copies of a reverse tuple contribute multiple counted pairs.\n\ndescription 2: Count the number of distinct bidirectional tuple pair types in a list, where a pair of tuples that are reverses of each other is counted at most once regardless of how many duplicate copies exist."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 315,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 95,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_117_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01TdRsA1zoGdkBLRjDg9jSfV",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Convert all possible convertible elements in a list of lists to floats by modifying the original list of lists in place, returning the mutated original list.\ndescription 2: Convert all possible convertible elements in a list of lists to floats, returning a new list of lists with the conversions applied, leaving the original list of lists unchanged."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 278,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 79,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_572_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_013Rfk4huF1optzPC1ugQ3Cw",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Remove duplicate numbers from a given number of lists, preserving the original order of first appearance for each element within each list.\ndescription 2: Remove duplicate numbers from a given number of lists, with no requirement on the order of elements in the resulting lists."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 269,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 60,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_614_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_011P529eJLmnoGZ1c8Yb85Sz",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find the cumulative sum of all numeric values present in the given tuple list, silently ignoring any non-numeric values such as strings.\ndescription 2: Find the cumulative sum of all values present in the given tuple list, raising an error if any non-numeric values such as strings are encountered."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 285,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 71,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_421_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01T6o16CFnW7vSo1vibyoGYd",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Concatenate each element of a tuple using a delimiter placed only between elements.\ndescription 2: Concatenate each element of a tuple using a delimiter placed between elements and also after the last element."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 271,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 49,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_407_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01J16Jyk6rVZDE8tf1QXHJWW",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Create the next bigger number by rearranging the digits of a given number. For negative number inputs, rearrange only the digit portion to form the next bigger arrangement of those digits while preserving the negative sign in the result.\n\ndescription 2: Create the next bigger number by rearranging the digits of a given number. The function only accepts non-negative integers and returns -1 or an appropriate error indicator when given a negative number input."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 283,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 102,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_614_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01R5AL2ZrHvUG1s67QSFY7bJ",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find the single total sum of all the values present in the given tuple list.\ndescription 2: Find the running cumulative sum of all the values present in the given tuple list, returning a list where each element is the sum of all values up to and including that point."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 284,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 64,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_614_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01BamDNDgaUnkH8QmzwmNQFq",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find the cumulative sum of all numeric values present in the given tuple list, including values found within any nested tuples by recursively summing their inner values.\ndescription 2: Find the cumulative sum of all top-level numeric values present in the tuples of the given tuple list, treating any nested tuples as non-numeric elements and excluding them from the sum."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 280,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 85,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_572_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01M7hk41PDvZPHncp4adSdaf",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Remove duplicate numbers from a given number of lists by modifying the original lists in place and returning them.\ndescription 2: Remove duplicate numbers from a given number of lists by returning new lists with duplicates removed, leaving the original lists unchanged."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 277,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 57,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_421_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01LDrJT28a9szHxMX9gonsQn",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Concatenate each element of a tuple by the delimiter, converting non-string elements to strings before concatenation.\ndescription 2: Concatenate each element of a tuple by the delimiter, requiring all elements to already be strings and raising an error if any element is not a string."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 269,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 66,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_780_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01UjFLb5EQtsPaNwquzqDgTi",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Given a list of tuples, return all pairwise combinations where each combination produces a single tuple whose elements are the element-wise sums (by index position) of the two constituent tuples.\n\ndescription 2: Given a list of tuples, return all pairwise combinations where each combination produces a single scalar value that is the sum of all elements from both constituent tuples combined."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 322,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 88,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_407_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_012CTEMdt3H7NaJ7n7WMd2eZ",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Create the next bigger number by rearranging the digits of a given number. If the next permutation of digits would have a leading zero when written out, the result should still be returned as an integer, which naturally drops leading zeros.\n\ndescription 2: Create the next bigger number by rearranging the digits of a given number. If the next permutation of digits would produce a number with fewer digits than the input due to a leading zero, return -1 to indicate no valid next bigger number exists."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 308,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 114,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_415_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01HMeXWqLf7gzFmCSRiKfGuo",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Find a pair with the highest product from a given array of integers, where if the array contains only one element, that element paired with itself is considered a valid pair.\ndescription 2: Find a pair with the highest product from a given array of integers, where a pair must consist of two elements at distinct indices, so an array with fewer than two elements has no valid pair."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 282,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 85,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_106_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_018Yh7fPaBJ63LnSNKX4XddL",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Append the given list as a single element to the end of the given tuple, resulting in a new tuple where the last element is the list itself.\ndescription 2: Append the elements of the given list individually to the end of the given tuple, resulting in a new tuple that contains all original tuple elements followed by all list elements."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 279,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 77,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_572_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01GkpXAuRoBgtvHFoAnHAnYi",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Remove duplicate numbers across all lists combined, so that each number appears only once across all lists, retained in the list where it first occurs, and removed from all subsequent lists.\ndescription 2: Remove duplicate numbers within each individual list independently, so that each number appears only once per list, but the same number may still appear in multiple lists."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 293,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 77,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "descriptions_task_407_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01TMkrk4M88ooLdoDZt2BZn7",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description 1: Create the next bigger number by rearranging the digits of a given number. When no bigger number can be formed from the digits, the function should return -1.\n\ndescription 2: Create the next bigger number by rearranging the digits of a given number. The function always returns a valid number, assuming the input will always have a possible larger rearrangement."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 297,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 86,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    }
+]

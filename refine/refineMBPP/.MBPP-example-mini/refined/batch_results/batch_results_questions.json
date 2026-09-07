@@ -1,0 +1,332 @@
+[
+    {
+        "custom_id": "questions_task_117",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01AKXRo7HZV48iBD7xGuuzi1",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should boolean values (True/False) be converted to floats (1.0/0.0)?\nquestion 2: Should None values be converted to floats (e.g., 0.0)?\nquestion 3: Should the function modify the original list of lists in place rather than returning a new list of lists?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 258,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 77,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_407",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_0192Kr9VZ3ag4VyJMZp63t3B",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should the function return -1 (or a sentinel value) when no bigger number can be formed from the digits (e.g., input is 9 or 531)?\nquestion 2: Should the function handle negative number inputs by rearranging only the digit portion and preserving the negative sign?\nquestion 3: Should the function accept and correctly handle inputs with leading zeros in the result (e.g., input 1000000200 producing 1000000200's next permutation) by returning the number as an integer without leading zeros?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 260,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 125,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_614",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_019M9nbCTnvTwyuM9bmtqUyd",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should nested tuples within the tuple list have their inner values included in the cumulative sum?\nquestion 2: Should non-numeric values (e.g., strings) in the tuples be ignored rather than causing an error?\nquestion 3: Should the function return a single total sum of all values, rather than a list of running cumulative sums?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 261,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 83,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_780",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01NybJSCJicuCVkfYDVNeCPu",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should the function compute combinations of sums by pairing each tuple with every other tuple exactly once (i.e., all 2-element combinations), as opposed to computing all possible subset combinations of any size?\n\nquestion 2: When combining two tuples, should the sum be computed element-wise (matching by index position), as opposed to summing all elements into a single scalar value?\n\nquestion 3: Should the output be a list of tuples, or should it be a list of lists?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 289,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 112,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_438",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01SoCXFb7jrhtMinVCBULJuX",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should a tuple be considered as forming a bidirectional pair with itself (e.g., does [(1, 2), (1, 2)] count as having a bidirectional pair)?\nquestion 2: If there are multiple copies of a bidirectional pair (e.g., [(1, 2), (2, 1), (2, 1)]), should each unique pair of matching tuples be counted separately (resulting in 2) rather than counting the pair type once (resulting in 1)?\nquestion 3: Should the function count the number of individual tuples that participate in bidirectional pairs, rather than the number of bidirectional pair combinations?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 250,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 152,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_421",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01SqVA2e36GFBPCGDz4VzwbA",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should non-string elements in the tuple be converted to strings before concatenation?\nquestion 2: Should the delimiter be placed only between elements (as opposed to also after the last element)?\nquestion 3: Should the function return an empty string when given an empty tuple?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 253,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 64,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_106",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01VYAPQZGPbFe6zi42HPhQmW",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should the list be appended as a single element to the end of the tuple (resulting in the list being a nested element)?\nquestion 2: Should the result be returned as a tuple (as opposed to returning a list)?\nquestion 3: If given multiple tuples, should the list be appended to each tuple individually (returning a collection of modified tuples)?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 253,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 84,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_429",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_012cCN4U2XV4ecq6TqZeemmK",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should the function perform a bitwise AND operation on corresponding integer elements of the two tuples?\nquestion 2: Should the result be returned as a single tuple rather than a list of tuples or some other data structure?\nquestion 3: If the two input tuples have different lengths, should the function only process elements up to the length of the shorter tuple?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 257,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 83,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_415",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01NbrXSjEwyc7641RXMYbcP6",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should the function return the pair of numbers themselves rather than the product value?\nquestion 2: When multiple pairs share the same highest product, should the function return the pair that appears first (by earliest indices) in the array?\nquestion 3: Should the function consider a pair formed by the same single element used twice (same index) when the array has only one element?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 256,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 85,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "questions_task_572",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01AUuE3L3fYczW3dmsgC8GSq",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "question 1: Should duplicates be removed across all lists combined (i.e., a number appearing in multiple lists is kept only in the first list), or should duplicates be removed only within each individual list?\nquestion 2: Should the original order of elements be preserved within each list after removing duplicates?\nquestion 3: Should the function modify the lists in place and return them, or should it return new lists leaving the originals unchanged?"
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 253,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 97,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    }
+]

@@ -1,0 +1,232 @@
+[
+    {
+        "task_id": 106,
+        "questions": {
+            "q1": {
+                "question": "Should the list be appended as a single element to the end of the tuple (resulting in the list being a nested element)?",
+                "description1": "Append the given list as a single element to the end of the given tuple, resulting in a new tuple where the last element is the list itself.",
+                "description2": "Append the elements of the given list individually to the end of the given tuple, resulting in a new tuple that contains all original tuple elements followed by all list elements.",
+                "oracle_description": "Append the elements of the given list individually to the end of the given tuple, returning a new tuple that contains all original tuple elements followed by all list elements."
+            },
+            "q2": {
+                "question": "Should the result be returned as a tuple (as opposed to returning a list)?",
+                "description1": "Append the given list to the given tuple and return the result as a tuple.",
+                "description2": "Append the given list to the given tuple and return the result as a list.",
+                "oracle_description": "Append the given list to the given tuple and return the result as a tuple."
+            },
+            "q3": {
+                "question": "If given multiple tuples, should the list be appended to each tuple individually (returning a collection of modified tuples)?",
+                "description1": "Append the given list to each of the given tuples individually, returning a collection of modified tuples where each original tuple has the list's elements appended to it.",
+                "description2": "Append the given list to the given tuples as a whole, treating all tuples as a single collection and returning one combined tuple with the list's elements appended at the end.",
+                "oracle_description": "Append the given list to a single given tuple, returning a new tuple that contains the original tuple's elements followed by the list's elements."
+            }
+        }
+    },
+    {
+        "task_id": 117,
+        "questions": {
+            "q1": {
+                "question": "Should boolean values (True/False) be converted to floats (1.0/0.0)?",
+                "description1": "Convert all possible convertible elements in a list of lists to floats, including boolean values, which should be converted to their float equivalents.",
+                "description2": "Convert all possible convertible elements in a list of lists to floats, but leave boolean values unchanged as their original boolean type.",
+                "oracle_description": "Convert all possible convertible string elements in a list of tuples to floats, leaving purely alphabetic strings unconverted. Boolean values are not applicable as the input consists of string elements; strings representing numeric values (including integers and decimals) should be converted to floats."
+            },
+            "q2": {
+                "question": "Should None values be converted to floats (e.g., 0.0)?",
+                "description1": "Convert all possible convertible elements in a list of lists to floats, including converting None values to floats (e.g., 0.0).",
+                "description2": "Convert all possible convertible elements in a list of lists to floats, leaving None values unchanged.",
+                "oracle_description": "Convert all possible convertible string elements in a list of tuples to floats, leaving purely alphabetic strings unconverted. None values are not expected in the input and should not be handled."
+            },
+            "q3": {
+                "question": "Should the function modify the original list of lists in place rather than returning a new list of lists?",
+                "description1": "Convert all possible convertible elements in a list of lists to floats by modifying the original list of lists in place, returning the mutated original list.",
+                "description2": "Convert all possible convertible elements in a list of lists to floats, returning a new list of lists with the conversions applied, leaving the original list of lists unchanged.",
+                "oracle_description": "Convert all possible convertible elements in a list of tuples to floats, returning a new list of tuples rather than modifying the original in place."
+            }
+        }
+    },
+    {
+        "task_id": 407,
+        "questions": {
+            "q1": {
+                "question": "Should the function return -1 (or a sentinel value) when no bigger number can be formed from the digits (e.g., input is 9 or 531)?",
+                "description1": "Create the next bigger number by rearranging the digits of a given number. When no bigger number can be formed from the digits, the function should return -1.",
+                "description2": "Create the next bigger number by rearranging the digits of a given number. The function always returns a valid number, assuming the input will always have a possible larger rearrangement.",
+                "oracle_description": "Create the next bigger number by rearranging the digits of a given number. If no bigger number can be formed from the digits, return False."
+            },
+            "q2": {
+                "question": "Should the function handle negative number inputs by rearranging only the digit portion and preserving the negative sign?",
+                "description1": "Create the next bigger number by rearranging the digits of a given number. For negative number inputs, rearrange only the digit portion to form the next bigger arrangement of those digits while preserving the negative sign in the result.",
+                "description2": "Create the next bigger number by rearranging the digits of a given number. The function only accepts non-negative integers and returns -1 or an appropriate error indicator when given a negative number input.",
+                "oracle_description": "Create the next bigger number by rearranging the digits of a given positive number. If no bigger number can be formed by rearranging the digits, return False. The function does not need to handle negative number inputs."
+            },
+            "q3": {
+                "question": "Should the function accept and correctly handle inputs with leading zeros in the result (e.g., input 1000000200 producing 1000000200's next permutation) by returning the number as an integer without leading zeros?",
+                "description1": "Create the next bigger number by rearranging the digits of a given number. If the next permutation of digits would have a leading zero when written out, the result should still be returned as an integer, which naturally drops leading zeros.",
+                "description2": "Create the next bigger number by rearranging the digits of a given number. If the next permutation of digits would produce a number with fewer digits than the input due to a leading zero, return -1 to indicate no valid next bigger number exists.",
+                "oracle_description": "Create the next bigger number by rearranging the digits of a given number. If no bigger number can be formed, return False. The result should be returned as an integer, which naturally excludes any leading zeros."
+            }
+        }
+    },
+    {
+        "task_id": 415,
+        "questions": {
+            "q1": {
+                "question": "Should the function return the pair of numbers themselves rather than the product value?",
+                "description1": "Find a pair with the highest product from a given array of integers and return the pair of numbers themselves.",
+                "description2": "Find a pair with the highest product from a given array of integers and return the product value.",
+                "oracle_description": "Find a pair of numbers with the highest product from a given array of integers, returning the pair of numbers themselves as a tuple."
+            },
+            "q2": {
+                "question": "When multiple pairs share the same highest product, should the function return the pair that appears first (by earliest indices) in the array?",
+                "description1": "Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, return the pair whose elements appear earliest (by their indices) in the array.",
+                "description2": "Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, any such pair may be returned.",
+                "oracle_description": "Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, return the pair that appears first by earliest indices in the array."
+            },
+            "q3": {
+                "question": "Should the function consider a pair formed by the same single element used twice (same index) when the array has only one element?",
+                "description1": "Find a pair with the highest product from a given array of integers, where if the array contains only one element, that element paired with itself is considered a valid pair.",
+                "description2": "Find a pair with the highest product from a given array of integers, where a pair must consist of two elements at distinct indices, so an array with fewer than two elements has no valid pair.",
+                "oracle_description": "Find a pair with the highest product from a given array of integers. A pair must consist of two distinct elements (at different indices), so if the array has fewer than two elements, return \"No pairs exists\" instead."
+            }
+        }
+    },
+    {
+        "task_id": 421,
+        "questions": {
+            "q1": {
+                "question": "Should non-string elements in the tuple be converted to strings before concatenation?",
+                "description1": "Concatenate each element of a tuple by the delimiter, converting non-string elements to strings before concatenation.",
+                "description2": "Concatenate each element of a tuple by the delimiter, requiring all elements to already be strings and raising an error if any element is not a string.",
+                "oracle_description": "Concatenate each element of a tuple into a single string separated by a hyphen delimiter, converting non-string elements to strings before concatenation."
+            },
+            "q2": {
+                "question": "Should the delimiter be placed only between elements (as opposed to also after the last element)?",
+                "description1": "Concatenate each element of a tuple using a delimiter placed only between elements.",
+                "description2": "Concatenate each element of a tuple using a delimiter placed between elements and also after the last element.",
+                "oracle_description": "Concatenate each element of a tuple into a single string using a hyphen delimiter placed only between elements, not after the last element."
+            },
+            "q3": {
+                "question": "Should the function return an empty string when given an empty tuple?",
+                "description1": "Concatenate each element of a tuple by the delimiter, returning an empty string when given an empty tuple.",
+                "description2": "Concatenate each element of a tuple by the delimiter, raising an error or returning a non-empty default value when given an empty tuple.",
+                "oracle_description": "Concatenate each element of a tuple into a single string using a hyphen (\"-\") as the delimiter between elements, converting non-string elements to strings. When given an empty tuple, return an empty string."
+            }
+        }
+    },
+    {
+        "task_id": 429,
+        "questions": {
+            "q1": {
+                "question": "Should the function perform a bitwise AND operation on corresponding integer elements of the two tuples?",
+                "description1": "Given two tuples of integers, return a tuple where each element is the bitwise AND of the corresponding elements from the two input tuples.",
+                "description2": "Given two tuples of integers, return a tuple where each element is the logical AND of the corresponding elements from the two input tuples, treating each element as a truth value.",
+                "oracle_description": "Given two tuples of integers, return a new tuple containing the result of performing a bitwise AND operation on each pair of corresponding elements."
+            },
+            "q2": {
+                "question": "Should the result be returned as a single tuple rather than a list of tuples or some other data structure?",
+                "description1": "Extract the element-wise bitwise AND of the given two tuples and return the result as a single tuple of the computed values.",
+                "description2": "Extract the element-wise bitwise AND of the given two tuples and return the result as a list of tuples, where each tuple pairs the original elements with their bitwise AND result or simply contains the AND values as individual tuples.",
+                "oracle_description": "Compute the element-wise bitwise AND of two tuples of integers and return the result as a single tuple."
+            },
+            "q3": {
+                "question": "If the two input tuples have different lengths, should the function only process elements up to the length of the shorter tuple?",
+                "description1": "Extract the elementwise bitwise AND of two tuples, returning a tuple of results. If the two input tuples have different lengths, only process elements up to the length of the shorter tuple.",
+                "description2": "Extract the elementwise bitwise AND of two tuples, returning a tuple of results. Both input tuples must be of equal length, and all elements from both tuples are processed.",
+                "oracle_description": "Extract the elementwise bitwise AND of two tuples, returning a new tuple. If the two input tuples have different lengths, only process elements up to the length of the shorter tuple."
+            }
+        }
+    },
+    {
+        "task_id": 438,
+        "questions": {
+            "q1": {
+                "question": "Should a tuple be considered as forming a bidirectional pair with itself (e.g., does [(1, 2), (1, 2)] count as having a bidirectional pair)?",
+                "description1": "Count the number of bidirectional tuple pairs in a list, where a bidirectional pair exists when both (a, b) and (b, a) are present, and a tuple is also considered a bidirectional pair with itself, meaning (a, a) paired with another (a, a), or (a, b) paired with a duplicate (a, b), counts as a bidirectional pair.",
+                "description2": "Count the number of bidirectional tuple pairs in a list, where a bidirectional pair exists only when both (a, b) and (b, a) are present and a does not equal b, meaning a tuple cannot form a bidirectional pair with an identical copy of itself.",
+                "oracle_description": "Count the number of bidirectional tuple pairs in a list, where a bidirectional pair consists of two tuples (a, b) and (b, a) at different positions. A tuple does not form a bidirectional pair with itself unless its first and second elements are equal. Each distinct pair of positions is counted separately, so duplicate tuples can form multiple pairs."
+            },
+            "q2": {
+                "question": "If there are multiple copies of a bidirectional pair (e.g., [(1, 2), (2, 1), (2, 1)]), should each unique pair of matching tuples be counted separately (resulting in 2) rather than counting the pair type once (resulting in 1)?",
+                "description1": "Count the number of bidirectional tuple pairs in a list, where each individual pairing of a tuple with a matching reverse tuple is counted separately, so multiple copies of a reverse tuple contribute multiple counted pairs.",
+                "description2": "Count the number of distinct bidirectional tuple pair types in a list, where a pair of tuples that are reverses of each other is counted at most once regardless of how many duplicate copies exist.",
+                "oracle_description": "Count the number of bidirectional tuple pairs in a list, where each unique combination of two tuples at different positions that are reverses of each other is counted separately. If a tuple appears multiple times, each distinct pairing with a matching reverse tuple is counted individually."
+            },
+            "q3": {
+                "question": "Should the function count the number of individual tuples that participate in bidirectional pairs, rather than the number of bidirectional pair combinations?",
+                "description1": "Given a list of tuples, return the count of individual tuples that have a corresponding reverse tuple also present in the list.",
+                "description2": "Given a list of tuples, return the count of unique bidirectional pair combinations, where each combination consists of a tuple and its reverse both present in the list.",
+                "oracle_description": "Count the number of bidirectional tuple pair combinations in a list, where a bidirectional pair consists of two tuples (a, b) and (b, a). Each unique combination of two such tuples at different positions is counted separately, so duplicate tuples can form multiple pairs."
+            }
+        }
+    },
+    {
+        "task_id": 572,
+        "questions": {
+            "q1": {
+                "question": "Should duplicates be removed across all lists combined (i.e., a number appearing in multiple lists is kept only in the first list), or should duplicates be removed only within each individual list?",
+                "description1": "Remove duplicate numbers across all lists combined, so that each number appears only once across all lists, retained in the list where it first occurs, and removed from all subsequent lists.",
+                "description2": "Remove duplicate numbers within each individual list independently, so that each number appears only once per list, but the same number may still appear in multiple lists.",
+                "oracle_description": "From a given list of numbers, remove all numbers that appear more than once in the list, keeping only the numbers that appear exactly once."
+            },
+            "q2": {
+                "question": "Should the original order of elements be preserved within each list after removing duplicates?",
+                "description1": "Remove duplicate numbers from a given number of lists, preserving the original order of first appearance for each element within each list.",
+                "description2": "Remove duplicate numbers from a given number of lists, with no requirement on the order of elements in the resulting lists.",
+                "oracle_description": "Remove elements that appear more than once in a given list, keeping only elements that occur exactly once, while preserving their original order."
+            },
+            "q3": {
+                "question": "Should the function modify the lists in place and return them, or should it return new lists leaving the originals unchanged?",
+                "description1": "Remove duplicate numbers from a given number of lists by modifying the original lists in place and returning them.",
+                "description2": "Remove duplicate numbers from a given number of lists by returning new lists with duplicates removed, leaving the original lists unchanged.",
+                "oracle_description": "Return a new list containing only the elements that appear exactly once in the given list."
+            }
+        }
+    },
+    {
+        "task_id": 614,
+        "questions": {
+            "q1": {
+                "question": "Should nested tuples within the tuple list have their inner values included in the cumulative sum?",
+                "description1": "Find the cumulative sum of all numeric values present in the given tuple list, including values found within any nested tuples by recursively summing their inner values.",
+                "description2": "Find the cumulative sum of all top-level numeric values present in the tuples of the given tuple list, treating any nested tuples as non-numeric elements and excluding them from the sum.",
+                "oracle_description": "Find the cumulative sum of all the values that are present in the given tuple list, where each element is a tuple of numbers and the sum includes all numbers from all tuples at the top level only, without handling nested tuples within tuples."
+            },
+            "q2": {
+                "question": "Should non-numeric values (e.g., strings) in the tuples be ignored rather than causing an error?",
+                "description1": "Find the cumulative sum of all numeric values present in the given tuple list, silently ignoring any non-numeric values such as strings.",
+                "description2": "Find the cumulative sum of all values present in the given tuple list, raising an error if any non-numeric values such as strings are encountered.",
+                "oracle_description": "Find the cumulative sum of all numeric values present in the given tuple list. All values in the tuples are assumed to be numeric; non-numeric values do not need to be handled."
+            },
+            "q3": {
+                "question": "Should the function return a single total sum of all values, rather than a list of running cumulative sums?",
+                "description1": "Find the single total sum of all the values present in the given tuple list.",
+                "description2": "Find the running cumulative sum of all the values present in the given tuple list, returning a list where each element is the sum of all values up to and including that point.",
+                "oracle_description": "Given a tuple list, return a single total sum of all the values present across all tuples in the list."
+            }
+        }
+    },
+    {
+        "task_id": 780,
+        "questions": {
+            "q1": {
+                "question": "Should the function compute combinations of sums by pairing each tuple with every other tuple exactly once (i.e., all 2-element combinations), as opposed to computing all possible subset combinations of any size?",
+                "description1": "Given a list of tuples, the function should return a list of tuples where each result tuple is the element-wise sum of every unique pair (2-element combination) of tuples from the input list.",
+                "description2": "Given a list of tuples, the function should return a list of tuples representing the element-wise sums for all possible subset combinations of any size (from single tuples up to the full list) from the input list.",
+                "oracle_description": "Given a list of tuples, compute the element-wise sums for all 2-element combinations (pairing each tuple with every other tuple exactly once) and return the resulting list of sum tuples."
+            },
+            "q2": {
+                "question": "When combining two tuples, should the sum be computed element-wise (matching by index position), as opposed to summing all elements into a single scalar value?",
+                "description1": "Given a list of tuples, return all pairwise combinations where each combination produces a single tuple whose elements are the element-wise sums (by index position) of the two constituent tuples.",
+                "description2": "Given a list of tuples, return all pairwise combinations where each combination produces a single scalar value that is the sum of all elements from both constituent tuples combined.",
+                "oracle_description": "Given a list of tuples, find all pairwise combinations of tuples and compute their element-wise sums (matching by index position), returning a list of the resulting sum tuples."
+            },
+            "q3": {
+                "question": "Should the output be a list of tuples, or should it be a list of lists?",
+                "description1": "Given a tuple list where each element is a tuple of numbers, return a list of tuples where each tuple contains the element-wise sums of all possible pairwise combinations of the tuples in the input list.",
+                "description2": "Given a tuple list where each element is a tuple of numbers, return a list of lists where each list contains the element-wise sums of all possible pairwise combinations of the tuples in the input list.",
+                "oracle_description": "Find all pairwise combinations of tuples in the given tuple list and return a list of tuples, where each tuple contains the element-wise sums of a pair of tuples from the input list."
+            }
+        }
+    }
+]

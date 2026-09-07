@@ -1,0 +1,992 @@
+[
+    {
+        "custom_id": "oracle_task_614_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Ya7Wc7a8rkswhUQSv84iUj",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find the cumulative sum of all the values that are present in the given tuple list, where each element is a tuple of numbers and the sum includes all numbers from all tuples at the top level only, without handling nested tuples within tuples."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 443,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 56,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_780_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01BdbW6RFeha1KyZWexA6iJ5",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find all pairwise combinations of tuples in the given tuple list and return a list of tuples, where each tuple contains the element-wise sums of a pair of tuples from the input list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 612,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 48,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_415_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01EoKYsBPbeo7YNdSQWjsjVu",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find a pair with the highest product from a given array of integers. When multiple pairs share the same highest product, return the pair that appears first by earliest indices in the array."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 513,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 41,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_438_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01EQXNYeCh32meFLr1LmdA45",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Count the number of bidirectional tuple pairs in a list, where each unique combination of two tuples at different positions that are reverses of each other is counted separately. If a tuple appears multiple times, each distinct pairing with a matching reverse tuple is counted individually."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 596,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 60,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_117_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01LLyDxSqdmuPnYLu9NUgFLr",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Convert all possible convertible elements in a list of tuples to floats, returning a new list of tuples rather than modifying the original in place."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 639,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 37,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_421_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Mvo54eBtuu9oo2zj2nMRhh",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Concatenate each element of a tuple into a single string using a hyphen delimiter placed only between elements, not after the last element."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 476,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 33,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_415_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01JTmEKjHGovLWgb2hPYTvXQ",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find a pair of numbers with the highest product from a given array of integers, returning the pair of numbers themselves as a tuple."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 501,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 31,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_614_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01RVc95Fj4MSjGZZP1vxwMt7",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find the cumulative sum of all numeric values present in the given tuple list. All values in the tuples are assumed to be numeric; non-numeric values do not need to be handled."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 448,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 44,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_106_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_013ppdRYXm5BN78fzg7UaZTz",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Append the given list to a single given tuple, returning a new tuple that contains the original tuple's elements followed by the list's elements."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 456,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 34,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_407_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01KkUHTZsz247kNbFrY7j7Hd",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Create the next bigger number by rearranging the digits of a given number. If no bigger number can be formed, return False. The result should be returned as an integer, which naturally excludes any leading zeros."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 492,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 50,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_415_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01M1tzjeMzKZSJFoxWxD6S9B",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Find a pair with the highest product from a given array of integers. A pair must consist of two distinct elements (at different indices), so if the array has fewer than two elements, return \"No pairs exists\" instead."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 512,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 50,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_106_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01REJrPMLfFdzsCqud9dzrBM",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Append the given list to the given tuple and return the result as a tuple."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 447,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 22,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_614_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Ry4vVLJGAHLvMgTjP3Dwr8",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Given a tuple list, return a single total sum of all the values present across all tuples in the list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 447,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 28,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_438_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Y2HeXBJ9824rjnxtoQDseT",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Count the number of bidirectional tuple pair combinations in a list, where a bidirectional pair consists of two tuples (a, b) and (b, a). Each unique combination of two such tuples at different positions is counted separately, so duplicate tuples can form multiple pairs."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 560,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 65,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_780_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01217kFHAZ6yzovMPz87JBes",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Given a list of tuples, find all pairwise combinations of tuples and compute their element-wise sums (matching by index position), returning a list of the resulting sum tuples."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 626,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 45,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_421_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_017CJjEryTDB4vsTk7hfSbrR",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Concatenate each element of a tuple into a single string using a hyphen (\"-\") as the delimiter between elements, converting non-string elements to strings. When given an empty tuple, return an empty string."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 471,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 49,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_117_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01UoLuHCPdY6JqWEU9z7XXpM",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Convert all possible convertible string elements in a list of tuples to floats, leaving purely alphabetic strings unconverted. Boolean values are not applicable as the input consists of string elements; strings representing numeric values (including integers and decimals) should be converted to floats."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 641,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 62,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_421_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Hc526u334YqFTiKhKUxrTJ",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Concatenate each element of a tuple into a single string separated by a hyphen delimiter, converting non-string elements to strings before concatenation."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 474,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 35,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_572_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01FdQMxnHD84StQDn453D9ph",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Remove elements that appear more than once in a given list, keeping only elements that occur exactly once, while preserving their original order."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 428,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 32,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_117_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Qpg2y3nCXc4ENLHVLU6MZB",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Convert all possible convertible string elements in a list of tuples to floats, leaving purely alphabetic strings unconverted. None values are not expected in the input and should not be handled."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 637,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 45,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_429_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Qybso34G7f2smkJzFgtiuk",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Extract the elementwise bitwise AND of two tuples, returning a new tuple. If the two input tuples have different lengths, only process elements up to the length of the shorter tuple."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 502,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 44,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_572_q3",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_011jp9WjmhC6dLW5B5rvNjGF",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Return a new list containing only the elements that appear exactly once in the given list."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 436,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 22,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_429_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01E6S24f4DEChc4Zkce224fh",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Compute the element-wise bitwise AND of two tuples of integers and return the result as a single tuple."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 499,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 29,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_572_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01YY5StWHsev8aDYBR9Yyufi",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: From a given list of numbers, remove all numbers that appear more than once in the list, keeping only the numbers that appear exactly once."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 452,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 33,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_407_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01KeWcRZWcdSv71oF59q4Hni",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Create the next bigger number by rearranging the digits of a given number. If no bigger number can be formed from the digits, return False."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 481,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 36,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_429_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01DDq8R1mj6j52dxa6QBf1HV",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Given two tuples of integers, return a new tuple containing the result of performing a bitwise AND operation on each pair of corresponding elements."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 496,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 33,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_407_q2",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_011J64dLMbvDGQ2x2BHtsYLT",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Create the next bigger number by rearranging the digits of a given positive number. If no bigger number can be formed by rearranging the digits, return False. The function does not need to handle negative number inputs."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 467,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 52,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_780_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01Fqkvdr1gmvc2xJchDSarrS",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Given a list of tuples, compute the element-wise sums for all 2-element combinations (pairing each tuple with every other tuple exactly once) and return the resulting list of sum tuples."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 636,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 48,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_106_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_018Shr2R1uCNPHq4Dm6wyEr1",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Append the elements of the given list individually to the end of the given tuple, returning a new tuple that contains all original tuple elements followed by all list elements."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 457,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 38,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    },
+    {
+        "custom_id": "oracle_task_438_q1",
+        "result": {
+            "type": "succeeded",
+            "message": {
+                "model": "claude-opus-4-6",
+                "id": "msg_01DJj5zmBYNiNhWzgTJQm8yC",
+                "type": "message",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "description: Count the number of bidirectional tuple pairs in a list, where a bidirectional pair consists of two tuples (a, b) and (b, a) at different positions. A tuple does not form a bidirectional pair with itself unless its first and second elements are equal. Each distinct pair of positions is counted separately, so duplicate tuples can form multiple pairs."
+                    }
+                ],
+                "stop_reason": "end_turn",
+                "stop_sequence": null,
+                "stop_details": null,
+                "usage": {
+                    "input_tokens": 572,
+                    "cache_creation_input_tokens": 0,
+                    "cache_read_input_tokens": 0,
+                    "cache_creation": {
+                        "ephemeral_5m_input_tokens": 0,
+                        "ephemeral_1h_input_tokens": 0
+                    },
+                    "output_tokens": 83,
+                    "service_tier": "batch",
+                    "inference_geo": "global"
+                }
+            }
+        }
+    }
+]

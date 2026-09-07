@@ -1,0 +1,41 @@
+{
+  "q1_desc1": {
+    "nb_candidates": 10,
+    "incoherence": 0.4358974358974359
+  },
+  "q1_desc2": {
+    "nb_candidates": 10,
+    "incoherence": 0.41025641025641024
+  },
+  "q1_oracle": {
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.13675213675213677
+  },
+  "q2_desc1": {
+    "nb_candidates": 10,
+    "incoherence": 0.5726495726495726
+  },
+  "q2_desc2": {
+    "nb_candidates": 10,
+    "incoherence": 0.6410256410256411
+  },
+  "q2_oracle": {
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.10256410256410256
+  },
+  "q3_desc1": {
+    "nb_candidates": 10,
+    "incoherence": 0.0
+  },
+  "q3_desc2": {
+    "nb_candidates": 10,
+    "incoherence": 0.7094017094017094
+  },
+  "q3_oracle": {
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.18803418803418803
+  }
+}
