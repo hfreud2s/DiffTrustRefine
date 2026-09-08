@@ -60,3 +60,17 @@ What it does in detail:
 - A task is skipped for a category when it has no Specification for that variant. HumanEvalComm does not define every manipulation for every task, so the combined categories (`2ap`, `2cp`, `3acp`) cover far fewer tasks than `original`, `1a`, `1c`, `1p`, `2ac`.
 - Category folder names map to dataset variants as `original` -> the unmanipulated spec, `1a` -> `prompt1a`, `1c` -> `prompt1c`, `1p` -> `prompt1p`, `2ac` -> `prompt2ac`, `2ap` -> `prompt2ap`, `2cp` -> `prompt2cp`, `3acp` -> `prompt3acp`.
 
+### Step 2: Submit a batch and retrieve results (`batch_processing.py`)
+
+Requires `OPENROUTER_API_KEY` in the environment. This uses OpenRouter's Batch API (`POST /api/beta/batches`), which takes the requests inline and returns the results inline in the status response once the batch is complete.
+
+`submit_llm(llm_dir)` is the entry point for one LLM. It submits each category's `baseline_batch_request.jsonl` as its own batch (option B: one batch per category) and writes a `batch_meta.json` next to each request file recording the batch id and status. Internally it calls `create_batch(request_path)`, which reads the request file and posts `{endpoint, model, requests}` in that order (OpenRouter stream-parses the body, so `endpoint` and `model` must precede `requests`).
+
+To retrieve, once a batch has run: `wait_for_batch(batch_id, poll=60)` polls `GET /api/beta/batches/{id}` until the batch is terminal (`completed`, `failed`, `expired`, `cancelled`), then `save_results(batch, out_path)` writes the inline results to `{category}/baseline_batch_result.jsonl`, one `{custom_id, response, error}` item per line. That file is the input for step 3 (post-processing into the run folders). The batch id is read back from `{category}/batch_meta.json`.
+
+Notes:
+
+- One batch per category. The largest dataset-50 category (`original`, 5000 requests) is a ~5.6 MB request; OpenRouter documents no hard request cap, and the only fixed limit is the 24h completion window.
+- OpenRouter deletes batch inputs and results 30 days after creation, so retrieve and post-process within that window.
+
+OpenRouter caps how many requests may be submitted per minute (about 20000). Submission is therefore throttled: `submit_llm` and `retry_llm` count the requests sent in each 60s window and wait when the next batch would cross `max_requests_per_min` (default 20000), and they back off and retry on any 429. If a run is still cut short, `pending_categories(llm_dir)` lists the categories that have a request file but no `batch_meta.json`, and `retry_llm(llm_dir)` resubmits exactly those. `submit_llm` skips categories that already have a `batch_meta.json`, so re-running it resumes rather than double-submitting.
