@@ -74,3 +74,13 @@ Notes:
 - OpenRouter deletes batch inputs and results 30 days after creation, so retrieve and post-process within that window.
 
 OpenRouter caps how many requests may be submitted per minute (about 20000). Submission is therefore throttled: `submit_llm` and `retry_llm` count the requests sent in each 60s window and wait when the next batch would cross `max_requests_per_min` (default 20000), and they back off and retry on any 429. If a run is still cut short, `pending_categories(llm_dir)` lists the categories that have a request file but no `batch_meta.json`, and `retry_llm(llm_dir)` resubmits exactly those. `submit_llm` skips categories that already have a `batch_meta.json`, so re-running it resumes rather than double-submitting.
+
+### Step 3: Post-process results into candidate files (`batch_processing.py`)
+
+Once a category's results are retrieved (`baseline_batch_result.jsonl`), `postprocess_baseline(llm_dir, categories=None)` turns them into the per-run candidate files the stats step reads. For each category it groups responses by (run, task) and writes one cloudpickle file per (run, task):
+
+```
+.HEC-experiment/{llm_dir}/{category}/baseline/run{r}/humanevalcomm_{task_id}[-{variant}]
+```
+
+Each file holds that task's list of raw candidate strings for that run, ordered by sample index. The variant suffix (`-prompt1a`, `-prompt1c`, ...) records which Specification the candidates were generated from, so the stats step can score them against the right spec. Failed responses (non-200) are skipped and counted. Called with no `categories`, it processes every category that has a result file.

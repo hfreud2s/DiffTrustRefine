@@ -1,7 +1,7 @@
 """
 Submits HumanEvalComm baseline batches to the OpenRouter Batch API and retrieves their results.
 
-Step 2: submission and retrieval.
+Steps 2-3: submission, retrieval, and post-processing.
   create_batch()    - submit one category's request file; returns the batch object (with its id)
   save_batch_meta() - record the batch id and state next to the request file
   get_batch()       - fetch a batch's current state
@@ -9,8 +9,9 @@ Step 2: submission and retrieval.
   save_results()    - write a completed batch's inline results to a .jsonl (input for step 3)
   submit_llm()      - submit every not-yet-submitted category for one LLM (throttled)
   pending_categories() / retry_llm() - find and resubmit categories a rate limit skipped
+  postprocess_baseline() - turn retrieved results into per-run candidate files (step 3)
 
-Requires the OPENROUTER_API_KEY environment variable.
+Requires OPENROUTER_API_KEY to submit/retrieve.
 OpenRouter Batch API docs: https://openrouter.ai/docs/batch-quickstart
 """
 import json
@@ -19,6 +20,8 @@ import time
 import urllib.request
 import urllib.error
 from pathlib import Path
+
+import cloudpickle
 
 THIS_DIR   = Path(__file__).resolve().parent
 EXPERIMENT = THIS_DIR / ".HEC-experiment"
@@ -264,6 +267,99 @@ def retry_llm(llm_dir: str, max_requests_per_min: int = 20000):
     return submitted
 
 
+# Category folder name -> the Instance variant it maps to (mirrors build_batch.CATEGORIES).
+# The variant is embedded in each candidate file name so compute_stats can select the right
+# Specification; "original" has no variant and gets no suffix.
+CATEGORIES = {
+    "original": None, "1a": "prompt1a", "1c": "prompt1c", "1p": "prompt1p",
+    "2ac": "prompt2ac", "2ap": "prompt2ap", "2cp": "prompt2cp", "3acp": "prompt3acp",
+}
+
+
+def extract_text(entry: dict):
+    """
+    Pulls the model's text out of one batch result item, or None if the request did not succeed.
+    Handles the OpenRouter/OpenAI chat shape (response.body.choices[0].message.content) and the
+    Anthropic-style result shape as a fallback.
+    """
+    resp = entry.get("response")
+    if resp and resp.get("status_code") == 200:
+        try:
+            return resp["body"]["choices"][0]["message"]["content"]
+        except (KeyError, IndexError, TypeError):
+            return None
+    result = entry.get("result")
+    if result and result.get("type") == "succeeded":
+        try:
+            return result["message"]["content"][0]["text"]
+        except (KeyError, IndexError, TypeError):
+            return None
+    return None
+
+
+def parse_custom_id(custom_id: str):
+    """
+    Splits a baseline custom_id "run{r}__humanevalcomm_{task_id}__sample{i}" into
+    (run:int, task_id:int, sample:int).
+    """
+    run_part, hec_part, sample_part = custom_id.split("__")
+    return int(run_part[len("run"):]), int(hec_part.split("_")[1]), int(sample_part[len("sample"):])
+
+
+def postprocess_baseline(llm_dir: str, categories: list = None):
+    """
+    Turns retrieved baseline batch results into the per-run candidate files compute_stats reads.
+
+    For each category with a baseline_batch_result.jsonl, groups responses by (run, task) and writes
+    one cloudpickle file per (run, task) holding that task's list of raw candidate strings to:
+        .HEC-experiment/{llm_dir}/{category}/baseline/run{r}/humanevalcomm_{task_id}[-{variant}]
+
+    llm_dir:    e.g. "LLM1"
+    categories: which categories to process (default: all that have a result file)
+    returns:    dict category -> number of candidate files written
+    """
+    llm_path = EXPERIMENT / llm_dir
+    if categories is None:
+        categories = sorted(pp.parent.name for pp in llm_path.glob("*/baseline_batch_result.jsonl"))
+    written_per_category = {}
+    for category in categories:
+        result_path = llm_path / category / "baseline_batch_result.jsonl"
+        if not result_path.exists():
+            print(f"skip {llm_dir}/{category}: no baseline_batch_result.jsonl")
+            continue
+        variant = CATEGORIES.get(category)
+        suffix  = f"-{variant}" if variant else ""
+
+        grouped = {}   # (run, task_id) -> {sample: text}
+        failed  = []
+        with open(result_path, "r", encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                entry = json.loads(line)
+                text  = extract_text(entry)
+                if text is None:
+                    failed.append(entry.get("custom_id"))
+                    continue
+                run, task_id, sample = parse_custom_id(entry["custom_id"])
+                grouped.setdefault((run, task_id), {})[sample] = text
+
+        written = 0
+        for (run, task_id), samples in sorted(grouped.items()):
+            run_dir = llm_path / category / "baseline" / f"run{run}"
+            run_dir.mkdir(parents=True, exist_ok=True)
+            candidates = [samples[i] for i in sorted(samples)]
+            with open(run_dir / f"humanevalcomm_{task_id}{suffix}", "wb") as out:
+                cloudpickle.dump(candidates, out)
+            written += 1
+        runs = sorted({r for r, _ in grouped})
+        written_per_category[category] = written
+        span = f"run{runs[0]}..run{runs[-1]}" if runs else "none"
+        print(f"{llm_dir}/{category}: {written} candidate files over {span}, "
+              f"{len(failed)} failed response(s)")
+    return written_per_category
+
+
 if __name__ == "__main__":
 
     # --- First submission for an LLM (skips anything already submitted, throttled) ---
@@ -279,4 +375,8 @@ if __name__ == "__main__":
     # batch_id = json.load(open(EXPERIMENT / "LLM1" / "original" / "batch_meta.json"))["batch_id"]
     # batch    = wait_for_batch(batch_id, poll=60)
     # save_results(batch, EXPERIMENT / "LLM1" / "original" / "baseline_batch_result.jsonl")
+
+    # --- Step 3: post-process retrieved results into per-run candidate files ---
+    # postprocess_baseline("LLM1")            # all categories that have a result file
+    # postprocess_baseline("LLM1", ["1a"])    # a single category
     pass
