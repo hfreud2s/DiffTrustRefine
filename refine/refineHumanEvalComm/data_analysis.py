@@ -3,10 +3,11 @@ Aggregates the per-run stats produced by compute_stats.score_phase into per-cate
 """
 import json
 import statistics
-from pathlib import Path
+import pathlib
+import sys
 
-THIS_DIR   = Path(__file__).resolve().parent
-EXPERIMENT = THIS_DIR / ".HEC-experiment"
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import EXPERIMENT
 
 
 def aggregate_phase(llm_dir: str, category: str, phase: str = "baseline"):

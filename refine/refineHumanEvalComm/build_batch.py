@@ -10,56 +10,8 @@ import json
 import pathlib
 import sys
 
-THIS_DIR  = pathlib.Path(__file__).resolve().parent          # .../refine/refineHumanEvalComm
-REPO_ROOT = THIS_DIR.parent.parent                           # .../DiffTrustRefine
-for entry in (REPO_ROOT, THIS_DIR):
-    if entry.as_posix() not in sys.path:
-        sys.path.insert(0, entry.as_posix())
-
-import cloudpickle
-
-DATA_DIR   = REPO_ROOT / "HumanEvalComm" / ".data"
-EXPERIMENT = THIS_DIR / ".HEC-experiment"
-
-# Category folder name -> the Instance variant it maps to.
-# None is the unmanipulated ("original") description; the rest are keys of
-# Instance.manipulated_specs (HumanEvalComm prefixes its variant keys with "prompt").
-CATEGORIES = {
-    "original": None,
-    "1a":   "prompt1a",
-    "1c":   "prompt1c",
-    "1p":   "prompt1p",
-    "2ac":  "prompt2ac",
-    "2ap":  "prompt2ap",
-    "2cp":  "prompt2cp",
-    "3acp": "prompt3acp",
-}
-
-
-def load_instances(dataset_name: str):
-    """
-    Loads the checked Instance objects from the benchmark's .data/{dataset_name}.pkl.
-    The pickle is a plain list of Instances (not a Dataset).
-
-    dataset_name: stem of the .pkl file, e.g. "dataset-50"
-    returns:      list of Instance
-    """
-    with open(DATA_DIR / f"{dataset_name}.pkl", "rb") as f:
-        return cloudpickle.load(f)
-
-
-def spec_for(inst, variant):
-    """
-    Returns the Specification the candidates for this category are generated from, or None if the
-    instance has no such variant. HumanEvalComm does not define every manipulation for every task,
-    so a None here means "skip this task for this category".
-
-    inst:    an Instance
-    variant: None for the "original" category, else a key of Instance.manipulated_specs
-    """
-    if variant is None:
-        return inst.spec
-    return inst.manipulated_specs.get(variant)
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import CATEGORIES, EXPERIMENT, DATASET_NAME, load_instances, spec_for
 
 
 def build_prompt(spec):
@@ -89,7 +41,7 @@ def build_prompt(spec):
 
 def build_baseline_batch(llm_dir:        str,
                          model:          str,
-                         dataset_name:   str = "dataset-50",
+                         dataset_name:   str = DATASET_NAME,
                          categories:     list = None,
                          num_candidates: int = 10,
                          num_runs:       int = 10,
@@ -123,7 +75,7 @@ def build_baseline_batch(llm_dir:        str,
         written = 0
         skipped = 0
         with open(out_path, "w", encoding="utf-8") as batch_file:
-            for inst in instances:
+            for inst in instances.values():
                 spec = spec_for(inst, variant)
                 if spec is None:
                     skipped += 1

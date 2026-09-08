@@ -3,29 +3,15 @@ Computes incoherence and error for HumanEvalComm candidate files.
 """
 import json
 import re
+import sys
+import time
 from pathlib import Path
 
 import cloudpickle
 
-import time
-
-import pathlib
-import sys
-
-THIS_DIR   = Path(__file__).resolve().parent          # .../refine/refineHumanEvalComm
-REPO_ROOT  = THIS_DIR.parent.parent                   # .../DiffTrustRefine
-for entry in (REPO_ROOT, THIS_DIR):
-    if entry.as_posix() not in sys.path:
-        sys.path.insert(0, entry.as_posix())
-
-
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from common import EXPERIMENT, DATASET_NAME, load_instances
 import difftrust
-
-
-EXPERIMENT   = THIS_DIR / ".HEC-experiment"
-DATA_DIR     = REPO_ROOT / "HumanEvalComm" / ".data"   # dataset pickles live in the benchmark folder
-SOURCE_JSON  = DATA_DIR / "HumanEvalComm.json"
-DATASET_NAME = "dataset-50"
 
 KEY_RE = re.compile(r"^humanevalcomm_(\d+)(?:-(\w+))?$")
 
@@ -37,8 +23,7 @@ def parse_candidate_key(key: str):
     "humanevalcomm_23"           -> (23, None)        the unmanipulated condition
     "humanevalcomm_23-prompt1a"  -> (23, "prompt1a")  a manipulated condition
 
-    key:     the candidate file's name, i.e. the first two underscore-separated fields
-             of the custom_id, as produced by group_candidates_by_task_id
+    key:     the candidate file's name, e.g. "humanevalcomm_23" or "humanevalcomm_23-prompt1a"
     returns: (task_id, variant), or None if the name does not match the scheme
     """
     match = KEY_RE.match(key)
@@ -46,24 +31,6 @@ def parse_candidate_key(key: str):
         return None
     task_id, variant = match.groups()
     return int(task_id), variant
-
-
-def load_instances_by_id(task_ids: set = None, dataset_name: str = DATASET_NAME):
-    """
-    Loads the checked Instance objects from .data/{dataset_name}.pkl, keyed by the numeric task id
-    they carry as inst.task_id (the N in "HumanEval/N").
-
-    Note that inst.name is the entry point, not the task id, and is not usable as a key: six of
-    them occur twice.
-
-    task_ids: optional set of ids to keep; None loads all of them
-    returns:  dict mapping task_id -> Instance
-    """
-    with open(DATA_DIR / f"{dataset_name}.pkl", "rb") as f:
-        instances = cloudpickle.load(f)
-
-    return {inst.task_id: inst for inst in instances
-            if task_ids is None or inst.task_id in task_ids}
 
 
 def extract_code(raw: str):
@@ -123,7 +90,7 @@ def compute_stats(candidate_path: Path,
             continue
         parsed.append((f, *key))
 
-    instances = load_instances_by_id({tid for _, tid, _ in parsed}, dataset_name)
+    instances = load_instances(dataset_name, {tid for _, tid, _ in parsed})
 
     if output_path.exists():
         with open(output_path, "r", encoding="utf-8") as f:
@@ -204,8 +171,7 @@ def score_phase(llm_dir: str, category: str, phase: str = "baseline",
     each run folder. It walks
         .HEC-experiment/{llm_dir}/{category}/{phase}/run{r}/
     and, for each run present, calls compute_stats to score every candidate file there against the
-    Specification named by that file's variant suffix. compute_stats is resumable, so re-running
-    picks up where an interrupted run left off.
+    task's ground truth. compute_stats is resumable, so re-running picks up where an interrupted run left off.
 
     llm_dir/category/phase: locate the phase directory
     runs:         which run indices to score (default: every run folder found)

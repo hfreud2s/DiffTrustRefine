@@ -16,6 +16,7 @@ OpenRouter Batch API docs: https://openrouter.ai/docs/batch-quickstart
 """
 import json
 import os
+import sys
 import time
 import urllib.request
 import urllib.error
@@ -23,8 +24,8 @@ from pathlib import Path
 
 import cloudpickle
 
-THIS_DIR   = Path(__file__).resolve().parent
-EXPERIMENT = THIS_DIR / ".HEC-experiment"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from common import CATEGORIES, EXPERIMENT
 
 API_BASE = "https://openrouter.ai/api/beta/batches"
 ENDPOINT = "/v1/chat/completions"
@@ -57,7 +58,10 @@ def _request(url: str, method: str, payload: dict = None):
         with urllib.request.urlopen(req) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", "replace")
+        try:
+            detail = e.read().decode("utf-8", "replace")
+        except Exception:
+            detail = e.reason or "<no response body>"
         raise OpenRouterError(e.code, detail, method, url) from None
 
 
@@ -71,7 +75,7 @@ def create_batch(request_path: Path, model: str = None, endpoint: str = ENDPOINT
     """
     Submits one category's request file as a single OpenRouter batch.
 
-    request_path: a baseline_batch_request.jsonl produced by build_batch.py
+    request_path: a request .jsonl of {custom_id, body} items (from build_batch or refine_descriptions)
     model:        OpenRouter model slug for the batch; if None, taken from the first request's body
     endpoint:     the API shape (default /v1/chat/completions)
     returns:      the batch object OpenRouter returns (carries the batch id and status)
@@ -265,15 +269,6 @@ def retry_llm(llm_dir: str, max_requests_per_min: int = 20000):
     submitted = _submit_categories(llm_dir, pending, max_requests_per_min)
     print(f"\nresubmitted {len(submitted)} batch(es) for {llm_dir}: {submitted}")
     return submitted
-
-
-# Category folder name -> the Instance variant it maps to (mirrors build_batch.CATEGORIES).
-# The variant is embedded in each candidate file name so compute_stats can select the right
-# Specification; "original" has no variant and gets no suffix.
-CATEGORIES = {
-    "original": None, "1a": "prompt1a", "1c": "prompt1c", "1p": "prompt1p",
-    "2ac": "prompt2ac", "2ap": "prompt2ap", "2cp": "prompt2cp", "3acp": "prompt3acp",
-}
 
 
 def extract_text(entry: dict):
