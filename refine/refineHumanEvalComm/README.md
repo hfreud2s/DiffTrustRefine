@@ -38,7 +38,25 @@ refineHumanEvalComm/
 
 Categories: `original` (unmanipulated description) plus the 7 HumanEvalComm manipulation variants `1a`, `1c`, `1p`, `2ac`, `2ap`, `2cp`, `3acp`. The digit is how many manipulation kinds are combined; the letters are the kinds (`a` = ambiguity, `c` = inconsistency, `p` = incompleteness).
 
-## Pipeline
+## Pipeline at a glance
+
+Run the baseline phase for each LLM, then the refinement phase for the tasks that turn out ambiguous. Every batch goes through the OpenRouter Batch API. Shared paths, the `CATEGORIES` map and instance loading live in `common.py`.
+
+Baseline phase (how self-consistent the model is on a description as written):
+
+1. Build baseline candidate requests for all categories: `build_baseline_batch` (`build_batch.py`) writes one batch file per (LLM, category).
+2. Submit and retrieve: `submit_llm` / `retry_llm`, then `wait_for_batch` + `save_results` (`batch_processing.py`).
+3. Turn the results into per-run candidate files: `postprocess_baseline` (`batch_processing.py`).
+4. Score incoherence and error per run, then average across runs: `score_phase` (`compute_stats.py`), then `aggregate_phase` (`data_analysis.py`).
+
+Refinement phase (whether asking a clarifying question helps):
+
+5. For the tasks with incoherence > 0, generate clarifying questions: `needs_refinement` + `build_questions_batch` (`refine_descriptions.py`), then submit and retrieve as in step 2.
+6. (to build) Post-process the answers, generate the yes/no and oracle descriptions, build candidates from each, then score and aggregate them exactly as steps 3-4 with `phase="refined"`.
+
+Each step is detailed below.
+
+## Step details
 
 The experiment is built up one step at a time. Each step is a function that must be run before the next.
 
