@@ -83,4 +83,12 @@ Once a category's results are retrieved (`baseline_batch_result.jsonl`), `postpr
 .HEC-experiment/{llm_dir}/{category}/baseline/run{r}/humanevalcomm_{task_id}[-{variant}]
 ```
 
-Each file holds that task's list of raw candidate strings for that run, ordered by sample index. The variant suffix (`-prompt1a`, `-prompt1c`, ...) records which Specification the candidates were generated from, so the stats step can score them against the right spec. Failed responses (non-200) are skipped and counted. Called with no `categories`, it processes every category that has a result file.
+Each file holds that task's list of raw candidate strings for that run, ordered by sample index. The variant suffix (`-prompt1a`, `-prompt1c`, ...) records which condition the candidates belong to. Failed responses (non-200) are skipped and counted. Called with no `categories`, it processes every category that has a result file.
+
+### Step 4: Score runs and aggregate (`compute_stats.py`, `data_analysis.py`)
+
+Scoring is per run, aggregation is across runs.
+
+`compute_stats.score_phase(llm_dir, category, phase="baseline", runs=None, nb_samples=1000, timeout=60)` scores the candidate files run by run. For each `{category}/{phase}/run{r}/` it computes pointwise incoherence and error for every candidate file and writes `run{r}/stats.json` (a list of `{key, task_id, variant, name, nb_candidates, incoherence, error}`). It reads the instances from the benchmark's `dataset-50.pkl`, is resumable (tasks already in a `stats.json` are skipped), and takes an optional `runs` list to score only some runs. Underneath, `compute_stats(candidate_path, output_path, ...)` scores a single folder.
+
+`data_analysis.aggregate_phase(llm_dir, category, phase="baseline")` then reads every `run{r}/stats.json`, aligns the runs by task_id, and writes `{phase}/aggregate.json`: one row per task with the per-run `incoherence_list` and `error_list` plus `mean_incoherence` and `mean_error` (Nones dropped before the mean). 
