@@ -116,8 +116,13 @@ if __name__ == "__main__":
     # --- Round 1: build the clarifying-question batch, then submit it with batch_processing ---
     # build_questions_batch("LLM1", "1a", num_questions=3)
 
-    # from batch_processing import create_batch, save_batch_meta
+    # from batch_processing import create_batch, save_batch_meta, wait_for_batch, save_results
     # req = EXPERIMENT / "LLM1" / "1a" / "refined" / "questions_batch_request.jsonl"
     # batch = create_batch(req) 
     # save_batch_meta(batch, req)
+
+    # --- Later: wait for a batch and save its results ---
+    # batch_id = json.load(open(EXPERIMENT / "LLM1" / "1a" / "refined" / "batch_meta.json"))["batch_id"]
+    # batch    = wait_for_batch(batch_id, poll=60)
+    # save_results(batch, EXPERIMENT / "LLM1" / "1a" / "refined" / "question_batch_result.jsonl")
     pass
