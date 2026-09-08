@@ -92,3 +92,19 @@ Scoring is per run, aggregation is across runs.
 `compute_stats.score_phase(llm_dir, category, phase="baseline", runs=None, nb_samples=1000, timeout=60)` scores the candidate files run by run. For each `{category}/{phase}/run{r}/` it computes pointwise incoherence and error for every candidate file and writes `run{r}/stats.json` (a list of `{key, task_id, variant, name, nb_candidates, incoherence, error}`). It reads the instances from the benchmark's `dataset-50.pkl`, is resumable (tasks already in a `stats.json` are skipped), and takes an optional `runs` list to score only some runs. Underneath, `compute_stats(candidate_path, output_path, ...)` scores a single folder.
 
 `data_analysis.aggregate_phase(llm_dir, category, phase="baseline")` then reads every `run{r}/stats.json`, aligns the runs by task_id, and writes `{phase}/aggregate.json`: one row per task with the per-run `incoherence_list` and `error_list` plus `mean_incoherence` and `mean_error` (Nones dropped before the mean). 
+
+## Refinement phase
+
+The refined phase clarifies a category's description and regenerates candidates from the clarified description, to test whether asking a question reduces incoherence and error and to score the quality of each question. Each coder LLM asks its own questions per default, and everything is stored under `{LLM}/{category}/refined/`.
+
+1. clarifying questions
+2. refined (yes/no) descriptions, one pair per question
+3. oracle (true) description per question, answered from the ground truth
+4. candidates generated from each refined/oracle description, into `{category}/refined/run{r}/`
+5. score and aggregate, exactly as the baseline phase (step 4)
+
+### Step 5: Refinement round 1 — clarifying questions (`refine_descriptions.py`)
+
+`needs_refinement(llm_dir, category)` reads `{category}/baseline/aggregate.json` and returns the tasks whose mean incoherence is above zero. Only those enter the refinement pipeline.
+
+`build_questions_batch(llm_dir, category, model=None, num_questions=3)` writes `{category}/refined/questions_batch_request.jsonl`: one OpenRouter item per needing-refinement task, custom_id `questions__humanevalcomm_{task_id}`, whose prompt embeds that category's description and asks for `num_questions` binary yes/no questions. Submit it with `batch_processing.create_batch` / `save_batch_meta`, the same way as the baseline batch.
