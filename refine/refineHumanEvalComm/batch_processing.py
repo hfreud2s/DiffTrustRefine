@@ -71,7 +71,6 @@ def read_requests(request_path: Path):
     with open(request_path, "r", encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
 
-
 def create_batch(request_path: Path, model: str = None, endpoint: str = ENDPOINT):
     """
     Submits one category's request file as a single OpenRouter batch.
@@ -418,6 +417,113 @@ def postprocess_questions(llm_dir: str, category: str,
     return out_path
 
 
+_DESC_RE = re.compile(r"description\s*1\s*:\s*(.*?)\s*description\s*2\s*:\s*(.*)", re.IGNORECASE | re.DOTALL)
+
+
+def parse_two_descriptions(text: str):
+    """Parses 'description 1: ... description 2: ...' into (description1, description2) or (None, None)."""
+    m = _DESC_RE.search(text)
+    if not m:
+        return None, None
+    return m.group(1).strip(), m.group(2).strip()
+
+
+def postprocess_descriptions(llm_dir: str, category: str,
+                             result_name: str = "descriptions_batch_result.jsonl"):
+    """
+    Fills description1/description2 for each question in questions_and_descriptions.json from a
+    retrieved descriptions batch (custom_id "descriptions__humanevalcomm_{id}__{qkey}"). Failed or
+    unparseable responses are skipped and counted.
+    """
+    refined_dir = EXPERIMENT / llm_dir / category / "refined"
+    qd_path = refined_dir / "questions_and_descriptions.json"
+    with open(qd_path, "r", encoding="utf-8") as f:
+        entries = json.load(f)
+    by_id = {e["task_id"]: e for e in entries}
+
+    filled = skipped = 0
+    with open(refined_dir / result_name, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            text  = extract_text(entry)
+            parts = entry.get("custom_id", "").split("__")   # descriptions, humanevalcomm_{id}, {qkey}
+            if text is None or len(parts) != 3:
+                skipped += 1
+                continue
+            task_id, qkey = int(parts[1].split("_")[1]), parts[2]
+            e = by_id.get(task_id)
+            if e is None or qkey not in e["questions"]:
+                skipped += 1
+                continue
+            d1, d2 = parse_two_descriptions(text)
+            if d1 is None:
+                skipped += 1
+                continue
+            e["questions"][qkey]["description1"] = d1
+            e["questions"][qkey]["description2"] = d2
+            filled += 1
+
+    with open(qd_path, "w", encoding="utf-8") as f:
+        json.dump(entries, f, indent=2)
+    print(f"{llm_dir}/{category}: filled descriptions for {filled} question(s), {skipped} skipped")
+    return qd_path
+
+
+
+_ORACLE_RE = re.compile(r"description\s*:\s*(.*)", re.IGNORECASE | re.DOTALL)
+
+
+def parse_oracle_description(text: str):
+    """Parses the oracle reply 'description: ...' into the description string, or None."""
+    m = _ORACLE_RE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def postprocess_oracle(llm_dir: str, category: str,
+                       result_name: str = "oracle_batch_result.jsonl"):
+    """
+    Fills oracle_description for each question in questions_and_descriptions.json from a retrieved
+    oracle batch (custom_id "oracle__humanevalcomm_{id}__{qkey}"). This is the ground-truth
+    description the coder's YES/NO descriptions are scored against, and the text auditor #2 later
+    checks for information leakage. Failed or unparseable responses are skipped and counted.
+    """
+    refined_dir = EXPERIMENT / llm_dir / category / "refined"
+    qd_path = refined_dir / "questions_and_descriptions.json"
+    with open(qd_path, "r", encoding="utf-8") as f:
+        entries = json.load(f)
+    by_id = {e["task_id"]: e for e in entries}
+
+    filled = skipped = 0
+    with open(refined_dir / result_name, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            text  = extract_text(entry)
+            parts = entry.get("custom_id", "").split("__")   # oracle, humanevalcomm_{id}, {qkey}
+            if text is None or len(parts) != 3:
+                skipped += 1
+                continue
+            task_id, qkey = int(parts[1].split("_")[1]), parts[2]
+            e = by_id.get(task_id)
+            if e is None or qkey not in e["questions"]:
+                skipped += 1
+                continue
+            description = parse_oracle_description(text)
+            if description is None:
+                skipped += 1
+                continue
+            e["questions"][qkey]["oracle_description"] = description
+            filled += 1
+
+    with open(qd_path, "w", encoding="utf-8") as f:
+        json.dump(entries, f, indent=2)
+    print(f"{llm_dir}/{category}: filled oracle description for {filled} question(s), {skipped} skipped")
+    return qd_path
+
+
 if __name__ == "__main__":
 
     # --- First submission for an LLM (skips anything already submitted, throttled) ---
@@ -437,4 +543,10 @@ if __name__ == "__main__":
     # --- Step 3: post-process retrieved results into per-run candidate files ---
     # postprocess_baseline("LLM1")            # all categories that have a result file
     # postprocess_baseline("LLM1", ["1a"])    # a single category
+
+    # --- Round 3: fill the coder's YES/NO descriptions into questions_and_descriptions.json ---
+    # postprocess_descriptions("LLM1", "1a")
+
+    # --- Round 4: fill the oracle's ground-truth description into questions_and_descriptions.json ---
+    # postprocess_oracle("LLM1", "1a")
     pass

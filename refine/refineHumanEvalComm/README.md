@@ -53,7 +53,8 @@ Refinement phase (whether asking a clarifying question helps):
 
 5. For the tasks with incoherence > 0, generate clarifying questions: `needs_refinement` + `build_questions_batch` (`refine_descriptions.py`), submit and retrieve as in step 2, then parse them into `questions_and_descriptions.json`: `postprocess_questions` (`batch_processing.py`).
 6. Audit the question set (auditor #1): `build_audit_questions_batch` (`audit.py`), submit, then `postprocess_audit_questions`. It checks that a question targeting the injected ambiguity is present and if not it appends one as `q_auditor` and flags `true_question_missing`. Evaluation-only.
-7. (to build) Generate the yes/no and oracle descriptions, build candidates from each, then score and aggregate exactly as steps 3-4 with `phase="refined"`; the oracle answers are audited for leakage (auditor #2).
+7. Generate the coder's YES/NO refined descriptions for every question: `build_descriptions_batch` (`refine_descriptions.py`) + `postprocess_descriptions` (`batch_processing.py`).
+8. Generate the oracle's true description per question (round 4). (to build) Then audit those oracle answers for leakage (auditor #2), build candidates from each description, and score and aggregate exactly as steps 3-4 with `phase="refined"`.
 
 Each step is detailed below.
 
@@ -157,3 +158,15 @@ It only adds tasks not already present, so it is safe to re-run. The blank-quest
 A single fixed auditor LLM, separate from the coder LLMs and the oracle (to avoid self-evaluation bias), checks that each task's question set contains a question targeting the injected ambiguity. `build_audit_questions_batch(llm_dir, category, model)` writes `{category}/refined/audit_questions_batch_request.jsonl` (custom_id `audit_questions__humanevalcomm_{task_id}`). Each prompt gives the auditor the original (clear) and manipulated (ambiguous) descriptions plus the coder's questions, and asks for a three-line verdict (`covered` / `covering` / `question`). `model` is required (the auditor model). Submit it with `batch_processing.create_batch`.
 
 `postprocess_audit_questions(llm_dir, category)` applies the verdicts back into `questions_and_descriptions.json`: it sets `true_question_missing` per task, and when the injected ambiguity was not covered it appends the auditor's question under the distinct key `q_auditor` with `source: "auditor"`. That question is scored later for incoherence reduction but is flagged so it stays out of the practical question pool (in a real deployment you could not know which question is the right one).
+
+### Round 3: Coder YES/NO descriptions (`refine_descriptions.py`, `batch_processing.py`)
+
+`build_descriptions_batch(llm_dir, category, model=None)` asks the coder LLM (its own model, inferred from the baseline request) to turn each question into a YES description and a NO description, one request per (task, question), including any `q_auditor` question so it is scored like the rest. custom_id `descriptions__humanevalcomm_{task_id}__{qkey}`; output `{category}/refined/descriptions_batch_request.jsonl`; submit with `create_batch`.
+
+`postprocess_descriptions(llm_dir, category)` parses `description 1:` / `description 2:` from the results and fills `description1` / `description2` for each question in `questions_and_descriptions.json`. These two branches are what the coder scores for incoherence reduction (imagining each answer); the oracle's true answer is generated separately in the next round.
+
+### Round 4: Oracle true description (`refine_descriptions.py`, `batch_processing.py`)
+
+`build_oracle_batch(llm_dir, category, model=ORACLE_MODEL)` asks the fixed oracle for the ground-truth ("true") refined description of every question in `questions_and_descriptions.json`, including any `q_auditor` question. Unlike the coder rounds, the model is the single fixed `ORACLE_MODEL` (the same simulated user across all LLMs and categories). Each prompt gives the oracle the category's (ambiguous) description, the question, and the reference solution (`inst.code`) with its test cases (`inst.test`), and asks it to answer the question from what the code actually does, in the format `description: ...`. One request per (task, question); custom_id `oracle__humanevalcomm_{task_id}__{qkey}`; output `{category}/refined/oracle_batch_request.jsonl`; submit with `create_batch`.
+
+`postprocess_oracle(llm_dir, category)` parses `description:` from the results and fills `oracle_description` for each question in `questions_and_descriptions.json`. This is the ground-truth branch the coder's YES/NO descriptions are measured against, and the text auditor #2 (still to build) then checks it for information leakage, filling `oracle_leak` / `oracle_rewrite`.
