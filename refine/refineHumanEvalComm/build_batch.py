@@ -11,7 +11,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from common import CATEGORIES, EXPERIMENT, DATASET_NAME, load_instances, spec_for
+from common import CATEGORIES, CODER_MODELS, EXPERIMENT, DATASET_NAME, load_instances, spec_for
 
 
 def build_prompt(spec):
@@ -97,13 +97,6 @@ def build_baseline_batch(llm_dir:        str,
 
 if __name__ == "__main__":
 
-    # Placeholder model ids. Replace with the real OpenRouter model strings for LLM1..LLM4.
-    MODELS = {
-        "LLM1": "openrouter/model-1",
-        "LLM2": "openrouter/model-2",
-        "LLM3": "openrouter/model-3",
-        "LLM4": "openrouter/model-4",
-    }
 
     dataset_name   = "dataset-50"
     num_candidates = 10
@@ -111,7 +104,7 @@ if __name__ == "__main__":
     temperature    = None
 
     # --- Baseline ---
-    for llm_dir, model in MODELS.items():
+    for llm_dir, model in CODER_MODELS.items():
         build_baseline_batch(
             llm_dir,
             model,

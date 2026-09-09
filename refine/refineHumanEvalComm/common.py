@@ -37,6 +37,33 @@ CATEGORIES = {
 }
 
 
+# --- Model list: one place for every role ---
+# Coders (four vendors), the oracle (simulates the user, answers from the ground truth), and
+# the auditor (independent judge, a different vendor from every coder and from the oracle).
+CODER_MODELS = {
+    "LLM1": "openai/gpt-5.6-luna:batch",
+    "LLM2": "anthropic/claude-sonnet-5:batch",
+    "LLM3": "deepseek/deepseek-v4-pro-0813:batch",
+    "LLM4": "qwen/qwen3.5-9b:batch",
+}
+ORACLE_MODEL  = "anthropic/claude-opus-4.8:batch"
+AUDITOR_MODEL = "google/gemini-3.8-flash:batch"
+
+
+def blank_question(text: str, source: str = "model"):
+    """A fresh question entry for questions_and_descriptions.json.
+    source is "model" for a coder-generated question or "auditor" for one appended by the auditor."""
+    return {
+        "question":           text,
+        "source":             source,
+        "description1":       None,   # coder LLM, YES branch
+        "description2":       None,   # coder LLM, NO branch
+        "oracle_description": None,   # oracle LLM, true answer
+        "oracle_leak":        None,   # auditor #2
+        "oracle_rewrite":     None,   # auditor #2
+    }
+
+
 def load_instances(dataset_name: str = DATASET_NAME, task_ids: set = None):
     """
     Loads the checked Instance objects from the benchmark's .data/{dataset_name}.pkl, keyed by

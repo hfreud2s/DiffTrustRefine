@@ -122,7 +122,7 @@ if __name__ == "__main__":
     # save_batch_meta(batch, req)
 
     # --- Later: wait for a batch and save its results ---
-    # batch_id = json.load(open(EXPERIMENT / "LLM1" / "1a" / "refined" / "batch_meta.json"))["batch_id"]
+    # batch_id = json.load(open(EXPERIMENT / "LLM1" / "1a" / "refined" / "questions_batch_meta.json"))["batch_id"]
     # batch    = wait_for_batch(batch_id, poll=60)
-    # save_results(batch, EXPERIMENT / "LLM1" / "1a" / "refined" / "question_batch_result.jsonl")
+    # save_results(batch, EXPERIMENT / "LLM1" / "1a" / "refined" / "questions_batch_result.jsonl")
     pass

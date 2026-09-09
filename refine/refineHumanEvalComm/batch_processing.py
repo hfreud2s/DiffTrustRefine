@@ -16,6 +16,7 @@ OpenRouter Batch API docs: https://openrouter.ai/docs/batch-quickstart
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.request
@@ -25,7 +26,7 @@ from pathlib import Path
 import cloudpickle
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import CATEGORIES, EXPERIMENT
+from common import CATEGORIES, EXPERIMENT, blank_question
 
 API_BASE = "https://openrouter.ai/api/beta/batches"
 ENDPOINT = "/v1/chat/completions"
@@ -92,9 +93,16 @@ def create_batch(request_path: Path, model: str = None, endpoint: str = ENDPOINT
     return batch
 
 
-def save_batch_meta(batch: dict, request_path: Path):
-    """Writes batch_meta.json next to the request file, recording the id and submission state."""
-    meta_path = request_path.parent / "batch_meta.json"
+def save_batch_meta(batch: dict, request_path: Path, meta_name: str = None):
+    """Writes a batch meta file next to the request file, recording the id and submission state.
+    The meta is named after the request file (e.g. questions_batch_request.jsonl ->
+    questions_batch_meta.json) so several batches can share a folder without overwriting each
+    other's meta. Pass meta_name to override."""
+    if meta_name is None:
+        meta_name = request_path.name.replace("_request.jsonl", "_meta.json")
+        if meta_name == request_path.name:
+            meta_name = "batch_meta.json"
+    meta_path = request_path.parent / meta_name
     meta = {
         "batch_id":       batch.get("id"),
         "status":         batch.get("status"),
@@ -154,8 +162,8 @@ def count_requests(request_path: Path):
 
 
 def is_submitted(category_dir: Path):
-    """True if this category already has a batch_meta.json carrying a batch_id (i.e. it was submitted)."""
-    meta = category_dir / "batch_meta.json"
+    """True if this category's baseline batch was submitted (a baseline_batch_meta.json with a batch_id)."""
+    meta = category_dir / "baseline_batch_meta.json"
     if not meta.exists():
         return False
     try:
@@ -355,6 +363,61 @@ def postprocess_baseline(llm_dir: str, categories: list = None):
     return written_per_category
 
 
+_QUESTION_RE = re.compile(r"question\s*\d+\s*:\s*(.+)", re.IGNORECASE)
+
+
+def parse_questions(text: str):
+    """Parses a reply of the form 'question 1: ...\nquestion 2: ...' into a list of question strings."""
+    return [m.group(1).strip() for m in _QUESTION_RE.finditer(text)]
+
+
+def postprocess_questions(llm_dir: str, category: str,
+                          result_name: str = "questions_batch_result.jsonl"):
+    """
+    Parses a retrieved question batch into {category}/refined/questions_and_descriptions.json.
+
+    Each result's reply ("question 1: ... question 2: ...") becomes a task entry:
+        {"task_id", "true_question_missing": False,
+         "questions": {"q1": {question, source, description1/description2/oracle_*: None}, ...}}
+    Questions are generated once per task. Existing task entries are left
+    untouched, so re-running is safe. 
+
+    llm_dir/category: which (LLM, category) to process
+    result_name:      the retrieved results file under {category}/refined/
+    returns:          the path to questions_and_descriptions.json
+    """
+    refined_dir = EXPERIMENT / llm_dir / category / "refined"
+    out_path    = refined_dir / "questions_and_descriptions.json"
+
+    entries = json.load(open(out_path, encoding="utf-8")) if out_path.exists() else []
+    seen = {e["task_id"] for e in entries}
+
+    added = skipped = 0
+    with open(refined_dir / result_name, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            text  = extract_text(entry)
+            if text is None:
+                skipped += 1
+                continue
+            task_id = int(entry["custom_id"].split("__")[1].split("_")[1])
+            if task_id in seen:
+                continue
+            qdict = {f"q{i+1}": blank_question(q) for i, q in enumerate(parse_questions(text))}
+            entries.append({"task_id": task_id, "true_question_missing": False, "questions": qdict})
+            seen.add(task_id)
+            added += 1
+
+    entries.sort(key=lambda e: e["task_id"])
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(entries, f, indent=2)
+    print(f"{llm_dir}/{category}: {added} task(s) added to {out_path.name} "
+          f"({len(entries)} total, {skipped} failed response(s))")
+    return out_path
+
+
 if __name__ == "__main__":
 
     # --- First submission for an LLM (skips anything already submitted, throttled) ---
@@ -367,7 +430,7 @@ if __name__ == "__main__":
     # print(pending_categories("LLM1"))
 
     # --- Later: wait for a batch and save its results ---
-    # batch_id = json.load(open(EXPERIMENT / "LLM1" / "original" / "batch_meta.json"))["batch_id"]
+    # batch_id = json.load(open(EXPERIMENT / "LLM1" / "original" / "baseline_batch_meta.json"))["batch_id"]
     # batch    = wait_for_batch(batch_id, poll=60)
     # save_results(batch, EXPERIMENT / "LLM1" / "original" / "baseline_batch_result.jsonl")
 

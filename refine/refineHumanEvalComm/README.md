@@ -51,8 +51,9 @@ Baseline phase (how self-consistent the model is on a description as written):
 
 Refinement phase (whether asking a clarifying question helps):
 
-5. For the tasks with incoherence > 0, generate clarifying questions: `needs_refinement` + `build_questions_batch` (`refine_descriptions.py`), then submit and retrieve as in step 2.
-6. (to build) Post-process the answers, generate the yes/no and oracle descriptions, build candidates from each, then score and aggregate them exactly as steps 3-4 with `phase="refined"`.
+5. For the tasks with incoherence > 0, generate clarifying questions: `needs_refinement` + `build_questions_batch` (`refine_descriptions.py`), submit and retrieve as in step 2, then parse them into `questions_and_descriptions.json`: `postprocess_questions` (`batch_processing.py`).
+6. Audit the question set (auditor #1): `build_audit_questions_batch` (`audit.py`), submit, then `postprocess_audit_questions`. It checks that a question targeting the injected ambiguity is present and if not it appends one as `q_auditor` and flags `true_question_missing`. Evaluation-only.
+7. (to build) Generate the yes/no and oracle descriptions, build candidates from each, then score and aggregate exactly as steps 3-4 with `phase="refined"`; the oracle answers are audited for leakage (auditor #2).
 
 Each step is detailed below.
 
@@ -62,7 +63,7 @@ The experiment is built up one step at a time. Each step is a function that must
 
 ### Step 1: Baseline batch generation (`build_batch.py`)
 
-`build_baseline_batch(llm_dir, model, dataset_name="dataset-50", categories=None, num_candidates=10, num_runs=10, temperature=None)` is called first, once per LLM. It samples program candidates straight from each category's task description, with no clarifying-question refinement (that is the later `refined` phase). Set the real OpenRouter model ids for `LLM1`..`LLM4` in the `__main__` block before running.
+`build_baseline_batch(llm_dir, model, dataset_name="dataset-50", categories=None, num_candidates=10, num_runs=10, temperature=None)` is called first, once per LLM. It samples program candidates straight from each category's task description, with no clarifying-question refinement (that is the later `refined` phase). The coder models are configured in `common.CODER_MODELS`.
 
 For the given LLM it writes one OpenRouter batch input file per category:
 
@@ -82,9 +83,9 @@ What it does in detail:
 
 Requires `OPENROUTER_API_KEY` in the environment. This uses OpenRouter's Batch API (`POST /api/beta/batches`), which takes the requests inline and returns the results inline in the status response once the batch is complete.
 
-`submit_llm(llm_dir)` is the entry point for one LLM. It submits each category's `baseline_batch_request.jsonl` as its own batch (option B: one batch per category) and writes a `batch_meta.json` next to each request file recording the batch id and status. Internally it calls `create_batch(request_path)`, which reads the request file and posts `{endpoint, model, requests}` in that order (OpenRouter stream-parses the body, so `endpoint` and `model` must precede `requests`).
+`submit_llm(llm_dir)` is the entry point for one LLM. It submits each category's `baseline_batch_request.jsonl` as its own batch (option B: one batch per category) and writes a per-batch meta file named after the request (e.g. `baseline_batch_meta.json`) next to each request file, recording the batch id and status. Internally it calls `create_batch(request_path)`, which reads the request file and posts `{endpoint, model, requests}` in that order (OpenRouter stream-parses the body, so `endpoint` and `model` must precede `requests`).
 
-To retrieve, once a batch has run: `wait_for_batch(batch_id, poll=60)` polls `GET /api/beta/batches/{id}` until the batch is terminal (`completed`, `failed`, `expired`, `cancelled`), then `save_results(batch, out_path)` writes the inline results to `{category}/baseline_batch_result.jsonl`, one `{custom_id, response, error}` item per line. That file is the input for step 3 (post-processing into the run folders). The batch id is read back from `{category}/batch_meta.json`.
+To retrieve, once a batch has run: `wait_for_batch(batch_id, poll=60)` polls `GET /api/beta/batches/{id}` until the batch is terminal (`completed`, `failed`, `expired`, `cancelled`), then `save_results(batch, out_path)` writes the inline results to `{category}/baseline_batch_result.jsonl`, one `{custom_id, response, error}` item per line. That file is the input for step 3 (post-processing into the run folders). The batch id is read back from that category's `baseline_batch_meta.json`.
 
 Notes:
 
@@ -126,3 +127,33 @@ The refined phase clarifies a category's description and regenerates candidates 
 `needs_refinement(llm_dir, category)` reads `{category}/baseline/aggregate.json` and returns the tasks whose mean incoherence is above zero. Only those enter the refinement pipeline.
 
 `build_questions_batch(llm_dir, category, model=None, num_questions=3)` writes `{category}/refined/questions_batch_request.jsonl`: one OpenRouter item per needing-refinement task, custom_id `questions__humanevalcomm_{task_id}`, whose prompt embeds that category's description and asks for `num_questions` binary yes/no questions. Submit it with `batch_processing.create_batch` / `save_batch_meta`, the same way as the baseline batch.
+
+### Step 6: Question post-processing (`batch_processing.py`)
+
+`postprocess_questions(llm_dir, category)` parses a retrieved question batch (`{category}/refined/questions_batch_result.jsonl`) into `{category}/refined/questions_and_descriptions.json`, the file every remaining refinement round reads and extends. One entry per task:
+
+```json
+{
+  "task_id": 1,
+  "true_question_missing": false,      // set by auditor #1
+  "questions": {
+    "q1": {
+      "question": "...",
+      "source": "model",               // "model" (coder) or "auditor" (added for evaluation only)
+      "description1": null,            // coder LLM, YES branch (later round)
+      "description2": null,            // coder LLM, NO branch (later round)
+      "oracle_description": null,      // oracle LLM, true answer (later round)
+      "oracle_leak": null,             // auditor #2
+      "oracle_rewrite": null           // auditor #2
+    }
+  }
+}
+```
+
+It only adds tasks not already present, so it is safe to re-run. The blank-question skeleton is `common.blank_question`.
+
+### Step 7: Auditor #1 — question-set audit (`audit.py`)
+
+A single fixed auditor LLM, separate from the coder LLMs and the oracle (to avoid self-evaluation bias), checks that each task's question set contains a question targeting the injected ambiguity. `build_audit_questions_batch(llm_dir, category, model)` writes `{category}/refined/audit_questions_batch_request.jsonl` (custom_id `audit_questions__humanevalcomm_{task_id}`). Each prompt gives the auditor the original (clear) and manipulated (ambiguous) descriptions plus the coder's questions, and asks for a three-line verdict (`covered` / `covering` / `question`). `model` is required (the auditor model). Submit it with `batch_processing.create_batch`.
+
+`postprocess_audit_questions(llm_dir, category)` applies the verdicts back into `questions_and_descriptions.json`: it sets `true_question_missing` per task, and when the injected ambiguity was not covered it appends the auditor's question under the distinct key `q_auditor` with `source: "auditor"`. That question is scored later for incoherence reduction but is flagged so it stays out of the practical question pool (in a real deployment you could not know which question is the right one).
