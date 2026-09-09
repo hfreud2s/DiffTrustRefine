@@ -98,7 +98,6 @@ def build_baseline_batch(llm_dir:        str,
 if __name__ == "__main__":
 
 
-    dataset_name   = "dataset-50"
     num_candidates = 10
     num_runs       = 10
     temperature    = None
@@ -108,7 +107,7 @@ if __name__ == "__main__":
         build_baseline_batch(
             llm_dir,
             model,
-            dataset_name,
+            DATASET_NAME,
             num_candidates=num_candidates,
             num_runs=num_runs,
             temperature=temperature,

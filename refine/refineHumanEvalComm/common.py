@@ -17,10 +17,16 @@ for entry in (REPO_ROOT, THIS_DIR):
 
 import cloudpickle
 
-EXPERIMENT   = THIS_DIR / ".HEC-experiment"                  # per-(LLM, category) experiment data
+EXPERIMENT   = THIS_DIR / ".HEC-mini"                  # per-(LLM, category) experiment data
 DATA_DIR     = REPO_ROOT / "HumanEvalComm" / ".data"         # dataset pickles + source JSON (benchmark folder)
 SOURCE_JSON  = DATA_DIR / "HumanEvalComm.json"
-DATASET_NAME = "dataset-50"
+DATASET_NAME = "dataset-10"
+
+BASE = "openrouter" # choose "litellm" or "openrouter"
+
+API_BASE_OR = "https://openrouter.ai/api/beta/batches"
+API_BASE_LL = "https://litellm.ai.cispa.de/"
+API_BASE = API_BASE_LL if BASE == "litellm" else API_BASE_OR
 
 # Category folder name -> the Instance variant it maps to.
 # None is the unmanipulated ("original") description; the rest are keys of Instance.manipulated_specs

@@ -26,11 +26,12 @@ from pathlib import Path
 import cloudpickle
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import CATEGORIES, EXPERIMENT, blank_question
+from common import CATEGORIES, EXPERIMENT, BASE, API_BASE, blank_question
 
-API_BASE = "https://openrouter.ai/api/beta/batches"
-ENDPOINT = "/v1/chat/completions"
-TERMINAL = {"completed", "failed", "expired", "cancelled"}
+ENDPOINT    = "/v1/chat/completions"
+TERMINAL    = {"completed", "failed", "expired", "cancelled"}
+
+
 
 
 class OpenRouterError(RuntimeError):
@@ -42,9 +43,12 @@ class OpenRouterError(RuntimeError):
 
 
 def _api_key():
-    key = os.environ.get("OPENROUTER_API_KEY")
+    if BASE == "litellm":
+        key = os.environ.get("LITELLM_API_KEY")
+    else:
+        key = os.environ.get("OPENROUTER_API_KEY")
     if not key:
-        raise RuntimeError("Set the OPENROUTER_API_KEY environment variable before submitting.")
+        raise RuntimeError("Set the API key environment variable before submitting.")
     return key
 
 
@@ -527,7 +531,8 @@ def postprocess_oracle(llm_dir: str, category: str,
 if __name__ == "__main__":
 
     # --- First submission for an LLM (skips anything already submitted, throttled) ---
-    # submit_llm("LLM1")
+    #submit_llm("LLM1")
+    #submit_llm("LLM1",['1a'])
 
     # --- Retry: resubmit only the categories a rate limit skipped ---
     # retry_llm("LLM1")
