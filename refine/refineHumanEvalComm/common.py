@@ -17,7 +17,7 @@ for entry in (REPO_ROOT, THIS_DIR):
 
 import cloudpickle
 
-EXPERIMENT   = THIS_DIR / ".HEC-mini"                  # per-(LLM, category) experiment data
+EXPERIMENT   = THIS_DIR / ".HEC-experiment"                  # per-(LLM, category) experiment data
 DATA_DIR     = REPO_ROOT / "HumanEvalComm" / ".data"         # dataset pickles + source JSON (benchmark folder)
 SOURCE_JSON  = DATA_DIR / "HumanEvalComm.json"
 DATASET_NAME = "dataset-10"
