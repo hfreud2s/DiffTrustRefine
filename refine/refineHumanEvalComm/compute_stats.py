@@ -142,20 +142,27 @@ def compute_stats(candidate_path: Path,
             task_result["incoherence"] = None
             task_result["incoherence_error"] = f"{type(e).__name__}: {e}"
             print(f"  incoherence=ERROR ({type(e).__name__})", end="")
-        try:
-            start_time = time.time()
-            err = difftrust.checking.timeout_call(
-                func=compute_error,
-                args=(candidate_list, inst.ground_truth, inst.filtered_generator, nb_samples),
-                kwargs={},
-                timeout=timeout,
-            )
-            task_result["error"] = err
-            print(f", error={err:.4f} (computed in {time.time()-start_time:.2f}s)")
-        except Exception as e:
-            task_result["error"] = None
-            task_result["error_error"] = f"{type(e).__name__}: {e}"
-            print(f", error=ERROR ({type(e).__name__})")
+        # Error (correctness vs ground truth) is only meaningful for the oracle's true description and
+        # for the baseline conditions. The coder's hypothetical YES/NO branches (desc1/desc2) encode a
+        # guessed answer, not the truth, so error is not computed for them.
+        branch = variant.split("__")[-1] if (variant and "__" in variant) else None
+        if branch is None or branch == "oracle":
+            try:
+                start_time = time.time()
+                err = difftrust.checking.timeout_call(
+                    func=compute_error,
+                    args=(candidate_list, inst.ground_truth, inst.filtered_generator, nb_samples),
+                    kwargs={},
+                    timeout=timeout,
+                )
+                task_result["error"] = err
+                print(f", error={err:.4f} (computed in {time.time()-start_time:.2f}s)")
+            except Exception as e:
+                task_result["error"] = None
+                task_result["error_error"] = f"{type(e).__name__}: {e}"
+                print(f", error=ERROR ({type(e).__name__})")
+        else:
+            print(", error=skipped (hypothetical refined branch)")
 
         results.append(task_result)
         with open(output_path, "w", encoding="utf-8") as f:
