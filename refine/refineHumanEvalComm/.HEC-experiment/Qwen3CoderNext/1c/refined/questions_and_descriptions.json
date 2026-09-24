@@ -1,0 +1,1424 @@
+[
+  {
+    "task_id": 1,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the function return only the individual opening parentheses from each top-level group, or should it return the full balanced group strings (e.g., `'()'`, `'(()'`, `'(()())'`)?",
+        "source": "model",
+        "description1": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. The function should return only the individual opening parentheses from each top-level group.",
+        "description2": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. The function should return the full balanced group strings (e.g., `'()'`, `'(()'`, `'(()())'`).",
+        "oracle_description": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. For each top-level group, return the full balanced group string (including all of its parentheses), not just the individual opening parenthesis.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "When a group contains nested parentheses, should the function preserve the internal structure (including spaces) of the group, or should it strip all spaces from each group before returning it?",
+        "source": "model",
+        "description1": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open parenthesis is properly closed) and not nested within each other. Ignore any spaces in the input string. When a group contains nested parentheses, preserve the internal structure\u2014including spaces\u2014of the group in the returned string for that group.",
+        "description2": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open parenthesis is properly closed) and not nested within each other. Ignore any spaces in the input string. When a group contains nested parentheses, strip all spaces from each group before returning it.",
+        "oracle_description": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Any spaces in the input string should be ignored entirely, so that the returned groups contain no spaces; when a group contains nested parentheses, its internal parenthesis structure is preserved but with all spaces removed.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "If the input contains unbalanced parentheses (e.g., `'(()'`), should the function still attempt to extract groups, or should it raise an error or return an empty list?",
+        "source": "model",
+        "description1": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. If the input contains unbalanced parentheses (e.g., `'(()'`), the function should still attempt to extract groups according to the above rules, possibly returning partial or incomplete groupings as appropriate.",
+        "description2": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. If the input contains unbalanced parentheses (e.g., `'(()'`), the function should raise an error or return an empty list.",
+        "oracle_description": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string.\n\nIf the input contains unbalanced parentheses, the function should not raise an error or return an empty list solely because of the imbalance; instead, it should process the string by tracking the nesting depth and emit a group each time the depth returns to zero after a closing parenthesis, so that any complete balanced groups found are still extracted while incomplete trailing content is simply not returned as a group.",
+        "oracle_leak": "specific implementation instructions (\"process the string by tracking the nesting depth and emit a group each time the depth returns to zero after a closing parenthesis\")",
+        "oracle_rewrite": "Input to this function is a string containing multiple groups of nested parentheses. Your goal is to separate those groups into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string. If the input contains unbalanced parentheses, do not raise an error or return an empty list; extract and return any complete, balanced groups, omitting incomplete groups."
+      }
+    }
+  },
+  {
+    "task_id": 5,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the delimiter be inserted between every pair of consecutive elements, or should it also appear at the end of the list when the input list is non-empty?",
+        "source": "model",
+        "description1": "Insert a number `delimeter` between every pair of consecutive elements of the input list `numbers`, and also append `delimeter` at the end of the list when the input list is non-empty.",
+        "description2": "Insert a number `delimeter` between every pair of consecutive elements of the input list `numbers`, but do not append `delimeter` at the end of the list when the input list is non-empty.",
+        "oracle_description": "Insert a number 'delimeter' between every two consecutive elements of input list `numbers`. The delimiter should appear only between consecutive elements and never at the end of the list; for a non-empty list, the last element is not followed by a delimiter.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "When the input list is empty, should the result be a list containing only the delimiter, or should it be an empty list?",
+        "source": "model",
+        "description1": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`. When the input list is empty, return a list containing only the delimiter.",
+        "description2": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`. When the input list is empty, return an empty list.",
+        "oracle_description": "Insert a number 'delimeter' between every two consecutive elements of input list `numbers`. When the input list is empty, the result should be an empty list.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "If the input list has exactly one element, should the result be that single element, or that element followed by the delimiter?",
+        "source": "model",
+        "description1": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`. If the input list has exactly one element, return that single element followed by the delimiter.",
+        "description2": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`. If the input list has exactly one element, return that single element without appending the delimiter.",
+        "oracle_description": "Insert a number 'delimeter' between every two consecutive elements of the input list `numbers`. If the input list has exactly one element, the result should be that single element with no delimiter appended, since there are no two consecutive elements between which to insert.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the delimiter be inserted between consecutive elements of the input list rather than appended to the end?",
+        "source": "auditor",
+        "description1": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`, and do not append it to the end of the list.",
+        "description2": "Insert a number `delimeter` between every two consecutive elements of input list `numbers`, and also append it to the end of the list.",
+        "oracle_description": "Insert a number 'delimeter' between every two consecutive elements of the input list `numbers'. The delimiter should be placed only between consecutive elements, not appended after the final element.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 6,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function treat non-parenthesis characters (e.g., letters, digits, symbols) in the input string as invalid and raise an error, or should it ignore them and only process parentheses?",
+        "source": "model",
+        "description1": "Input to this function is a string that may contain parentheses and other characters. The function should treat any character that is not an opening '(' or closing ')' parenthesis as invalid and raise an error. For each group of parentheses separated by spaces, output the deepest level of nesting of parentheses. E.g. (() ()) has maximum two levels of nesting while ((( ))) has three.",
+        "description2": "Input to this function is a string that may contain parentheses and other characters. The function should ignore any character that is not an opening '(' or closing ')' parenthesis and only process parentheses. Groups are defined by spaces in the original string, and for each group, the function should compute the deepest level of nesting of parentheses based solely on the parentheses present in that group. E.g. (() ()) has maximum two levels of nesting while ((( ))) has three.",
+        "oracle_description": "Input to this function is a string representing multiple groups of nested parentheses separated by spaces. For each of the groups, output the deepest level of nesting of parentheses. For example, a group like (()()) has maximum two levels of nesting while ((())) has three. Any characters in the input that are not parentheses (such as letters, digits, or other symbols) should not be treated as errors; the function should simply process the parentheses without raising an error for such characters. Return a list containing the maximum nesting depth for each group, in order.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function consider only balanced parentheses groups, or should it compute nesting depth even for unbalanced groups (e.g., `(()`)?",
+        "source": "model",
+        "description1": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. For each of the groups, output the deepest level of nesting of parentheses, considering only balanced parentheses groups; if a group is unbalanced, its nesting depth is undefined and thus not computed.",
+        "description2": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. For each of the groups, output the deepest level of nesting of parentheses, computing nesting depth even for unbalanced groups (e.g., `(()`); the depth is defined as the maximum nesting level reached during a left-to-right scan, regardless of whether all parentheses are matched.",
+        "oracle_description": "Input to this function is a string representing multiple groups of nested parentheses separated by spaces. For each group, output the deepest level of nesting of parentheses. For example, a group like (()()) has a maximum of two levels of nesting while ((())) has three. The nesting depth should be computed by tracking how parentheses open and close throughout the group, and this computation applies regardless of whether a given group is balanced; unbalanced groups are still processed by the same depth-tracking behavior rather than being rejected or treated specially.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function treat consecutive spaces (e.g., multiple spaces between groups) as a single separator, or as indicating an empty group (which might have depth 0)?",
+        "source": "model",
+        "description1": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. Consecutive spaces are treated as a single separator, so multiple spaces between groups do not produce empty groups. For each group, output the deepest level of nesting of parentheses.",
+        "description2": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. Consecutive spaces are treated as separators that may produce empty groups, where an empty group has nesting depth 0. For each group (including any empty groups resulting from consecutive spaces), output the deepest level of nesting of parentheses.",
+        "oracle_description": "Input to this function is a string representing multiple groups of nested parentheses separated by spaces. For each of the groups, output the deepest level of nesting of parentheses. E.g. a group like (() ()) has maximum two levels of nesting while a group like ((( ))) has three. When splitting the input into groups by spaces, consecutive spaces act as a single separator and do not produce empty groups; any empty substring resulting from the splitting is ignored rather than treated as a group with depth zero.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function identify groups by top-level balanced parentheses rather than splitting on whitespace?",
+        "source": "auditor",
+        "description1": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. Groups are identified by splitting the input string on whitespace, and for each resulting group, output the deepest level of nesting of parentheses.",
+        "description2": "Input to this function is a string represented multiple groups for nested parentheses separated by spaces. Groups are identified by finding top-level balanced parentheses substrings (i.e., maximal substrings where every opening parenthesis has a matching closing parenthesis and no prefix has more closing than opening parentheses), and for each such group, output the deepest level of nesting of parentheses.",
+        "oracle_description": "Input to this function is a string representing multiple groups of nested parentheses. The groups are separated by whitespace, and the string should be split on whitespace to identify each group (rather than by detecting top-level balanced parentheses). For each group, output the deepest level of nesting of parentheses. For example, a group like (() ()) has maximum two levels of nesting while ((( ))) has three.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 7,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return a list containing only the empty string when the input list is empty and the substring is non-empty?",
+        "source": "model",
+        "description1": "Filter an input list of strings to include only those that contain a given substring; when the input list is empty and the substring is non-empty, return a list containing only the empty string.",
+        "description2": "Filter an input list of strings to include only those that contain a given substring; when the input list is empty and the substring is non-empty, return an empty list.",
+        "oracle_description": "Filter an input list of strings, returning only those that contain the given substring. When the input list is empty, the result should be an empty list regardless of the substring.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function return the substring itself when the input list is empty, regardless of whether the substring appears in any list element?",
+        "source": "model",
+        "description1": "Given a list of strings and a substring, return a list containing only those strings from the input list that contain the substring; if the input list is empty, return a list containing the substring itself.",
+        "description2": "Given a list of strings and a substring, return a list containing only those strings from the input list that contain the substring; if the input list is empty, return an empty list.",
+        "oracle_description": "Filter an input list of strings, returning only those that contain a given substring. When the input list is empty, the result is an empty list, regardless of the substring.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function include strings that contain the substring as a *contiguous* sequence, or could it include strings where the characters of the substring appear in order but not necessarily consecutively?",
+        "source": "model",
+        "description1": "Filter an input list of strings to include only those that contain the given substring as a contiguous sequence.",
+        "description2": "Filter an input list of strings to include only those that contain the given substring with its characters appearing in order but not necessarily consecutively.",
+        "oracle_description": "Filter an input list of strings, returning only those strings that contain the given substring as a contiguous sequence of characters.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return strings that contain the given substring, rather than strings that do not contain it?",
+        "source": "auditor",
+        "description1": "Filter an input list of strings to include only those that contain the given substring.",
+        "description2": "Filter an input list of strings to include only those that do not contain the given substring.",
+        "oracle_description": "Filter an input list of strings, returning only those strings that contain the given substring.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 8,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the first element of the returned tuple be the product and the second element be the sum, or vice versa?",
+        "source": "model",
+        "description1": "For a given list of integers, return a tuple where the first element is the product of all the integers in the list and the second element is the sum of all the integers in the list. An empty list should yield a product of 1 and a sum of 0.",
+        "description2": "For a given list of integers, return a tuple where the first element is the sum of all the integers in the list and the second element is the product of all the integers in the list. An empty list should yield a sum of 0 and a product of 1.",
+        "oracle_description": "For a given list of integers, return a tuple consisting of a sum and a product of all the integers in the list. The first element of the returned tuple should be the sum, and the second element should be the product. An empty sum should be equal to 0 and an empty product should be equal to 1.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function need to handle non-integer elements (e.g., floats, strings) in the input list, and if so, how?",
+        "source": "model",
+        "description1": "For a given list of integers (which may include non-integer elements such as floats or strings), return a tuple consisting of the sum and product of all the integers in the list, where non-integer elements are ignored; the sum of an empty list of integers is 0 and the product of an empty list of integers is 1.",
+        "description2": "For a given list of integers, return a tuple consisting of the sum and product of all the integers in the list; the sum of an empty list is 0 and the product of an empty list is 1.",
+        "oracle_description": "For a given list of integers, return a tuple consisting of the sum and the product of all the integers in the list. The empty sum should be equal to 0 and the empty product should be equal to 1. The function is not required to handle non-integer elements such as floats or strings; the input is assumed to consist of integers only.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function mutate the input list, or must it operate on a copy or be purely functional?",
+        "source": "model",
+        "description1": "For a given list of integers, return a tuple consisting of the sum and product of all the integers in the list, where the function may mutate the input list in the process. Empty sum should be equal to 0 and empty product should be equal to 1.",
+        "description2": "For a given list of integers, return a tuple consisting of the sum and product of all the integers in the list, where the function must not mutate the input list and must operate on a copy or be purely functional. Empty sum should be equal to 0 and empty product should be equal to 1.",
+        "oracle_description": "For a given list of integers, return a tuple consisting of a sum and a product of all the integers in the list. Empty sum should be equal to 0 and empty product should be equal to 1. The function must not modify the input list; it should leave the original list unchanged.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 11,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function raise an error if the two input strings have different lengths?",
+        "source": "model",
+        "description1": "Input are two strings a and b consisting only of 1s and 0s. If the two input strings have different lengths, raise an error. Otherwise, perform binary XOR on these inputs and return result also as a string.",
+        "description2": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return result also as a string.",
+        "oracle_description": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return the result also as a string. If the two input strings have different lengths, the function should not raise an error; instead, the XOR is performed over the positions the strings share, and the result reflects only those positions.",
+        "oracle_leak": "how mismatched lengths are handled (performing XOR only over shared positions / truncating to the shorter string)",
+        "oracle_rewrite": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return the result also as a string. The function should not raise an error if the two input strings have different lengths."
+      },
+      "q2": {
+        "question": "Should leading zeros be preserved in the output (e.g., is `'001' ^ '010' = '011'` acceptable, or must it be `'11'`)?",
+        "source": "model",
+        "description1": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs bit by bit (aligning least significant bits or most significant bits as implied by the example), preserving leading zeros in the output, and return the result as a string.",
+        "description2": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs bit by bit (aligning least significant bits or most significant bits as implied by the example), removing leading zeros from the output (except when the result is zero, in which case return '0'), and return the result as a string.",
+        "oracle_description": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return the result also as a string. The result should be formed by combining the corresponding characters of the inputs directly, without removing any leading zeros; that is, leading zeros in the result are preserved rather than stripped.",
+        "oracle_leak": "specifying that the result should be formed by combining corresponding characters of the inputs directly (implementation detail / resolving alignment)",
+        "oracle_rewrite": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return the result also as a string, preserving any leading zeros in the result."
+      },
+      "q3": {
+        "question": "Should the function treat empty strings as valid inputs, and if so, what should `string_xor('', '')` return?",
+        "source": "model",
+        "description1": "Input are two strings a and b consisting only of 1s and 0s, which may be empty. Perform binary XOR on these inputs and return result also as a string, where XOR is defined bit-by-bit for corresponding positions, and if one string is shorter than the other, the missing bits are treated as 0s.",
+        "description2": "Input are two strings a and b consisting only of 1s and 0s, which must be non-empty. Perform binary XOR on these inputs and return result also as a string, where XOR is defined bit-by-bit for corresponding positions, and if one string is shorter than the other, the missing bits are treated as 0s.",
+        "oracle_description": "Input are two strings a and b consisting only of 1s and 0s. Perform binary XOR on these inputs and return the result also as a string. Empty strings are valid inputs, and applying the operation to two empty strings returns an empty string.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function perform standard bitwise XOR (evaluating identical bits to '0') rather than bitwise XNOR as shown in the example?",
+        "source": "auditor",
+        "description1": "Given two binary strings a and b (each consisting only of characters '0' and '1'), compute their bitwise XOR by comparing corresponding bits: if the bits are the same, output '0'; if they differ, output '1'. Return the resulting binary string.",
+        "description2": "Given two binary strings a and b (each consisting only of characters '0' and '1'), compute their bitwise XNOR by comparing corresponding bits: if the bits are the same, output '1'; if they differ, output '0'. Return the resulting binary string.",
+        "oracle_description": "Input are two strings a and b consisting only of 1s and 0s. Perform standard binary XOR on these inputs, where identical bits produce '0' and differing bits produce '1', and return the result also as a string.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 12,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function consider only the first occurrence of the longest string, or should it return the last occurrence if multiple strings share the maximum length?",
+        "source": "model",
+        "description1": "Out of a list of strings, return the longest one, considering only the first occurrence of the longest string; if multiple strings share the maximum length, return the first one encountered in the list; return None if the input list is empty.",
+        "description2": "Out of a list of strings, return the longest one, considering only the last occurrence of the longest string; if multiple strings share the maximum length, return the last one encountered in the list; return None if the input list is empty.",
+        "oracle_description": "Out of a list of strings, return the longest one. In case multiple strings share the maximum length, return the first one among them (the earliest occurrence). Return None in case the input list is empty.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should strings containing only whitespace be treated as having length equal to the number of characters (including spaces), or should leading/trailing whitespace be stripped before measuring length?",
+        "source": "model",
+        "description1": "Out of a list of strings, return the longest one, where the length of each string is measured as the number of characters including any whitespace (e.g., leading, trailing, or internal spaces count toward the length). In case of multiple strings with the same maximum length, return the first one in the list. Return None if the input list is empty.",
+        "description2": "Out of a list of strings, return the longest one, where the length of each string is measured after stripping leading and trailing whitespace. In case of multiple strings with the same maximum length, return the first one in the list. Return None if the input list is empty.",
+        "oracle_description": "Out of a list of strings, return the longest one. The length of each string is measured by its total number of characters, including any whitespace, without stripping leading or trailing whitespace. Return the first one in case of multiple strings of the same length. Return None in case the input list is empty.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an exception if the input list contains non-string elements (e.g., integers or None), or should it attempt to handle them (e.g., by converting to string or ignoring them)?",
+        "source": "model",
+        "description1": "Given a list of strings, return the longest one. If multiple strings have the same maximum length, return the first one in the list. If the input list is empty, return None. If the input list contains any non-string elements (e.g., integers, None, or other types), raise an exception.",
+        "description2": "Given a list of strings, return the longest one. If multiple strings have the same maximum length, return the first one in the list. If the input list is empty, return None. If the input list contains any non-string elements, handle them by converting each element to a string before comparison.",
+        "oracle_description": "Out of a list of strings, return the longest one. Return the first one in case of multiple strings of the same length. Return None in case the input list is empty. The function assumes all elements are strings and does not perform any special handling for non-string elements; it relies on standard string-length behavior, so encountering an element that does not support length computation will result in an error being raised.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return the longest string rather than the shortest string?",
+        "source": "auditor",
+        "description1": "Out of a list of strings, return the longest string. In case of multiple strings of the same maximum length, return the first one encountered. Return None if the input list is empty.",
+        "description2": "Out of a list of strings, return the shortest string. In case of multiple strings of the same minimum length, return the first one encountered. Return None if the input list is empty.",
+        "oracle_description": "Out of a list of strings, return the longest one. Return the first one in case of multiple strings of the same length. Return None in case the input list is empty.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 13,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return the greatest common divisor in absolute value, ignoring the signs of a and b?",
+        "source": "model",
+        "description1": "Return the greatest common divisor of two integers a and b, expressed as a non-negative integer (i.e., in absolute value, ignoring the signs of a and b).",
+        "description2": "Return the greatest common divisor of two integers a and b, preserving the sign according to the standard mathematical definition (which may be negative if either or both inputs are negative, depending on convention).",
+        "oracle_description": "Return the greatest common divisor of two integers a and b. The result should be the greatest common divisor computed based on the given values as provided, without any special handling to disregard or normalize the signs of a and b.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "When one of the inputs is zero, should the function return the absolute value of the other input?",
+        "source": "model",
+        "description1": "Return the greatest common divisor of two integers a and b, where if one of the inputs is zero, the function returns the absolute value of the other input.",
+        "description2": "Return the greatest common divisor of two integers a and b, where if one of the inputs is zero, the function does not return the absolute value of the other input.",
+        "oracle_description": "Return a greatest common divisor of two integers a and b. When one of the inputs is zero, the function should return the absolute value of the other input.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function return a negative number if both inputs are negative?",
+        "source": "model",
+        "description1": "Return the greatest common divisor of two integers a and b, where if both inputs are negative, the result may be negative.",
+        "description2": "Return the greatest common divisor of two integers a and b, where if both inputs are negative, the result is non-negative.",
+        "oracle_description": "Return a greatest common divisor of two integers a and b. When both inputs are negative, the returned value may be negative rather than being converted to a positive result.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return the standard mathematical greatest common divisor rather than following the doctest example outputs?",
+        "source": "auditor",
+        "description1": "Return the greatest common divisor of two integers a and b, where the greatest common divisor is defined as the largest positive integer that divides both numbers without leaving a remainder.",
+        "description2": "Return a value for the greatest common divisor of two integers a and b that matches the behavior shown in the provided doctest examples, which may differ from the standard mathematical definition.",
+        "oracle_description": "Return the greatest common divisor of two integers a and b, using the standard mathematical definition of the greatest common divisor (the largest integer that divides both a and b), regardless of any values shown in the illustrative examples.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 15,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the numbers be separated by periods (.) or spaces, based on the docstring examples?",
+        "source": "model",
+        "description1": "Return a string containing period-delimited numbers starting from 0 up to n inclusive.",
+        "description2": "Return a string containing space-delimited numbers starting from 0 up to n inclusive.",
+        "oracle_description": "Return a string containing numbers starting from 0 up to n inclusive, with the numbers separated by single spaces.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function include negative numbers in the sequence when n is negative?",
+        "source": "model",
+        "description1": "Return a string containing space-delimited numbers starting from 0 up to n inclusive, where the sequence includes negative numbers when n is negative.",
+        "description2": "Return a string containing space-delimited numbers starting from 0 up to n inclusive, where the sequence does not include negative numbers when n is negative.",
+        "oracle_description": "Return a string containing space-delimited numbers starting from 0 up to n inclusive. When n is negative, no numbers are included in the sequence, so negative numbers never appear; the result contains only non-negative numbers from 0 onward when n is at least 0.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an exception for non-integer inputs (e.g., floats, strings), or attempt to handle them?",
+        "source": "model",
+        "description1": "Return a string containing space-delimited numbers starting from 0 up to n inclusive, where n must be a non-negative integer; raise an exception for non-integer inputs (e.g., floats, strings).",
+        "description2": "Return a string containing space-delimited numbers starting from 0 up to n inclusive, attempting to handle non-integer inputs (e.g., floats, strings) by converting or interpreting them as needed.",
+        "oracle_description": "Return a string containing space-delimited numbers starting from 0 up to n inclusive. The function does not perform any validation of the input type; it relies on the input supporting the operations needed to generate a numeric sequence, and no special handling or exception is prescribed for non-integer inputs.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 19,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the output string preserve the original casing of the input number words (e.g., 'Three' \u2192 'Three' in output)?",
+        "source": "model",
+        "description1": "Input is a space-delimited string of numerals from 'zero' to 'nine', where each numeral may appear in any casing (e.g., 'Zero', 'ONE', 'tWo'). Valid choices are the words 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', and 'nine' in any casing. Return the string with numbers sorted from smallest to largest, preserving the original casing of each input numeral word.",
+        "description2": "Input is a space-delimited string of numerals from 'zero' to 'nine', where each numeral may appear in any casing (e.g., 'Zero', 'ONE', 'tWo'). Valid choices are the words 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', and 'nine' in any casing. Return the string with numbers sorted from smallest to largest, converting each numeral word to lowercase in the output.",
+        "oracle_description": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest. The number words appear in lowercase, and the output preserves this lowercase form exactly as given in the input.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function raise an exception if the input contains an invalid number word (e.g., 'ten' or 'twelve')?",
+        "source": "model",
+        "description1": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. If the input contains any word outside this valid set, the function must raise an exception. Return the string with numbers sorted from smallest to largest.",
+        "description2": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. The function must not raise an exception for invalid number words; instead, it should process only the valid words present in the input (ignoring invalid ones) or handle them as specified implicitly by the original task. Return the string with numbers sorted from smallest to largest.",
+        "oracle_description": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest. If the input contains a word that is not one of the valid number words, the function should raise an exception rather than handle it gracefully.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should duplicate number words in the input be preserved in the output (e.g., 'one one two' \u2192 'one one two')?",
+        "source": "model",
+        "description1": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest, preserving all occurrences (including duplicates) of each number word in the order they appear relative to equal elements.",
+        "description2": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest, removing all duplicate occurrences so that each number word appears at most once.",
+        "oracle_description": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest. If a number word appears more than once in the input, each occurrence is preserved in the output, so the output contains the same number of words as the input.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the numbers be sorted in ascending order (smallest to largest)?",
+        "source": "auditor",
+        "description1": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from smallest to largest.",
+        "description2": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with numbers sorted from largest to smallest.",
+        "oracle_description": "Input is a space-delimited string of numerals from 'zero' to 'nine'. Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'. Return the string with the numbers sorted from smallest to largest, in ascending order.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 22,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the function return only the integer values, or should it return all non-integer values (i.e., is the filtering criterion \"keep integers\" or \"remove integers\")?",
+        "source": "model",
+        "description1": "Filter the given list of any Python values to return only the integer values.",
+        "description2": "Filter the given list of any Python values to return all non-integer values.",
+        "oracle_description": "Filter a given list of arbitrary Python values, returning a new list containing only those values that are integers.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function preserve the original order of elements in the list?",
+        "source": "model",
+        "description1": "Filter a given list of arbitrary Python values to retain only non-integer elements, preserving the original order of those elements in the output.",
+        "description2": "Filter a given list of arbitrary Python values to retain only non-integer elements, without any requirement to preserve the original order of those elements in the output.",
+        "oracle_description": "Filter a given list of arbitrary Python values, returning only the integer values. The elements that are kept must appear in the same order as they occurred in the original list.",
+        "oracle_leak": "resolving the contradiction between the docstring and the example outputs by specifying that only integer values are returned",
+        "oracle_rewrite": "Filter given list of any python values only for integers, preserving their original order (e.g., filter_integers(['a', 3.14, 5]) -> ['a'], filter_integers([1, 2, 3, 'abc', {}, []]) -> ['abc'])."
+      },
+      "q3": {
+        "question": "Should the function treat boolean values (True/False) as integers and include them in the output?",
+        "source": "model",
+        "description1": "Filter a given list of arbitrary Python values to include only those that are integers, where boolean values (True/False) are considered integers and thus included in the output.",
+        "description2": "Filter a given list of arbitrary Python values to include only those that are integers, where boolean values (True/False) are not considered integers and thus excluded from the output.",
+        "oracle_description": "Filter a given list of arbitrary Python values, returning only those values that are integers. Because boolean values are considered a subtype of integers in Python, they should be treated as integers and included in the output.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 26,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should elements that appear exactly once be retained, while those appearing two or more times be removed entirely?",
+        "source": "model",
+        "description1": "From a list of integers, remove all elements that occur more than once, retaining only those that appear exactly once, and preserve the original order of the remaining elements.",
+        "description2": "From a list of integers, remove all occurrences of elements that appear more than once, but retain the first occurrence of each such element, and preserve the original order of the remaining elements.",
+        "oracle_description": "From a list of integers, remove every element that occurs more than once, keeping only the elements that appear exactly once. Elements appearing two or more times are removed entirely (none of their occurrences are kept). Keep the order of the retained elements the same as in the input.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does \u201cremove all elements that occur more than once\u201d mean removing *all occurrences* of such elements (including the first), or only the *subsequent* occurrences (i.e., keeping the first occurrence)?",
+        "source": "model",
+        "description1": "From a list of integers, remove all elements that occur more than once, where \u201cremove all elements that occur more than once\u201d means removing *all occurrences* of such elements (including the first), and keep the order of the remaining elements the same as in the input.",
+        "description2": "From a list of integers, remove all elements that occur more than once, where \u201cremove all elements that occur more than once\u201d means removing only the *subsequent occurrences* of such elements (i.e., keeping the first occurrence), and keep the order of the remaining elements the same as in the input.",
+        "oracle_description": "From a list of integers, remove all elements that occur more than once, removing every occurrence of any such element (including its first appearance), so that only elements appearing exactly once in the input remain. Keep the order of the remaining elements the same as in the input.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function modify the original list in-place, or return a new list while leaving the original unchanged?",
+        "source": "model",
+        "description1": "From a list of integers, remove all elements that occur more than once, modifying the original list in-place, and keep the order of the remaining elements the same as in the input.",
+        "description2": "From a list of integers, remove all elements that occur more than once, returning a new list while leaving the original list unchanged, and keep the order of the remaining elements the same as in the input.",
+        "oracle_description": "From a list of integers, remove all elements that occur more than once. Keep order of elements left the same as in the input. The function should return a new list containing the result, leaving the original input list unchanged.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 37,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the \"odd indices\" refer to 0-based or 1-based indexing?",
+        "source": "model",
+        "description1": "This function takes a list l and returns a list l' such that l' is identical to l at the odd indices (1, 3, 5, ... in 1-based indexing), while its values at the even indices (0, 2, 4, ... in 0-based indexing) are equal to the values of the even indices of l, but sorted.",
+        "description2": "This function takes a list l and returns a list l' such that l' is identical to l at the odd indices (0, 2, 4, ... in 0-based indexing), while its values at the even indices (1, 3, 5, ... in 0-based indexing) are equal to the values of the even indices of l, but sorted.",
+        "oracle_description": "This function takes a list l and returns a list l' such that l' is identical to l in the odd indices (using 0-based indexing), while its values at the even indices are equal to the values of the even indices of l, but sorted.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the sorting of even-indexed elements be in ascending or descending order?",
+        "source": "model",
+        "description1": "This function takes a list `l` and returns a list `l'` such that `l'` is identical to `l` at the odd indices, while its values at the even indices are equal to the values of the even indices of `l`, but sorted in ascending order.",
+        "description2": "This function takes a list `l` and returns a list `l'` such that `l'` is identical to `l` at the odd indices, while its values at the even indices are equal to the values of the even indices of `l`, but sorted in descending order.",
+        "oracle_description": "This function takes a list l and returns a list l' such that l' is identical to l in the odd indices, while its values at the even indices are equal to the values of the even indices of l, but sorted in ascending order.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function modify the original list in-place or return a new list?",
+        "source": "model",
+        "description1": "This function takes a list `l` and modifies it in-place so that the values at even indices are sorted (in ascending order), while the values at odd indices remain unchanged. The function returns `None`.",
+        "description2": "This function takes a list `l` and returns a new list `l'` such that `l'` is identical to `l` at odd indices, while the values at even indices in `l'` are the sorted (in ascending order) values of the even indices of `l`. The original list `l` remains unmodified.",
+        "oracle_description": "This function takes a list l and returns a new list l' such that l' is identical to l in the odd indices, while its values at the even indices are equal to the values of the even indices of l, but sorted. The original list is not modified in-place; a new list is returned.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function sort the entire list in descending order as shown in the examples?",
+        "source": "auditor",
+        "description1": "This function takes a list `l` and returns a list `l'` such that `l'` is identical to `l` at the odd indices, while the values at the even indices of `l'` are the values from the even indices of `l`, sorted in descending order.",
+        "description2": "This function takes a list `l` and returns a list `l'` such that `l'` is identical to `l` at the odd indices, while the values at the even indices of `l'` are the values from the even indices of `l`, sorted in ascending order.",
+        "oracle_description": "This function takes a list l and returns a list l' such that l' is identical to l at the odd indices, while its values at the even indices are equal to the values at the even indices of l, but sorted. The sorting applies only to the values at the even indices (arranged in ascending order among themselves); the entire list is not sorted, and the values at odd indices remain unchanged in their original positions.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 43,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return True for a list containing only one zero?",
+        "source": "model",
+        "description1": "pairs_sum_to_zero takes a list of integers as an input and returns True if there exist two distinct elements in the list (allowing the two elements to be the same value if they appear at different positions, including two zeros) that sum to zero, and False otherwise.",
+        "description2": "pairs_sum_to_zero takes a list of integers as an input and returns True if there exist two distinct elements in the list (where distinct means different positions, but the same value may be used only if it appears at least twice) that sum to zero, and False otherwise\u2014except that a single zero does not count as a valid pair.",
+        "oracle_description": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise. Two elements are considered based on their positions in the list, so a single zero does not count as a pair with itself; a list containing only one zero returns False.",
+        "oracle_leak": "Clarifying that elements are considered distinct based on their positions in the list (resolving the distinct indices vs. distinct values ambiguity).",
+        "oracle_rewrite": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise. A list containing only one zero returns False, as a single zero cannot pair with itself."
+      },
+      "q2": {
+        "question": "Does the function consider an element paired with itself (e.g., using the same index twice) to form a sum of zero?",
+        "source": "model",
+        "description1": "pairs_sum_to_zero takes a list of integers as an input and returns True if there exist two elements (not necessarily at distinct indices) in the list that sum to zero, and False otherwise.",
+        "description2": "pairs_sum_to_zero takes a list of integers as an input and returns True if there exist two distinct elements (at distinct indices) in the list that sum to zero, and False otherwise.",
+        "oracle_description": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two elements at distinct positions in the list that sum to zero, and False otherwise. An element cannot be paired with itself (the same position cannot be used twice); two distinct positions are required even if their values happen to be equal.",
+        "oracle_leak": "resolving whether the elements must have distinct values (specifying that values can be equal across distinct positions)",
+        "oracle_rewrite": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise. An element cannot be paired with itself (the same position/index cannot be used twice)."
+      },
+      "q3": {
+        "question": "Should the function return True for an empty list?",
+        "source": "model",
+        "description1": "pairs_sum_to_zero takes a list of integers as an input and returns True if there are two distinct elements in the list that sum to zero, and False otherwise; for an empty list, it returns True.",
+        "description2": "pairs_sum_to_zero takes a list of integers as an input and returns True if there are two distinct elements in the list that sum to zero, and False otherwise; for an empty list, it returns False.",
+        "oracle_description": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise. For an empty list, it returns False.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return True when two distinct elements sum to zero, following the text description rather than the examples?",
+        "source": "auditor",
+        "description1": "pairs_sum_to_zero takes a list of integers as an input and returns True if there are two distinct elements in the list that sum to zero, and False otherwise.",
+        "description2": "pairs_sum_to_zero takes a list of integers as an input and returns True if there are two elements (not necessarily distinct) in the list that sum to zero, and False otherwise.",
+        "oracle_description": "pairs_sum_to_zero takes a list of integers as an input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise. The determination of whether such a pair exists is based on the actual values in the list, so the function returns True exactly when two elements summing to zero can be found and False in all other cases.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 47,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the median be computed as the middle element of the sorted list (i.e., the 1-based median index), ignoring the standard statistical definition for even-length lists?",
+        "source": "model",
+        "description1": "Return the median of elements in the list l, where the median is defined as the middle element of the list after sorting it in non-decreasing order (i.e., for a list of length n, return the element at 0-based index \u230an/2\u230b in the sorted list, which corresponds to the 1-based median index).",
+        "description2": "Return the median of elements in the list l, where the median is defined according to the standard statistical definition: for an odd-length list, return the middle element of the sorted list; for an even-length list, return the average of the two middle elements of the sorted list.",
+        "oracle_description": "Return the median of elements in the list l. The median should be computed using the standard statistical definition: for an odd-length list it is the middle element of the sorted list, and for an even-length list it is the average of the two central elements of the sorted list.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function return the actual median value (e.g., average of two middle values for even-length lists) or the element at the middle index after sorting?",
+        "source": "model",
+        "description1": "Return the element at the middle index after sorting the list (for odd-length lists, the single middle element; for even-length lists, the element at the lower middle index, i.e., floor((n\u22121)/2) after 0-based indexing).",
+        "description2": "Return the actual median value, defined as the average of the two middle elements for even-length lists (and the single middle element for odd-length lists).",
+        "oracle_description": "Return the median of elements in the list l. When the list has an odd number of elements, the median is the middle element after sorting. When the list has an even number of elements, the median is the average of the two middle values after sorting.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function modify the original list in-place during sorting, or must it operate on a copy?",
+        "source": "model",
+        "description1": "Return the median of elements in the list `l`, where the function sorts the list in-place during computation.",
+        "description2": "Return the median of elements in the list `l`, where the function must not modify the original list `l` and must operate on a copy instead.",
+        "oracle_description": "Return the median of elements in the list l. The function must not modify the original list; any sorting or reordering needed to compute the result must operate on a copy, leaving the input list unchanged.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function compute the statistical median of the list as stated in the description rather than following the doctest examples?",
+        "source": "auditor",
+        "description1": "Return the statistical median of the elements in the list `l`, where the median is defined as the middle value when the elements are sorted in ascending order (for odd-length lists) or the average of the two middle values (for even-length lists).",
+        "description2": "Return the value indicated by the doctest examples: for a list of odd length, return the largest element; for a list of even length, return the larger of the two middle elements after sorting.",
+        "oracle_description": "Return the statistical median of the elements in the list l. The median is computed by ordering the elements and selecting the middle value, so it may not correspond to any element shown in the illustrative examples in the description.",
+        "oracle_leak": "specifying how the median is computed (\"by ordering the elements and selecting the middle value\"), which resolves an unasked open point regarding the definition/handling of the median (e.g., for even-length lists)",
+        "oracle_rewrite": "Return the statistical median of the elements in the list l rather than following the doctest examples."
+      }
+    }
+  },
+  {
+    "task_id": 48,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the function return True only for strings that are palindromes and False otherwise, or is there a different definition of \"palindrome\" being used here?",
+        "source": "model",
+        "description1": "Return True if the given string is a palindrome (i.e., reads the same forwards and backwards), and False otherwise.",
+        "description2": "Return True only for strings that are *not* palindromes, and False for strings that are palindromes.",
+        "oracle_description": "Checks if a given string is a palindrome. The function should return True for strings that read the same forwards and backwards (i.e., actual palindromes) and False otherwise.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function consider case sensitivity (e.g., should 'Aa' be treated as a palindrome)?",
+        "source": "model",
+        "description1": "Checks if a given string is a palindrome, treating uppercase and lowercase letters as distinct (e.g., 'Aa' is not considered a palindrome).",
+        "description2": "Checks if a given string is a palindrome, ignoring case (e.g., 'Aa' is considered a palindrome).",
+        "oracle_description": "Checks if a given string is a palindrome. The comparison is case-sensitive, meaning characters that differ only in letter case are treated as different characters.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function ignore non-alphanumeric characters (e.g., should 'a!a' be considered a palindrome)?",
+        "source": "model",
+        "description1": "Checks if a given string is a palindrome, where non-alphanumeric characters are ignored (e.g., 'a!a' is considered a palindrome).",
+        "description2": "Checks if a given string is a palindrome, where non-alphanumeric characters are not ignored (e.g., 'a!a' is not considered a palindrome).",
+        "oracle_description": "Checks if a given string is a palindrome, returning whether the string reads the same forwards and backwards. All characters, including non-alphanumeric ones, are considered as part of the comparison; no characters are ignored.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 49,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "When n is 0, should the function return p (as shown in the examples) or 1 (the mathematical value of 2\u2070)?",
+        "source": "model",
+        "description1": "Return 2^n modulo p, where if the mathematical result is 1 (i.e., when n = 0), the function instead returns p; for all other n, return the standard remainder when 2^n is divided by p.",
+        "description2": "Return 2^n modulo p, where the result is the standard mathematical remainder when 2^n is divided by p (i.e., when n = 0, return 1); for all other n, return the standard remainder when 2^n is divided by p.",
+        "oracle_description": "Return 2^n modulo p (be aware of numerics). When n is 0, the function should return the mathematical value of 2\u2070 (that is, 1 taken modulo p), rather than returning p.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "When 2\u207f is exactly divisible by p, should the function return p (as shown in the examples) or 0 (the standard mathematical modulo result)?",
+        "source": "model",
+        "description1": "Return 2\u207f modulo p, where if 2\u207f is exactly divisible by p (i.e., 2\u207f mod p = 0), the function returns p instead of 0.",
+        "description2": "Return 2\u207f modulo p, where if 2\u207f is exactly divisible by p (i.e., 2\u207f mod p = 0), the function returns 0 (the standard mathematical modulo result).",
+        "oracle_description": "Return 2^n modulo p (be aware of numerics). When 2^n is exactly divisible by p, the function should return the standard mathematical modulo result of 0 rather than p.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function return p whenever 2\u207f mod p equals 0, regardless of whether p divides 2\u207f exactly?",
+        "source": "model",
+        "description1": "Return 2\u207f modulo p, but if the mathematical result is 0, return p instead; otherwise return the standard remainder in the range [0, p\u22121].",
+        "description2": "Return the standard remainder when 2\u207f is divided by p, which lies in the range [0, p\u22121]; no special case is made when the remainder is 0.",
+        "oracle_description": "Return 2^n modulo p (be aware of numerics). The result is the standard mathematical remainder of 2 raised to the power n divided by p; when this remainder is 0, the function returns 0 rather than p.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return 2^n modulo p as stated in the description, rather than p as shown in the examples?",
+        "source": "auditor",
+        "description1": "Return 2^n modulo p, where the result is computed as the mathematical remainder when 2^n is divided by p (i.e., the standard modular arithmetic result), and if this remainder is zero, return p instead.",
+        "description2": "Return p for all given inputs, regardless of the values of n and p, as illustrated by the provided examples.",
+        "oracle_description": "Return 2^n modulo p (be aware of numerics). The function should compute and return the actual value of 2 raised to the power n, taken modulo p, rather than returning p itself. The examples shown in the description are illustrative only and do not reflect the intended return values.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 52,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return True for an empty list?",
+        "source": "model",
+        "description1": "Return True if all numbers in the list `l` are below threshold `t`, with the convention that this condition is considered vacuously true when the list is empty.",
+        "description2": "Return True if all numbers in the list `l` are below threshold `t`, with the convention that this condition is considered false when the list is empty.",
+        "oracle_description": "Return True if all numbers in the list l are below threshold t. If the list is empty, return True.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function return True if any number equals the threshold?",
+        "source": "model",
+        "description1": "Return True if all numbers in the list `l` are less than or equal to threshold `t`.",
+        "description2": "Return True if all numbers in the list `l` are strictly less than threshold `t`.",
+        "oracle_description": "Return True if all numbers in the list l are strictly below threshold t. If any number equals the threshold, the function should return False (a value must be strictly less than the threshold to satisfy the condition).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an exception if the list contains non-numeric values?",
+        "source": "model",
+        "description1": "Return True if all numbers in the list `l` are below threshold `t`, raising an exception if the list contains non-numeric values.",
+        "description2": "Return True if all numbers in the list `l` are below threshold `t`, without raising an exception if the list contains non-numeric values.",
+        "oracle_description": "Return True if all numbers in the list l are below threshold t. If the list contains non-numeric values, the function does not perform any special validation and does not deliberately raise an exception for them; comparisons are attempted directly, so any error that arises is simply whatever results from comparing such values against the threshold.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return True when all numbers in the list are below the threshold?",
+        "source": "auditor",
+        "description1": "Return True if every number in the list `l` is strictly less than the threshold `t`.",
+        "description2": "Return True if every number in the list `l` is less than or equal to the threshold `t`.",
+        "oracle_description": "Return True if all numbers in the list l are strictly below the threshold t, meaning that when every number in the list is below the threshold the function returns True.",
+        "oracle_leak": "\"strictly below\", which resolves whether the comparison is strict (< vs <=) rather than just answering whether True is returned when all numbers are below the threshold",
+        "oracle_rewrite": "Return True if all numbers in the list l are below the threshold t, meaning that when every number in the list is below the threshold the function returns True."
+      }
+    }
+  },
+  {
+    "task_id": 54,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Does the function require that both words contain *exactly* the same multiset of characters (i.e., same characters with the same frequencies), or does it only require that the set of distinct characters be identical?",
+        "source": "model",
+        "description1": "Check if two words contain exactly the same multiset of characters\u2014that is, every character appears the same number of times in both words.",
+        "description2": "Check if two words contain exactly the same set of distinct characters\u2014that is, the collection of unique characters appearing in each word is identical, regardless of how many times each character appears.",
+        "oracle_description": "Check whether two words are composed of the same set of distinct characters. The comparison should consider only which characters appear in each word, ignoring how many times each character occurs. Return whether both words contain exactly the same collection of distinct characters.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function consider character case sensitivity (e.g., 'A' vs 'a') as distinct characters, or should it treat uppercase and lowercase letters as equivalent?",
+        "source": "model",
+        "description1": "Check if two words have the same characters, treating uppercase and lowercase letters as distinct characters (e.g., 'A' and 'a' are considered different).",
+        "description2": "Check if two words have the same characters, treating uppercase and lowercase letters as equivalent (e.g., 'A' and 'a' are considered the same character).",
+        "oracle_description": "Check whether two words are composed of the same set of characters. Character comparison is case sensitive, meaning uppercase and lowercase forms of a letter are treated as distinct characters. Return a boolean indicating whether the two words consist of the same characters.",
+        "oracle_leak": "specifying that words are compared by their \"set\" of characters, which resolves whether character frequency/multiplicity matters",
+        "oracle_rewrite": "Check if two words have the same characters. Character comparison is case sensitive, meaning uppercase and lowercase forms of a letter are treated as distinct characters."
+      },
+      "q3": {
+        "question": "Does the function require that both input strings be non-empty, or should it return True for two empty strings and False for one empty and one non-empty?",
+        "source": "model",
+        "description1": "Check if two non-empty words have the same characters (allowing for different frequencies), returning True only if both strings are non-empty and contain exactly the same set of distinct characters; return False if either string is empty.",
+        "description2": "Check if two words have the same characters (allowing for different frequencies), returning True if both strings are empty, False if exactly one is empty, and otherwise True precisely when both strings contain exactly the same set of distinct characters.",
+        "oracle_description": "Check if two words have the same set of characters, that is, whether both words are composed of exactly the same distinct characters regardless of how many times each appears or their order. Regarding empty inputs: two empty strings should be considered to have the same characters (return True), while an empty string compared with a non-empty string should not (return False).",
+        "oracle_leak": "resolving whether character frequency/counts matter by specifying that words must have the same set of distinct characters regardless of how many times each appears or their order",
+        "oracle_rewrite": "Check if two words have the same characters. Two empty strings should return True, while comparing an empty string with a non-empty string should return False."
+      },
+      "q_auditor": {
+        "question": "Should the function return True when the two words have the same set of characters?",
+        "source": "auditor",
+        "description1": "Check if two words have the same set of characters (ignoring multiplicity), returning True if every character appearing in either word appears in both, and False otherwise.",
+        "description2": "Check if two words have the same characters with the same multiplicities, returning True if each character appears exactly the same number of times in both words, and False otherwise.",
+        "oracle_description": "Check if two words have the same characters. The function should return True when the two words contain exactly the same set of distinct characters, regardless of how many times each character appears in either word.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 60,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Does the function include both 1 and n in the sum?",
+        "source": "model",
+        "description1": "sum_to_n is a function that sums all integers from 1 through n, inclusive.",
+        "description2": "sum_to_n is a function that sums all integers from 2 through n, inclusive.",
+        "oracle_description": "sum_to_n is a function that sums numbers from 1 to n, including both 1 and n in the sum.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Is the function defined for n = 0, and if so, what should it return?",
+        "source": "model",
+        "description1": "sum_to_n is a function that sums numbers from 1 to n, inclusive. For n = 0, the function is defined and returns 0.",
+        "description2": "sum_to_n is a function that sums numbers from 1 to n, inclusive. For n = 0, the function is not defined.",
+        "oracle_description": "sum_to_n is a function that sums numbers from 1 to n. The function is defined for n = 0, in which case it should return 0 (the sum of no numbers).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an error for negative inputs, or return some specific value (e.g., 0 or the sum for |n|)?",
+        "source": "model",
+        "description1": "sum_to_n is a function that sums numbers from 1 to n. For negative inputs, the function should raise an error.",
+        "description2": "sum_to_n is a function that sums numbers from 1 to n. For negative inputs, the function should return 0.",
+        "oracle_description": "sum_to_n is a function that sums numbers from 1 to n. For negative inputs, the function does not raise an error and returns the value that results from summing over an empty range.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function follow the docstring description and return the sum of numbers from 1 to n, rather than the doubled values shown in the examples?",
+        "source": "auditor",
+        "description1": "sum_to_n is a function that returns the sum of integers from 1 to n (inclusive).",
+        "description2": "sum_to_n is a function that returns twice the sum of integers from 1 to n (inclusive).",
+        "oracle_description": "sum_to_n is a function that sums the numbers from 1 to n and returns that sum, as described by the function's purpose (the returned value is the true total of the integers from 1 to n, not a doubled value).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 61,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return True only when the brackets are perfectly balanced and properly nested (e.g., \"()\" is True, \")(\" is False), or does it return True whenever the total number of opening brackets equals the total number of closing brackets (regardless of order)?",
+        "source": "model",
+        "description1": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket in the correct order\u2014i.e., the brackets are perfectly balanced and properly nested (so that at no point while scanning left to right do closing brackets outnumber opening ones, and the total counts are equal).",
+        "description2": "brackets is a string of \"(\" and \")\". Return True if the total number of opening brackets equals the total number of closing brackets, regardless of their order or nesting.",
+        "oracle_description": "brackets is a string of \"(\" and \")\". Return True if the brackets are perfectly balanced and properly nested, meaning every opening bracket has a corresponding later closing bracket and every closing bracket matches a previously opened one, with no unmatched brackets of either kind. Return False otherwise.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function consider an empty string to be correctly bracketed (i.e., should `correct_bracketing(\"\")` return True or False)?",
+        "source": "model",
+        "description1": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket, and an empty string is considered correctly bracketed.",
+        "description2": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket, and an empty string is not considered correctly bracketed.",
+        "oracle_description": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket. An empty string is considered correctly bracketed, so the function returns True for it.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "When the specification says \u201cevery opening bracket has a corresponding closing bracket,\u201d does it require that each closing bracket also correspond to a preceding opening bracket (i.e., no unmatched closing brackets), or does it only require that the count of '(' equals the count of ')'?",
+        "source": "model",
+        "description1": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket, and every closing bracket corresponds to a preceding opening bracket (i.e., no unmatched closing brackets occur at any point when scanning left to right).",
+        "description2": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket, and the total number of opening brackets equals the total number of closing brackets (i.e., only the counts need to match, regardless of order or position).",
+        "oracle_description": "brackets is a string of \"(\" and \")\". Return True if the brackets are properly matched, meaning every opening bracket has a corresponding closing bracket and every closing bracket corresponds to a preceding opening bracket (no closing bracket may appear without a matching opening bracket before it). Return False otherwise.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function return True when brackets are properly matched as stated in the description, rather than False as shown in the examples?",
+        "source": "auditor",
+        "description1": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket and all brackets are properly nested and matched (i.e., the bracket sequence is valid in the standard sense).",
+        "description2": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket, but the matching need not respect nesting order (i.e., the count of opening and closing brackets is equal, regardless of their positions).",
+        "oracle_description": "brackets is a string of \"(\" and \")\". Return True if every opening bracket has a corresponding closing bracket (i.e., the brackets are properly matched), and False otherwise.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 62,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the derivative of a constant polynomial (e.g., `[5]`) be `[0]` or `[]`?",
+        "source": "model",
+        "description1": "xs represent coefficients of a polynomial, where xs[0] + xs[1] * x + xs[2] * x^2 + ... . Return the derivative of this polynomial in the same coefficient list form, with the understanding that the derivative of a constant polynomial (e.g., [5]) is [0].",
+        "description2": "xs represent coefficients of a polynomial, where xs[0] + xs[1] * x + xs[2] * x^2 + ... . Return the derivative of this polynomial in the same coefficient list form, with the understanding that the derivative of a constant polynomial (e.g., [5]) is [].",
+        "oracle_description": "xs represent coefficients of a polynomial, where the value at each index is the coefficient of the corresponding power of x (xs[0] is the constant term, xs[1] is the coefficient of x, xs[2] is the coefficient of x^2, and so on). Return the derivative of this polynomial in the same coefficient-list form. When the polynomial is a constant (i.e., has no terms of degree one or higher), the derivative should be represented as an empty list rather than a list containing a single zero.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the derivative of the zero polynomial (e.g., `[0]`) be `[0]` or `[]`?",
+        "source": "model",
+        "description1": "xs represent coefficients of a polynomial, where xs[0] + xs[1] * x + xs[2] * x^2 + ... . Return the derivative of this polynomial in the same coefficient list form, with the understanding that the derivative of the zero polynomial (e.g., `[0]`) is `[0]`.",
+        "description2": "xs represent coefficients of a polynomial, where xs[0] + xs[1] * x + xs[2] * x^2 + ... . Return the derivative of this polynomial in the same coefficient list form, with the understanding that the derivative of the zero polynomial (e.g., `[0]`) is `[]`.",
+        "oracle_description": "Given a list `xs` representing the coefficients of a polynomial, where `xs[0] + xs[1] * x + xs[2] * x^2 + ...`, return the derivative of this polynomial in the same coefficient-list form. The derivative is computed by dropping the constant term and multiplying each remaining coefficient by its original power. If the input polynomial has no terms beyond the constant term (for example, the zero polynomial or any single-coefficient list), the result should be an empty list rather than a list containing zero.",
+        "oracle_leak": "extends the rule to all single-coefficient lists (constant polynomials) and input polynomials with no terms beyond the constant term, beyond just the zero polynomial.",
+        "oracle_rewrite": "xs represent coefficients of a polynomial. xs[0] + xs[1] * x + xs[2] * x^2 + .... Return derivative of this polynomial in the same form. For the zero polynomial (e.g., [0]), return []."
+      },
+      "q3": {
+        "question": "Should the derivative of a polynomial with leading zero coefficients (e.g., `[1, 2, 0, 0]`) retain trailing zeros in the derivative (e.g., `[0, 0, 2]`) or strip them (e.g., `[2]`)?",
+        "source": "model",
+        "description1": "Given a list of coefficients `xs` representing a polynomial `xs[0] + xs[1] * x + xs[2] * x^2 + ...`, return the list of coefficients of its derivative, preserving trailing zero coefficients (i.e., if the derivative has zero coefficients at the end, they are included in the output list).",
+        "description2": "Given a list of coefficients `xs` representing a polynomial `xs[0] + xs[1] * x + xs[2] * x^2 + ...`, return the list of coefficients of its derivative, with all trailing zero coefficients removed (i.e., the output list ends with the last nonzero coefficient of the derivative, if any).",
+        "oracle_description": "Given a list `xs` representing the coefficients of a polynomial, where `xs[0] + xs[1] * x + xs[2] * x^2 + ...`, return the derivative of this polynomial in the same coefficient form. When computing the derivative, the resulting coefficients should be produced directly from the differentiation of each term, preserving any resulting zero coefficients in their positions (including trailing zeros) rather than stripping them.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the returned derivative coefficients be ordered in ascending order of degree?",
+        "source": "auditor",
+        "description1": "xs represent coefficients of a polynomial in ascending order of degree (i.e., xs[0] + xs[1] * x + xs[2] * x^2 + ...). Return the derivative of this polynomial in ascending order of degree, in the same coefficient list format.",
+        "description2": "xs represent coefficients of a polynomial in ascending order of degree (i.e., xs[0] + xs[1] * x + xs[2] * x^2 + ...). Return the derivative of this polynomial in descending order of degree, in the same coefficient list format.",
+        "oracle_description": "xs represent coefficients of a polynomial, where xs[0] + xs[1] * x + xs[2] * x^2 + .... Return the derivative of this polynomial in the same form, with the resulting coefficients ordered in ascending order of degree (the coefficient of the lowest-degree term first).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 64,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should uppercase vowels (e.g., 'A', 'E', 'I', 'O', 'U') be counted as vowels?",
+        "source": "model",
+        "description1": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels are 'a', 'e', 'i', 'o', 'u' in either uppercase or lowercase, and 'y' or 'Y' is also a vowel only when it appears at the end of the given word.",
+        "description2": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels are 'a', 'e', 'i', 'o', 'u' in lowercase only, and 'y' is also a vowel only when it is at the end of the given word (and must also be lowercase).",
+        "oracle_description": "Write a function vowels_count which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. Vowels should be counted regardless of whether they appear in uppercase or lowercase form.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function treat the input string as case-sensitive when checking for trailing 'y' (e.g., should 'Y' at the end count as a vowel)?",
+        "source": "model",
+        "description1": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels are 'a', 'e', 'i', 'o', 'u', and 'y' only when it appears at the end of the string, with case sensitivity: only a lowercase 'y' at the end counts as a vowel, and an uppercase 'Y' at the end does not.",
+        "description2": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels are 'a', 'e', 'i', 'o', 'u', and 'y' only when it appears at the end of the string, with case insensitivity: both lowercase 'y' and uppercase 'Y' at the end count as vowels.",
+        "oracle_description": "Write a function vowels_count which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. When determining whether a trailing character is 'y', the check should be case-insensitive, so a trailing 'y' counts as a vowel regardless of whether it appears in lowercase or uppercase.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should non-alphabetic characters (e.g., digits, punctuation, spaces) in the input string affect the count of vowels, or should they be ignored?",
+        "source": "model",
+        "description1": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. Non-alphabetic characters (e.g., digits, punctuation, spaces) in the input string should be ignored when counting vowels.",
+        "description2": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. Non-alphabetic characters (e.g., digits, punctuation, spaces) in the input string should be counted as contributing zero to the vowel count (i.e., they are not vowels and do not affect the count beyond being excluded from vowel classification).",
+        "oracle_description": "Write a function vowels_count which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. Non-alphabetic characters (such as digits, punctuation, or spaces) do not affect the count and are simply not treated as vowels.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function count only the vowels as described in the text, rather than returning the total character count shown in the examples?",
+        "source": "auditor",
+        "description1": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string, where vowels are defined as the letters 'a', 'e', 'i', 'o', 'u' (case-insensitively), and 'y' counts as a vowel only when it appears as the final character of the string. The function should count only these vowels and not return the total character count.",
+        "description2": "Write a function `vowels_count` which takes a string representing a word as input and returns the number of vowels in the string, where vowels are defined as the letters 'a', 'e', 'i', 'o', 'u' (case-insensitively), and 'y' counts as a vowel only when it appears as the final character of the string. The function should return the total number of characters in the string, regardless of whether they are vowels.",
+        "oracle_description": "Write a function vowels_count which takes a string representing a word as input and returns the number of vowels in the string. Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a vowel, but only when it is at the end of the given word. The function should count only these vowels according to this rule and return that count, not the total number of characters in the string.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 65,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "When shift equals the number of digits, should the result be the original number (as in a full rotation) or the reversed number (as per the \"if shift > number of digits\" rule)?",
+        "source": "model",
+        "description1": "Circular shift the digits of the integer x by shifting the digits right by shift positions and return the result as a string. If shift is greater than the number of digits, return the digits reversed. If shift equals the number of digits, return the original number (as a full rotation yields the original arrangement).",
+        "description2": "Circular shift the digits of the integer x by shifting the digits right by shift positions and return the result as a string. If shift is greater than the number of digits, return the digits reversed. If shift equals the number of digits, return the digits reversed.",
+        "oracle_description": "Circular shift the digits of the integer x, shifting the digits right by shift, and return the result as a string. If shift is greater than the number of digits, return the digits reversed. If shift equals the number of digits, perform a full rotation so that the result is the original number.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "For negative integers, should the minus sign be treated as part of the digit sequence, or should only the absolute value\u2019s digits be shifted?",
+        "source": "model",
+        "description1": "Circular shift the digits of the integer x, treating the minus sign as part of the digit sequence, by shifting the digits right by shift positions and return the result as a string. If shift exceeds the total number of characters (including the minus sign), return the entire character sequence reversed.",
+        "description2": "Circular shift the digits of the integer x, considering only the absolute value\u2019s digits (ignoring the minus sign), by shifting the digits right by shift positions and return the result as a string. If shift exceeds the number of digits in the absolute value, return the digits of the absolute value reversed (with the minus sign prepended if the original integer was negative).",
+        "oracle_description": "Circular shift the digits of the integer x, shifting the digits right by shift and returning the result as a string. If shift exceeds the number of digits, return the digits reversed. For negative integers, the minus sign is treated as part of the character sequence to be shifted, so it participates in the shifting or reversal along with the digits.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "When shift is zero, should the function return the original number as a string, or should it apply the reversal rule (since 0 \u2264 number of digits)?",
+        "source": "model",
+        "description1": "Circular shift the digits of the integer x by shifting the digits right by shift positions and return the result as a string. If shift is greater than the number of digits, return the digits reversed. If shift is zero, return the original number as a string.",
+        "description2": "Circular shift the digits of the integer x by shifting the digits right by shift positions and return the result as a string. If shift is greater than the number of digits, return the digits reversed. If shift is zero, apply the reversal rule (i.e., return the digits reversed).",
+        "oracle_description": "Circular shift the digits of the integer x, shifting the digits right by shift, and return the result as a string. If shift is greater than the number of digits, return the digits reversed. When shift is zero, the reversal rule does not apply, so the original number is returned as a string.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function shift digits to the right as described in the text, rather than following the doctest examples?",
+        "source": "auditor",
+        "description1": "Circular shift the digits of the integer x to the right by shift positions and return the result as a string. If shift exceeds the number of digits, return the digits reversed.",
+        "description2": "Circular shift the digits of the integer x to the right by shift positions and return the result as a string. If shift exceeds the number of digits, return the digits in their original order (i.e., no reversal).",
+        "oracle_description": "Circular shift the digits of the integer x, shifting the digits to the right by the given amount, and return the result as a string. If the shift is greater than the number of digits, return the digits reversed. The right-shift behavior described in this text is the intended behavior, taking precedence over any illustrative examples provided.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 68,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return the *first* occurrence of the smallest even value when there are ties, or the *last* occurrence?",
+        "source": "model",
+        "description1": "Given an array representing a branch of a tree with non-negative integer nodes, return the node with the smallest even value, breaking ties by selecting the *first* occurrence (i.e., the one with the smallest index). Return the result as a list `[smallest_value, its_index]`. If there are no even values or the array is empty, return an empty list.",
+        "description2": "Given an array representing a branch of a tree with non-negative integer nodes, return the node with the smallest even value, breaking ties by selecting the *last* occurrence (i.e., the one with the largest index). Return the result as a list `[smallest_value, its_index]`. If there are no even values or the array is empty, return an empty list.",
+        "oracle_description": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value. If multiple nodes share the same smallest even value, return the node that has the smallest index (the first occurrence). The plucked node should be returned in a list of the form [smallest_value, its_index]. If there are no even values or the given array is empty, return an empty list.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does \u201csmallest even value\u201d refer to the numerically smallest even integer, or the smallest even value *by index* (e.g., earliest appearance)?",
+        "source": "model",
+        "description1": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the numerically smallest even value. If multiple nodes share this numerically smallest even value, return the one that appears earliest in the array (i.e., has the smallest index). Return the plucked node as a list `[smallest_value, its index]`. If there are no even values or the given array is empty, return an empty list.",
+        "description2": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value *by index*\u2014that is, the first (earliest occurring) even value encountered when scanning the array from left to right. Return the plucked node as a list `[value, its index]`. If there are no even values or the given array is empty, return an empty list.",
+        "oracle_description": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value, where \"smallest even value\" means the numerically smallest even integer among the node values. If multiple nodes share this smallest even value, return the one that has the smallest index. The plucked node should be returned in a list of the form [smallest_value, its_index]. If there are no even values or the given array is empty, return an empty list.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "When multiple nodes have the same smallest even value, should the function return the one with the *smallest index* (i.e., earliest in the array), or the *largest index* (i.e., latest in the array)?",
+        "source": "model",
+        "description1": "Given an array representing a branch of a tree with non-negative integer nodes, return the node with the smallest even value, breaking ties by selecting the node with the smallest index (i.e., the earliest occurrence in the array). Return the result as a list `[smallest_value, its index]`. If there are no even values or the array is empty, return an empty list.",
+        "description2": "Given an array representing a branch of a tree with non-negative integer nodes, return the node with the smallest even value, breaking ties by selecting the node with the largest index (i.e., the latest occurrence in the array). Return the result as a list `[smallest_value, its index]`. If there are no even values or the array is empty, return an empty list.",
+        "oracle_description": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value. If multiple nodes share the same smallest even value, return the one that appears earliest in the array (the one with the smallest index). The plucked node should be returned in a list of the form [smallest_value, its_index]. If there are no even values or the given array is empty, return an empty list.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the function select the smallest even value as described in the problem statement, rather than the largest value shown in the examples?",
+        "source": "auditor",
+        "description1": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value. If multiple nodes with the same smallest even value are found, return the node that has the smallest index. The plucked node should be returned in a list, [smallest_value, its index]. If there are no even values or the given array is empty, return [].",
+        "description2": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the largest even value. If multiple nodes with the same largest even value are found, return the node that has the smallest index. The plucked node should be returned in a list, [largest_value, its index]. If there are no even values or the given array is empty, return [].",
+        "oracle_description": "Given an array representing a branch of a tree that has non-negative integer nodes, your task is to pluck one of the nodes and return it. The plucked node should be the node with the smallest even value. If multiple nodes share that same smallest even value, return the one with the smallest index. The plucked node should be returned in a list of the form [smallest_value, its_index]. If there are no even values, or the given array is empty, return an empty list. The illustrative examples provided in the task may be inconsistent with this rule and should not be relied upon; the smallest-even-value behavior described here is the intended behavior.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 79,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the binary representation include leading zeros to match the bit-length of the input\u2019s binary form (e.g., 5 \u2192 \"db101db\" or \"db0101db\")?",
+        "source": "model",
+        "description1": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit ('0' or '1'), including leading zeros to match the minimal bit-length required to represent the number in binary (e.g., 5 \u2192 \"101\", 4 \u2192 \"100\", 3 \u2192 \"11\", etc.). The returned string must be enclosed by the characters 'db' at both the beginning and the end.",
+        "description2": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit ('0' or '1'), without any leading zeros (i.e., the most significant bit must be '1' unless the number is zero, in which case the representation is \"0\"). The returned string must be enclosed by the characters 'db' at both the beginning and the end.",
+        "oracle_description": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number. Each character in the string will be '0' or '1'.\n\nThe binary representation should be the minimal form without any extra leading zeros beyond what is naturally required to represent the number.\n\nThere will be an extra couple of characters 'db' at the beginning and at the end of the string. The extra characters are there to help with the format.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should negative integers be handled, and if so, should the output include a minus sign or use two\u2019s complement representation?",
+        "source": "model",
+        "description1": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number. Each character in the string will be '0' or '1'. Negative integers are handled, and for negative inputs, the output includes a minus sign followed by the binary representation of the absolute value, with the extra characters 'db' at the beginning and at the end of the string. Examples: decimal_to_binary(15) returns \"db1111db\", decimal_to_binary(-15) returns \"db-1111db\", decimal_to_binary(32) returns \"db100000db\".",
+        "description2": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number. Each character in the string will be '0' or '1'. Negative integers are not handled; only non-negative integers are valid inputs. The extra characters 'db' appear at the beginning and at the end of the string. Examples: decimal_to_binary(15) returns \"db1111db\", decimal_to_binary(32) returns \"db100000db\".",
+        "oracle_description": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number. Each character in the string will be '0' or '1'.\n\nThere will be an extra couple of characters 'db' at the beginning and at the end of the string. The extra characters are there to help with the format.\n\nIf a negative integer is given, the output should include a minus sign before the binary digits (rather than using two's complement representation).\n\nExamples:\ndecimal_to_binary(15)   # returns \"db15db\"\ndecimal_to_binary(32)   # returns \"db32db\"",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should zero be represented as \"db0db\" or \"db00db\" (or some other fixed-width form)?",
+        "source": "model",
+        "description1": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit ('0' or '1'), using the standard positional binary representation (e.g., zero is \"0\", one is \"1\", two is \"10\", etc.). The returned string must be wrapped with the characters 'db' at both the beginning and the end. For example, if the binary representation of the input is \"0\", the return value must be \"db0db\".",
+        "description2": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit ('0' or '1'), using the standard positional binary representation (e.g., zero is \"0\", one is \"1\", two is \"10\", etc.). The returned string must be wrapped with the characters 'db' at both the beginning and the end. For example, if the binary representation of the input is \"0\", the return value must be \"db00db\".",
+        "oracle_description": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit. Each such character in the string will be '0' or '1'.\n\nThere will be an extra couple of characters 'db' at the beginning and at the end of the string. The extra characters are there to help with the format.\n\nWhen the number is zero, its binary portion should be represented using the minimal form consisting of a single '0' character (i.e., no leading zeros or fixed-width padding), so the result is 'db0db'.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the value between the 'db' markers be formatted in binary rather than decimal?",
+        "source": "auditor",
+        "description1": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary digit ('0' or '1'), and the binary representation placed between two 'db' markers at the beginning and end of the string.",
+        "description2": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with the original decimal representation (in base 10) placed between two 'db' markers at the beginning and end of the string.",
+        "oracle_description": "You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number. Each character in the value portion of the string will be '0' or '1', representing the binary form of the given number.\n\nThere will be an extra couple of characters 'db' at the beginning and at the end of the string. The extra characters are there to help with the format.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 101,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return words in the same order as they appear in the input string?",
+        "source": "model",
+        "description1": "Given a string of words separated by commas or spaces, split the string into individual words and return an array containing those words in the same order as they appear in the input string.",
+        "description2": "Given a string of words separated by commas or spaces, split the string into individual words and return an array containing those words in reverse order relative to their appearance in the input string.",
+        "oracle_description": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array of the words, with the words appearing in the same order as they occur in the input string.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should punctuation (e.g., commas) be stripped from the words before returning them?",
+        "source": "model",
+        "description1": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words, strip punctuation (e.g., commas) from each word, and return an array of the resulting words.",
+        "description2": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array of the words, preserving any punctuation (e.g., commas) attached to them.",
+        "oracle_description": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array of the words. The separating punctuation (such as commas) should not appear in the returned words; only the words themselves are included in the result.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should empty strings (e.g., from consecutive delimiters or leading/trailing delimiters) be excluded from the result?",
+        "source": "model",
+        "description1": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words, exclude any empty strings (e.g., from consecutive delimiters or leading/trailing delimiters), and return an array of the remaining words.",
+        "description2": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words, include all resulting substrings (even empty strings from consecutive delimiters or leading/trailing delimiters), and return an array of all words.",
+        "oracle_description": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array of the words. Empty strings arising from consecutive delimiters or from leading or trailing delimiters should be excluded from the result.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the returned array contain all words from the input string rather than only the last word?",
+        "source": "auditor",
+        "description1": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array containing all the words from the input string.",
+        "description2": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array containing only the last word from the input string.",
+        "oracle_description": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array containing all the words from the input string, in the order they appear.",
+        "oracle_leak": "word ordering constraint (\"in the order they appear\")",
+        "oracle_rewrite": "You will be given a string of words separated by commas or spaces. Your task is to split the string into words and return an array containing all the words from the input string."
+      }
+    }
+  },
+  {
+    "task_id": 105,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should negative numbers outside the range 1\u20139 be converted to names like \"Minus One\" (as implied by the third example), or should they be ignored entirely like numbers outside 1\u20139?",
+        "source": "model",
+        "description1": "Given an array of integers, filter out all integers that are not in the range 1\u20139 inclusive, sort the remaining integers in ascending order, reverse the resulting array, and replace each remaining digit with its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Additionally, for any integer outside the range 1\u20139 (including negative numbers and numbers \u226510), convert it to its English name prefixed with \"Minus \" if negative (e.g., \u22121 becomes \"Minus One\") or as a plain number name if non-negative but outside 1\u20139, and include it in the final output in the order determined by sorting and reversing the *entire* original array (before filtering). Return the list of such names.",
+        "description2": "Given an array of integers, filter out all integers that are not in the range 1\u20139 inclusive, sort the remaining integers in ascending order, reverse the resulting array, and replace each remaining digit with its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Integers outside the range 1\u20139 (including negative numbers and numbers \u226510) are ignored entirely and do not appear in the output. Return the list of names for the filtered, sorted, and reversed integers.",
+        "oracle_description": "Given an array of integers, sort the integers that are between 1 and 9 inclusive, reverse the resulting array, and then replace each digit by its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Any number that is not between 1 and 9 inclusive\u2014including negative numbers\u2014should be ignored entirely and excluded from the result. If the array is empty, return an empty array.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should duplicate values be preserved in the output (e.g., two \"One\"s in the first example), or should duplicates be removed before naming?",
+        "source": "model",
+        "description1": "Given an array of integers, filter out all integers that are not between 1 and 9 inclusive, sort the remaining integers in ascending order, reverse the sorted list, and replace each remaining integer with its corresponding English name (\"One\" through \"Nine\"), preserving duplicate values in the output (e.g., if two 1s remain after filtering, output two \"One\"s).",
+        "description2": "Given an array of integers, filter out all integers that are not between 1 and 9 inclusive, sort the remaining integers in ascending order, reverse the sorted list, and replace each remaining integer with its corresponding English name (\"One\" through \"Nine\"), removing duplicate values before naming (e.g., if two 1s remain after filtering, output only one \"One\").",
+        "oracle_description": "Given an array of integers, sort the integers that are between 1 and 9 inclusive, reverse the resulting array, and then replace each digit by its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Duplicate values must be preserved: if a value appears multiple times among the qualifying integers, its corresponding name should appear that many times in the output. If the array is empty, return an empty array. If the array has any number outside the range 1 to 9 inclusive, ignore it.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should zero be treated as a valid digit to convert (e.g., to \"Zero\") or ignored like numbers outside 1\u20139?",
+        "source": "model",
+        "description1": "Given an array of integers, sort the integers that are between 0 and 9 inclusive, reverse the resulting array, and then replace each digit by its corresponding name from \"Zero\", \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Integers outside the range 0\u20139 are ignored. If the array is empty, return an empty array.",
+        "description2": "Given an array of integers, sort the integers that are between 1 and 9 inclusive, reverse the resulting array, and then replace each digit by its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Integers outside the range 1\u20139 are ignored. If the array is empty, return an empty array.",
+        "oracle_description": "Given an array of integers, sort the integers that are between 1 and 9 inclusive, reverse the resulting array, and then replace each digit by its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\". Any number outside the range 1 to 9 inclusive, including zero, should be ignored and not converted. If the array is empty, return an empty array.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 111,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Should the function return a dictionary with all letters that share the maximum frequency, or only one such letter (e.g., the first encountered)?",
+        "source": "model",
+        "description1": "Given a string representing space-separated lowercase letters, return a dictionary containing all letters that have the highest frequency of occurrence in the string, each mapped to that frequency. If multiple letters tie for the highest frequency, include all of them. If the string is empty, return an empty dictionary.",
+        "description2": "Given a string representing space-separated lowercase letters, return a dictionary containing exactly one letter that has the highest frequency of occurrence in the string, mapped to that frequency. If multiple letters tie for the highest frequency, include only one of them (e.g., the first encountered). If the string is empty, return an empty dictionary.",
+        "oracle_description": "Given a string representing space separated lowercase letters, return a dictionary of the letter(s) with the most repetition and containing the corresponding count. If several letters share the same maximum occurrence, return all of them in the dictionary, each mapped to that maximum count.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does an empty string input require returning an empty dictionary, or should it raise an exception or return `None`?",
+        "source": "model",
+        "description1": "Given a string representing space-separated lowercase letters, return a dictionary containing the letter(s) with the highest frequency and their corresponding count. If multiple letters share the highest frequency, include all of them. For an empty string input, return an empty dictionary.",
+        "description2": "Given a string representing space-separated lowercase letters, return a dictionary containing the letter(s) with the highest frequency and their corresponding count. If multiple letters share the highest frequency, include all of them. For an empty string input, raise an exception.",
+        "oracle_description": "Given a string representing a space separated lowercase letters, return a dictionary of the letter with the most repetition and containing the corresponding count. If several letters have the same occurrence, return all of them. If the input string is empty, return an empty dictionary.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "When multiple letters tie for the highest frequency, should the dictionary preserve any specific ordering (e.g., alphabetical or insertion order), or is any order acceptable?",
+        "source": "model",
+        "description1": "Given a string representing space-separated lowercase letters, return a dictionary containing all letters that tie for the highest frequency of occurrence, each mapped to that frequency. When multiple letters tie for the highest frequency, the dictionary must include them in alphabetical order.",
+        "description2": "Given a string representing space-separated lowercase letters, return a dictionary containing all letters that tie for the highest frequency of occurrence, each mapped to that frequency. When multiple letters tie for the highest frequency, the dictionary may include them in any order.",
+        "oracle_description": "Given a string representing space separated lowercase letters, return a dictionary of the letter with the most repetition and containing the corresponding count. If several letters have the same occurrence, return all of them. When multiple letters tie for the highest frequency, they may be returned in any order; no specific ordering (such as alphabetical or insertion order) is required.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 115,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Does each bucket lowering count as one operation regardless of how many units of water it actually removes (up to its capacity)?",
+        "source": "model",
+        "description1": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Each lowering of a bucket counts as one operation, regardless of how many units of water it actually removes (up to its capacity). Return the total number of bucket lowerings required to empty all wells.",
+        "description2": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Each bucket lowering removes as many units of water as possible from a single well (up to the bucket\u2019s capacity), and the number of operations contributed by that lowering equals the number of units of water actually removed (i.e., 1 operation per unit of water extracted). Return the total number of operations required to empty all wells.",
+        "oracle_description": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells and output the number of times you need to lower the buckets.\n\nEach time a bucket is lowered, it counts as one operation regardless of how many units of water it actually removes (up to its capacity). In other words, a single lowering of a bucket can remove up to its full capacity of water units in one operation.\n\nConstraints:\n* all wells have the same length\n* 1 <= grid.length <= 10^2\n* 1 <= grid[:,1].length <= 10^2\n* grid[i][j] -> 0 | 1\n* 1 <= capacity <= 10",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Are wells emptied independently, meaning the bucket is lowered separately for each well (row), and water from one well cannot be used to satisfy the capacity requirement of another?",
+        "source": "model",
+        "description1": "You are given a rectangular grid of wells, where each row represents a single well and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Wells are emptied independently: the bucket is lowered separately for each well (row), and water from one well cannot be used to satisfy the capacity requirement of another. Output the total number of times buckets must be lowered across all wells to empty them.",
+        "description2": "You are given a rectangular grid of wells, where each row represents a single well and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Wells are NOT emptied independently: the bucket can be lowered once and used across multiple wells, with water from different wells contributing collectively toward the bucket\u2019s capacity in a single lowering. Output the total number of times buckets must be lowered to empty all wells.",
+        "oracle_description": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells and output the total number of times you need to lower the buckets.\n\nWells are emptied independently: each well is emptied using only its own bucket, and the bucket is lowered separately for each well. Water from one well cannot be used to satisfy the capacity requirement of another well. The total number of bucket lowerings is the sum over all wells of the number of times that well's bucket must be lowered to remove all of its water.\n\nConstraints:\n* all wells have the same length\n* 1 <= grid.length <= 10^2\n* 1 <= grid[:,1].length <= 10^2\n* grid[i][j] -> 0 | 1\n* 1 <= capacity <= 10",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "In Example 3, is the expected output of 3 due to one bucket lowering per well (row), even though all wells are empty (sum of water = 0)?",
+        "source": "model",
+        "description1": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. For each well (row), you must lower the bucket at least once if the well contains any water, and also at least once if the well contains no water (i.e., every well requires exactly one bucket lowering regardless of its water content). Output the number of times you need to lower the buckets.",
+        "description2": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. For each well (row), you must lower the bucket enough times to remove all water units, where each lowering can extract up to `bucket_capacity` units of water from that well; wells with no water require zero bucket lowerings. Output the number of times you need to lower the buckets.",
+        "oracle_description": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets.\n\nFor each well, the number of bucket lowerings needed is determined solely by the amount of water present in that well (the count of 1s) and the bucket capacity. A well that contains no water requires no bucket lowerings, so an empty well contributes zero to the total count. The overall result is the sum across all wells.\n\nConstraints:\n* all wells have the same length\n* 1 <= grid.length <= 10^2\n* 1 <= grid[:,1].length <= 10^2\n* grid[i][j] -> 0 | 1\n* 1 <= capacity <= 10",
+        "oracle_leak": "resolving how bucket lowerings are aggregated across wells (stating that the overall result is the sum across all wells)",
+        "oracle_rewrite": "You are given a rectangular grid of wells. Each row represents a single well, and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets. A well that contains no water requires no bucket lowerings. Constraints: * all wells have the same length * 1 <= grid.length <= 10^2 * 1 <= grid[:,1].length <= 10^2 * grid[i][j] -> 0 | 1 * 1 <= capacity <= 10"
+      }
+    }
+  },
+  {
+    "task_id": 116,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should negative integers be included in the sorting logic at all, or should they be excluded or handled specially?",
+        "source": "model",
+        "description1": "Sort an array of non-negative integers according to the number of ones in their binary representation in descending order; for integers with the same number of ones, sort them by their decimal value in ascending order. Negative integers should be included in the sorting logic and processed according to the same rules (using their binary representation\u2019s count of ones and decimal value for tie-breaking).",
+        "description2": "Sort an array of non-negative integers according to the number of ones in their binary representation in descending order; for integers with the same number of ones, sort them by their decimal value in ascending order. Negative integers should be excluded from the sorting logic and omitted from the result.",
+        "oracle_description": "In this Kata, you have to sort an array of non-negative integers according to the number of ones in their binary representation in descending order. For similar number of ones, sort based on decimal value. Negative integers, if present, are included in the same sorting logic and handled using the same rules as all other values rather than being excluded or given special treatment.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "For non-negative integers with the same number of 1-bits, should the secondary sort be in ascending or descending decimal order?",
+        "source": "model",
+        "description1": "Sort an array of non-negative integers by the count of 1-bits in their binary representation in descending order; for integers with the same number of 1-bits, sort them in ascending decimal order.",
+        "description2": "Sort an array of non-negative integers by the count of 1-bits in their binary representation in descending order; for integers with the same number of 1-bits, sort them in descending decimal order.",
+        "oracle_description": "In this Kata, you have to sort an array of non-negative integers according to the number of ones in their binary representation. For numbers with the same number of ones, sort based on their decimal value in ascending order.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an error, ignore, or include negative integers in the output when given a list containing both negative and non-negative integers?",
+        "source": "model",
+        "description1": "Sort an array of non-negative integers according to the number of ones in their binary representation in descending order; for integers with the same number of ones, sort them by their decimal value in ascending order. If the input contains negative integers, include them in the output (treated as non-negative for the purpose of counting ones, i.e., using their absolute value\u2019s binary representation), and preserve them in the result according to the same sorting criteria.",
+        "description2": "Sort an array of non-negative integers according to the number of ones in their binary representation in descending order; for integers with the same number of ones, sort them by their decimal value in ascending order. If the input contains negative integers, ignore them (exclude them from the output).",
+        "oracle_description": "In this Kata, you have to sort an array of integers according to the number of ones in their binary representation, in ascending order. For a similar number of ones, sort based on decimal value. When the input contains negative integers, they must be included in the output (not ignored, and no error is raised); the sort is applied to all values present.",
+        "oracle_leak": "Changed the sort order specification from \"descending order\" to \"ascending order\", resolving a contradictory open point about sort direction that was not part of the question.",
+        "oracle_rewrite": "In this Kata, you have to sort an array of integers according to number of ones in their binary representation in descending order. For similar number of ones, sort based on decimal value. When the input contains both negative and non-negative integers, negative integers must be included in the output (they should not be ignored, and no error should be raised); the sort is applied to all values present. It must be implemented like this: >>> sort_array([1, 5, 2, 3, 4]) == [1, 2, 3, 4, 5] >>> sort_array([-2, -3, -4, -5, -6]) == [-6, -5, -4, -3, -2] >>> sort_array([1, 0, 2, 3, 4]) [0, 1, 2, 3, 4]"
+      },
+      "q_auditor": {
+        "question": "Should the array be sorted primarily by the number of binary ones in descending order?",
+        "source": "auditor",
+        "description1": "Sort an array of non-negative integers primarily by the number of ones in their binary representation in descending order, and secondarily by their decimal value in ascending order for ties.",
+        "description2": "Sort an array of non-negative integers primarily by the number of ones in their binary representation in ascending order, and secondarily by their decimal value in ascending order for ties.",
+        "oracle_description": "In this Kata, you have to sort an array of non-negative integers according to the number of ones in their binary representation in ascending order. For a similar number of ones, sort based on decimal value.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 122,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should negative numbers with two digits (e.g., -10) be counted as having at most two digits?",
+        "source": "model",
+        "description1": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits (where negative numbers with two digits, such as -10, are considered to have at most two digits) from the first k elements of arr.",
+        "description2": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits (where negative numbers are not considered to have at most two digits regardless of their absolute value's digit count) from the first k elements of arr.",
+        "oracle_description": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr. For a negative number, the minus sign is counted as a character when determining the number of digits, so a negative number whose absolute value has two digits is treated as having more than two digits and is not counted (only negative numbers with a single-digit absolute value qualify as having at most two digits).\n\nExample:\n\n    Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n    Output: 24 # sum of 21 + 3\n\nConstraints:\n    1. 1 <= len(arr) <= 100\n    2. 1 <= k <= len(arr)",
+        "oracle_leak": "Corrected the example output and comment from 12 (sum of 9 + 3) to 24 (sum of 21 + 3).",
+        "oracle_rewrite": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr. For negative numbers, the negative sign counts toward the digit count, so negative numbers with two digits (e.g., -10) have 3 characters/digits and are not counted.\n\nExample:\n\n    Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n    Output: 12 # sum of 9 + 3\n\nConstraints:\n    1. 1 <= len(arr) <= 100\n    2. 1 <= k <= len(arr)"
+      },
+      "q2": {
+        "question": "Should the digit count of a number be based on its absolute value (e.g., -99 has two digits) or its string representation including the minus sign (e.g., \"-99\" has three characters)?",
+        "source": "model",
+        "description1": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits (counting digits based on absolute value, so negative numbers are counted by their magnitude, e.g., -99 has two digits) from the first k elements of arr.",
+        "description2": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits (counting digits based on the string representation including the minus sign, so negative numbers are counted by their full character count, e.g., -99 has three digits) from the first k elements of arr.",
+        "oracle_description": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr. The digit count of a number is based on its string representation, so for a negative number the minus sign counts as one of the characters (for example, a negative number with two digits after the sign is considered to have three characters).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should zero be considered as having one digit (and thus included) or zero digits (and thus excluded)?",
+        "source": "model",
+        "description1": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr, where zero is considered to have one digit.",
+        "description2": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr, where zero is considered to have zero digits.",
+        "oracle_description": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr. The digit count of a number is determined by the length of its decimal string representation; thus the number zero is considered to have one digit and is included.\n\nConstraints:\n1. 1 <= len(arr) <= 100\n2. 1 <= k <= len(arr)",
+        "oracle_leak": "Defining digit count by the length of decimal string representations, which resolves how negative integers are treated.",
+        "oracle_rewrite": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr. The number zero is considered to have one digit. Constraints: 1. 1 <= len(arr) <= 100 2. 1 <= k <= len(arr)"
+      },
+      "q_auditor": {
+        "question": "Should the sum be calculated only from the first k elements of the array?",
+        "source": "auditor",
+        "description1": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr.",
+        "description2": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from all elements of arr.",
+        "oracle_description": "Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits, considering only the first k elements of arr.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 126,
+    "true_question_missing": false,
+    "questions": {
+      "q1": {
+        "question": "Does the function return `True` when the list is strictly increasing (no duplicates at all)?",
+        "source": "model",
+        "description1": "Given a list of integers (with no negative numbers), return True if the list is sorted in non-decreasing order and contains at most one duplicate of any number; otherwise return False.",
+        "description2": "Given a list of integers (with no negative numbers), return True if the list is sorted in non-decreasing order and contains at most two duplicates of any number; otherwise return False.",
+        "oracle_description": "Given a list of numbers, return whether or not they are sorted in ascending order. If the list has more than one duplicate of the same number, return False. Assume no negative numbers and only integers. When the list is strictly increasing with no duplicates at all, the function returns True.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Does the function return `True` when there is exactly one duplicate pair (i.e., one number appears exactly twice) and the list is otherwise sorted?",
+        "source": "model",
+        "description1": "Given a list of non-negative integers, return True if the list is sorted in non-decreasing order and contains at most one number that appears exactly twice (with all other numbers appearing at most once), and return False otherwise.",
+        "description2": "Given a list of non-negative integers, return True if the list is sorted in non-decreasing order and contains no number that appears more than once, and return False otherwise.",
+        "oracle_description": "Given a list of numbers, return whether or not they are sorted in ascending order. If the list contains any number that appears more than twice, return False. A number appearing exactly twice does not by itself make the result False; a list that is otherwise sorted in ascending order and contains exactly one such duplicated pair should return True. Assume no negative numbers and only integers.",
+        "oracle_leak": "Clarifying that \"more than 1 duplicate\" means appearing more than twice, and stating that a number appearing twice does not by itself make the result False in general.",
+        "oracle_rewrite": "Given a list of numbers, return whether or not they are sorted in ascending order. If list has more than 1 duplicate of the same number, return False. A list that is otherwise sorted in ascending order and contains exactly one duplicate pair (one number appearing exactly twice) returns True. Assume no negative numbers and only integers."
+      },
+      "q3": {
+        "question": "Does the function return `True` when there is a number that appears more than twice, but only if it appears exactly three times and the list is otherwise sorted?",
+        "source": "model",
+        "description1": "Given a list of non-negative integers, return True if the list is sorted in non-decreasing order and contains no number that appears more than twice; otherwise, return False. However, if any number appears exactly three times and all other numbers appear at most twice while the entire list remains non-decreasing, return True.",
+        "description2": "Given a list of non-negative integers, return True if the list is sorted in non-decreasing order and contains no number that appears more than twice; otherwise, return False. In particular, if any number appears three or more times, return False regardless of whether the list is otherwise sorted.",
+        "oracle_description": "Given a list of numbers, return whether or not they are sorted in ascending order. If any single number appears more than twice in the list, return False. A number that appears exactly twice does not by itself cause False, so a list in which one or more numbers appear at most twice and which is otherwise in ascending order returns True; however, if any number appears three or more times, the result is False regardless of the ordering. Assume no negative numbers and only integers.",
+        "oracle_leak": "resolving that multiple distinct numbers appearing up to twice are allowed and do not cause False",
+        "oracle_rewrite": "Given a list of numbers, return whether or not they are sorted in ascending order. If any single number appears three or more times in the list, return False (it does not return True if a number appears exactly three times). Assume no negative numbers and only integers."
+      }
+    }
+  },
+  {
+    "task_id": 130,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Does the sequence start with tri(0) = 1, or is tri(0) undefined and the list should start from tri(1)?",
+        "source": "model",
+        "description1": "Given a non-negative integer `n`, return a list of the first `n + 1` numbers of the Tribonacci sequence, where the sequence is defined by:  \n- tri(0) = 1,  \n- tri(1) = 3,  \n- tri(n) = 1 + n / 2 if n is even and n \u2265 2,  \n- tri(n) = tri(n \u2212 1) + tri(n \u2212 2) + tri(n + 1) if n is odd and n \u2265 1.",
+        "description2": "Given a non-negative integer `n`, return a list of the first `n + 1` numbers of the Tribonacci sequence, where the sequence is defined by:  \n- tri(1) = 3,  \n- tri(n) = 1 + n / 2 if n is even and n \u2265 2,  \n- tri(n) = tri(n \u2212 1) + tri(n \u2212 2) + tri(n + 1) if n is odd and n \u2265 1,  \nand tri(0) is undefined, so the list starts from tri(1).",
+        "oracle_description": "Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in the last couple centuries. However, what people don't know is Tribonacci sequence. Tribonacci sequence is defined by the recurrence:\ntri(1) = 3\ntri(n) = 1 + n / 2, if n is even.\ntri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\nFor example:\ntri(2) = 1 + (2 / 2) = 2\ntri(4) = 3\ntri(3) = tri(2) + tri(1) + tri(4) = 2 + 3 + 3 = 8\n\nThe sequence is defined starting at index 0, with tri(0) = 1. You are given a non-negative integer number n, you have to return a list of the first n + 1 numbers of the Tribonacci sequence.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "For even n, is the division n / 2 integer division (floor division) or real division (then truncated/rounded)?",
+        "source": "model",
+        "description1": "For even n, the division n / 2 is integer division (floor division), meaning the result is the greatest integer less than or equal to the exact quotient. The Tribonacci sequence is defined by tri(1) = 3, tri(n) = 1 + \u230an / 2\u230b when n is even, and tri(n) = tri(n \u2212 1) + tri(n \u2212 2) + tri(n + 1) when n is odd. Given a non-negative integer n, return a list of the first n + 1 numbers of this sequence.",
+        "description2": "For even n, the division n / 2 is real division (producing a floating-point or exact rational value), and the result is then truncated or rounded to an integer in some unspecified manner. The Tribonacci sequence is defined by tri(1) = 3, tri(n) = 1 + (n / 2) (with real division) when n is even, and tri(n) = tri(n \u2212 1) + tri(n \u2212 2) + tri(n + 1) when n is odd. Given a non-negative integer n, return a list of the first n + 1 numbers of this sequence.",
+        "oracle_description": "Everyone knows the Fibonacci sequence, it was studied deeply by mathematicians in the last couple centuries. However, what people don't know is the Tribonacci sequence. The Tribonacci sequence is defined by the recurrence:\ntri(1) = 3\ntri(n) = 1 + n / 2, if n is even.\ntri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n\nWhen n is even, the division n / 2 is real (floating-point) division, so the term 1 + n / 2 is computed using ordinary (non-truncated) division and may yield a non-integer floating-point value.\n\nFor example:\ntri(2) = 1 + (2 / 2) = 2\ntri(4) = 3\ntri(3) = tri(2) + tri(1) + tri(4) = 2 + 3 + 3 = 8\n\nYou are given a non-negative integer number n, you have to return a list of the first n + 1 numbers of the Tribonacci sequence.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "In the odd case recurrence tri(n) = tri(n-1) + tri(n-2) + tri(n+1), does computing tri(n) require knowing tri(n+1) first, implying the sequence must be computed backwards or with simultaneous equations, or is this a typo and should be tri(n-3)?",
+        "source": "model",
+        "description1": "Given a non-negative integer n, return a list of the first n + 1 numbers of the Tribonacci sequence, defined by tri(1) = 3, tri(n) = 1 + n / 2 when n is even, and tri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1) when n is odd\u2014where computing tri(n) for odd n requires knowing tri(n + 1) first, implying the sequence must be computed backwards or via simultaneous equations.",
+        "description2": "Given a non-negative integer n, return a list of the first n + 1 numbers of the Tribonacci sequence, defined by tri(1) = 3, tri(n) = 1 + n / 2 when n is even, and tri(n) = tri(n - 1) + tri(n - 2) + tri(n - 3) when n is odd.",
+        "oracle_description": "Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in the last couple centuries. However, what people don't know is Tribonacci sequence. Tribonacci sequence is defined by the recurrence:\ntri(1) = 3\ntri(n) = 1 + n / 2, if n is even.\ntri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n\nIn the odd case, the term tri(n + 1) refers to the next index, which is even, and is therefore obtained directly from the even-case formula rather than requiring the sequence to be computed backwards or via simultaneous equations. That is, tri(n + 1) is evaluated using the closed-form even-index rule, so tri(n) for odd n can be computed forward from the two preceding values together with the directly computed value at index n + 1.\n\nYou are given a non-negative integer number n, you have to return a list of the first n + 1 numbers of the Tribonacci sequence.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "Should the returned list be computed using the recurrence relation defined in the description rather than matching the example output `tri(3) = [1, 1, 2, 3]`?",
+        "source": "auditor",
+        "description1": "Given a non-negative integer `n`, return a list of the first `n + 1` numbers of the Tribonacci sequence, where the sequence is defined by the recurrence: `tri(1) = 3`; `tri(n) = 1 + n / 2` if `n` is even; `tri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1)` if `n` is odd. The list must be computed by evaluating the recurrence relation to determine each term, rather than by matching the example output `tri(3) = [1, 1, 2, 3]`.",
+        "description2": "Given a non-negative integer `n`, return a list of the first `n + 1` numbers of the Tribonacci sequence, where the sequence is defined by the recurrence: `tri(1) = 3`; `tri(n) = 1 + n / 2` if `n` is even; `tri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1)` if `n` is odd. The list must match the example output `tri(3) = [1, 1, 2, 3]`, even if this requires deviating from the recurrence relation.",
+        "oracle_description": "Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in the last couple centuries. However, what people don't know is Tribonacci sequence. Tribonacci sequence is defined by the recurrence:\ntri(1) = 3\ntri(n) = 1 + n / 2, if n is even.\ntri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\nFor example:\ntri(2) = 1 + (2 / 2) = 2\ntri(4) = 3\ntri(3) = tri(2) + tri(1) + tri(4) = 2 + 3 + 3 = 8\n\nYou are given a non-negative integer number n, you have to return a list of the first n + 1 numbers of the Tribonacci sequence. The returned list must be computed using the recurrence relation defined above, and its values should follow from that recurrence rather than from any illustrative example output.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  },
+  {
+    "task_id": 136,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should zero be considered a positive integer for the purpose of finding the smallest positive integer?",
+        "source": "model",
+        "description1": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of non-negative integers (including zero) in a list. If there is no negative integer, return None for 'a'; if there is no non-negative integer (i.e., no zero or positive integer), return None for 'b'.",
+        "description2": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers (excluding zero) in a list. If there is no negative integer, return None for 'a'; if there is no positive integer, return None for 'b'.",
+        "oracle_description": "Create a function that returns a tuple (a, b), where 'a' is the largest of the negative integers, and 'b' is the smallest of the positive integers in a list. Zero is considered neither positive nor negative, so it is never selected as the smallest positive integer. If there are no negative integers, return 'a' as None; if there are no positive integers, return 'b' as None.",
+        "oracle_leak": "Stating that zero is not considered negative either (\"neither positive nor negative\"), which resolves whether zero can be selected as the largest negative integer.",
+        "oracle_rewrite": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers in a list. Zero is not considered a positive integer for the purpose of finding the smallest positive integer. If there is no negative or positive integers, return them as None."
+      },
+      "q2": {
+        "question": "Should zero be considered a negative integer for the purpose of finding the largest negative integer?",
+        "source": "model",
+        "description1": "Create a function that returns a tuple (a, b), where 'a' is the largest integer less than or equal to zero in the list, and 'b' is the smallest integer greater than or equal to zero in the list. If there is no such integer for a given position, return None for that position.",
+        "description2": "Create a function that returns a tuple (a, b), where 'a' is the largest integer strictly less than zero in the list, and 'b' is the smallest integer strictly greater than zero in the list. If there is no such integer for a given position, return None for that position.",
+        "oracle_description": "Create a function that returns a tuple (a, b), where 'a' is the largest of the negative integers in a list, and 'b' is the smallest of the positive integers in the list. Zero is neither negative nor positive, so it is not considered when finding the largest negative integer (nor the smallest positive integer). If there are no negative integers, 'a' should be None, and if there are no positive integers, 'b' should be None.",
+        "oracle_leak": "Specifying that zero is not considered when finding the smallest positive integer.",
+        "oracle_rewrite": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers in a list. Zero is not considered a negative integer for the purpose of finding the largest negative integer. If there are no negative or positive integers, return them as None."
+      },
+      "q3": {
+        "question": "In the case where the list contains only zeros, should the function return (None, None) or (0, 0)?",
+        "source": "model",
+        "description1": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers in a list. If there is no negative integer, return None for 'a'; if there is no positive integer, return None for 'b'. Zeros are neither considered negative nor positive, so they do not affect the values of 'a' or 'b'. For example, a list containing only zeros yields (None, None).",
+        "description2": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers in a list. If there is no negative integer, return None for 'a'; if there is no positive integer, return None for 'b'. However, zeros are treated as both non-negative and non-positive in a way that when the list contains only zeros, the function returns (0, 0) instead of (None, None).",
+        "oracle_description": "Create a function that returns a tuple (a, b), where 'a' is the largest of the negative integers, and 'b' is the smallest of the positive integers in a list. If there are no negative integers, 'a' should be None; if there are no positive integers, 'b' should be None. Zero is treated as neither positive nor negative, so it is never selected for either value; in particular, a list containing only zeros yields (None, None).",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q_auditor": {
+        "question": "When there are no negative integers in the list, should the first element of the returned tuple be None?",
+        "source": "auditor",
+        "description1": "Create a function that returns a tuple (a, b), where 'a' is the largest negative integer in the list, and 'b' is the smallest positive integer in the list. If there are no negative integers, 'a' should be None; if there are no positive integers, 'b' should be None. Zero is neither considered negative nor positive for the purpose of determining 'a' or 'b'.",
+        "description2": "Create a function that returns a tuple (a, b), where 'a' is the largest negative integer in the list, and 'b' is the smallest positive integer in the list. If there are no negative integers, 'a' should be None; if there are no positive integers, 'b' should be None. Zero is neither considered negative nor positive for the purpose of determining 'a' or 'b'.",
+        "oracle_description": "Create a function that returns a tuple (a, b), where 'a' is the largest of the negative integers in a list, and 'b' is the smallest of the positive integers in the list. If there are no negative integers, 'a' should be None; if there are no positive integers, 'b' should be None. Note that zero is treated as neither negative nor positive, so it counts as neither for either value.",
+        "oracle_leak": "Clarification on how zero is treated (that it is neither negative nor positive).",
+        "oracle_rewrite": "Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers, and 'b' is the smallest of positive integers in a list. If there are no negative integers, 'a' should be None. If there are no positive integers, return 'b' as None."
+      }
+    }
+  },
+  {
+    "task_id": 152,
+    "true_question_missing": true,
+    "questions": {
+      "q1": {
+        "question": "Should the function return a list of integers, or could it return a list of floats if the absolute difference is non-integer?",
+        "source": "model",
+        "description1": "Given two arrays of scores and guesses of equal length, where each index corresponds to a match, return a list of integers where each element is the absolute difference between the corresponding guess and score; if the guess matches the score exactly, the value is 0.",
+        "description2": "Given two arrays of scores and guesses of equal length, where each index corresponds to a match, return a list of numbers (which may be integers or floats) where each element is the absolute difference between the corresponding guess and score; if the guess matches the score exactly, the value is 0.",
+        "oracle_description": "You are given two arrays of scores and guesses of equal length, where each index represents a match. Return an array of the same length indicating how far off each guess was: for each match, if the guess is correct the value is 0, otherwise the value is the absolute difference between the guess and the score. The returned values reflect the magnitude of these differences based on the input values; the result mirrors the numeric type produced by taking the absolute difference of the corresponding elements.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q2": {
+        "question": "Should the function handle negative differences by returning the signed difference (as in the examples), or should it always return the absolute difference (i.e., non-negative)?",
+        "source": "model",
+        "description1": "Given two arrays of integers (scores and guesses) of equal length, where each index corresponds to a match, return an array of the same length where each element is the signed difference between the guess and the score (i.e., guess \u2212 score) for that match. If the guess equals the score, the value is 0; otherwise, it reflects whether the guess was higher (positive) or lower (negative) than the actual score.",
+        "description2": "Given two arrays of integers (scores and guesses) of equal length, where each index corresponds to a match, return an array of the same length where each element is the absolute difference between the guess and the score for that match. If the guess equals the score, the value is 0; otherwise, it is the non-negative magnitude of the difference between the guess and the actual score.",
+        "oracle_description": "I think we all remember that feeling when the result of some long-awaited event is finally known. The feelings and thoughts you have at that moment are definitely worth noting down and comparing. Your task is to determine if a person correctly guessed the results of a number of matches. You are given two arrays of scores and guesses of equal length, where each index shows a match. Return an array of the same length denoting how far off each guess was. If they have guessed correctly, the value is 0, and if not, the value is the absolute (non-negative) difference between the guess and the score.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      },
+      "q3": {
+        "question": "Should the function raise an exception if the input arrays have different lengths, or should it assume equal-length inputs and behave unpredictably otherwise?",
+        "source": "model",
+        "description1": "Given two arrays of integers (scores and guesses) of equal length, return an array of the same length where each element is the absolute difference between the corresponding elements in the scores and guesses arrays. If the corresponding elements are equal, the result is 0. If the input arrays have different lengths, raise an exception.",
+        "description2": "Given two arrays of integers (scores and guesses), return an array where each element is the absolute difference between the corresponding elements in the scores and guesses arrays at the same index, up to the length of the shorter array. If the corresponding elements are equal, the result is 0. If the input arrays have different lengths, the behavior is undefined (no guarantee of correctness or consistency).",
+        "oracle_description": "I think we all remember that feeling when the result of some long-awaited event is finally known. The feelings and thoughts you have at that moment are definitely worth noting down and comparing. Your task is to determine if a person correctly guessed the results of a number of matches. You are given two arrays of scores and guesses, where each index shows a match. Return an array denoting how far off each guess was. If they have guessed correctly, the value is 0, and if not, the value is the absolute difference between the guess and the score. When the input arrays have different lengths, the function does not raise an exception; it assumes equal-length inputs and simply processes indices up to the length of the shorter array, ignoring any extra elements.",
+        "oracle_leak": "specific handling for mismatched array lengths (processing up to the length of the shorter array and ignoring extra elements)",
+        "oracle_rewrite": "I think we all remember that feeling when the result of some long-awaited event is finally known. The feelings and thoughts you have at that moment are definitely worth noting down and comparing. Your task is to determine if a person correctly guessed the results of a number of matches. You are given two arrays of scores and guesses of equal length, where each index shows a match. Return an array of the same length denoting how far off each guess was. If they have guessed correctly, the value is 0, and if not, the value is the absolute difference between the guess and the score. The function assumes equal-length inputs and does not raise an exception if the input arrays have different lengths."
+      },
+      "q_auditor": {
+        "question": "Should the function follow the written description by returning 0 for correct guesses and the absolute difference otherwise, rather than following the example outputs?",
+        "source": "auditor",
+        "description1": "Given two arrays of integers (scores and guesses) of equal length, return an array where each element is 0 if the corresponding guess equals the score, and otherwise is the absolute difference between the guess and the score.",
+        "description2": "Given two arrays of integers (scores and guesses) of equal length, return an array where each element is the difference between the guess and the score (without taking absolute value), with no special handling for correct guesses\u2014i.e., when the guess equals the score, the result is 0, but when they differ, the result may be negative.",
+        "oracle_description": "I think we all remember that feeling when the result of some long-awaited event is finally known. The feelings and thoughts you have at that moment are definitely worth noting down and comparing. Your task is to determine if a person correctly guessed the results of a number of matches. You are given two arrays of scores and guesses of equal length, where each index shows a match. Return an array of the same length denoting how far off each guess was. If they have guessed correctly, the value is 0, and if not, the value is the absolute difference between the guess and the score. Follow this written rule of returning 0 for correct guesses and the absolute difference otherwise, regardless of any illustrative example outputs.",
+        "oracle_leak": null,
+        "oracle_rewrite": null
+      }
+    }
+  }
+]
