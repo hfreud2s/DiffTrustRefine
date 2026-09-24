@@ -13,15 +13,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import EXPERIMENT, DATASET_NAME, load_instances
 import difftrust
 
-KEY_RE = re.compile(r"^humanevalcomm_(\d+)(?:-(\w+))?$")
+KEY_RE = re.compile(r"^humanevalcomm_(\d+)(?:[-_]+(.+))?$")   # trailing label: variant, or {qkey}__{branch} for refined
 
 
 def parse_candidate_key(key: str):
     """
     Splits a candidate file name into (task_id, variant).
 
-    "humanevalcomm_23"           -> (23, None)        the unmanipulated condition
-    "humanevalcomm_23-prompt1a"  -> (23, "prompt1a")  a manipulated condition
+    "humanevalcomm_23"             -> (23, None)          the unmanipulated condition
+    "humanevalcomm_23-prompt1a"    -> (23, "prompt1a")    a manipulated (baseline) condition
+    "humanevalcomm_23__q1__oracle" -> (23, "q1__oracle")  a refined condition (question + branch)
 
     key:     the candidate file's name, e.g. "humanevalcomm_23" or "humanevalcomm_23-prompt1a"
     returns: (task_id, variant), or None if the name does not match the scheme
@@ -198,8 +199,9 @@ def score_phase(llm_dir: str, category: str, phase: str = "baseline",
 if __name__ == "__main__":
 
     # --- Step 4a: score each run of a category (writes run{r}/stats.json) ---
-    # score_phase("LLM1", "1a")               # all runs of the baseline phase
-    # score_phase("LLM1", "1a", runs=[0])     # just run0
+    # score_phase("LLM1", "1a")                       # all runs of the baseline phase
+    # score_phase("LLM1", "1a", runs=[0])             # just run0
+    # score_phase("LLM1", "1a", phase="refined")      # the refined phase (round 5)
 
     # --- Or a single run folder directly ---
     # run_dir = EXPERIMENT / "LLM1" / "1a" / "baseline" / "run0"

@@ -30,23 +30,27 @@ def aggregate_phase(llm_dir: str, category: str, phase: str = "baseline"):
             continue
         with open(stats_path, "r", encoding="utf-8") as f:
             rows = json.load(f)
-        per_run[int(d.name[len("run"):])] = {r["task_id"]: r for r in rows}
+        per_run[int(d.name[len("run"):])] = {r["key"]: r for r in rows}
 
     runs = sorted(per_run)
     if not runs:
         print(f"{llm_dir}/{category}/{phase}: no run stats found (run score_phase first)")
         return []
 
-    task_ids = sorted({tid for run_rows in per_run.values() for tid in run_rows})
+    # Align across runs by candidate key (the file name), which is stable from run to run. For the
+    # baseline that is one key per task; for the refined phase it is one key per (task, question,
+    # branch) condition, so conditions of the same task do not collide.
+    keys = sorted({k for run_rows in per_run.values() for k in run_rows})
     aggregated = []
-    for tid in task_ids:
-        inc = [per_run[r].get(tid, {}).get("incoherence") for r in runs]
-        err = [per_run[r].get(tid, {}).get("error") for r in runs]
+    for key in keys:
+        inc = [per_run[r].get(key, {}).get("incoherence") for r in runs]
+        err = [per_run[r].get(key, {}).get("error") for r in runs]
         inc_valid = [v for v in inc if v is not None]
         err_valid = [v for v in err if v is not None]
-        sample = next(per_run[r][tid] for r in runs if tid in per_run[r])
+        sample = next(per_run[r][key] for r in runs if key in per_run[r])
         aggregated.append({
-            "task_id":          tid,
+            "key":              key,
+            "task_id":          sample.get("task_id"),
             "name":             sample.get("name"),
             "variant":          sample.get("variant"),
             "runs":             runs,
@@ -64,5 +68,8 @@ def aggregate_phase(llm_dir: str, category: str, phase: str = "baseline"):
 
 
 if __name__ == "__main__":
-    #aggregate_phase("LLM1", "1a")
+
+    # --- Step 4b: aggregate per-run stats into {phase}/aggregate.json ---
+    # aggregate_phase("LLM1", "1a")                    # baseline
+    # aggregate_phase("LLM1", "1a", phase="refined")   # round 5
     pass

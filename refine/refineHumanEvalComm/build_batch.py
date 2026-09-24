@@ -11,7 +11,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from common import CATEGORIES, CODER_MODELS, EXPERIMENT, DATASET_NAME, load_instances, spec_for
+from common import CATEGORIES, CODER_MODELS, EXPERIMENT, DATASET_NAME, load_instances, spec_for, provider_obj
 
 
 def build_prompt(spec):
@@ -45,7 +45,8 @@ def build_baseline_batch(llm_dir:        str,
                          categories:     list = None,
                          num_candidates: int = 10,
                          num_runs:       int = 10,
-                         temperature:    float = None):
+                         temperature:    float = None,
+                         provider=None):
     """
     Writes one OpenRouter baseline batch file per category for a single LLM.
 
@@ -83,6 +84,8 @@ def build_baseline_batch(llm_dir:        str,
                 body = {"model": model, "messages": build_prompt(spec)}
                 if temperature is not None:
                     body["temperature"] = temperature
+                if provider is not None:
+                    body["provider"] = provider_obj(provider)
                 for run in range(num_runs):
                     for i in range(num_candidates):
                         request = {
@@ -99,11 +102,17 @@ def build_baseline_batch(llm_dir:        str,
 # Which refined descriptions become program candidates. Per question we generate from the oracle's
 # true answer and from both of the coder's YES/NO branches, so scoring later yields both the
 # true-refinement effect (oracle) and the expected-incoherence-reduction signal (desc1/desc2).
-DESC_VARIANTS = [
-    ("oracle_description", "oracle"),
-    ("description1",       "desc1"),
-    ("description2",       "desc2"),
-]
+ORACLE_VARIANTS = [("oracle_description", "oracle")]                 # oracle's true answer
+CODER_VARIANTS  = [("description1", "desc1"), ("description2", "desc2")]  # coder YES/NO branches
+DESC_VARIANTS   = ORACLE_VARIANTS + CODER_VARIANTS                        # all three (combined default)
+
+
+def effective_oracle_description(q):
+    """The oracle description to sample programs from: the auditor's (#2) tightened rewrite when a
+    leak was flagged and a rewrite was supplied, otherwise the oracle's original true description."""
+    if q.get("oracle_leak") and q.get("oracle_rewrite"):
+        return q["oracle_rewrite"]
+    return q.get("oracle_description")
 
 
 def build_refined_prompt(description: str, spec):
@@ -135,7 +144,10 @@ def build_refined_candidates_batch(llm_dir:        str,
                                    dataset_name:   str = DATASET_NAME,
                                    num_candidates: int = 10,
                                    num_runs:       int = 10,
-                                   temperature:    float = None):
+                                   temperature:    float = None,
+                                   provider=None,
+                                   variants=None,
+                                   request_name:   str = "refined_candidates_batch_request.jsonl"):
     """
     Writes the batch that generates refined program candidates for one (LLM, category). For every
     task in {category}/refined/questions_and_descriptions.json, every question, and every filled
@@ -154,9 +166,11 @@ def build_refined_candidates_batch(llm_dir:        str,
     instances = load_instances(dataset_name, {e["task_id"] for e in entries})
     if model is None:
         model = CODER_MODELS[llm_dir]
+    if variants is None:
+        variants = DESC_VARIANTS
 
-    out_path = refined_dir / "refined_candidates_batch_request.jsonl"
-    written = skipped = 0
+    out_path = refined_dir / request_name
+    written = skipped = rewrites_used = 0
     with open(out_path, "w", encoding="utf-8") as f:
         for e in entries:
             inst = instances.get(e["task_id"])
@@ -164,14 +178,21 @@ def build_refined_candidates_batch(llm_dir:        str,
                 continue
             spec = inst.spec
             for qkey, q in e["questions"].items():
-                for field, label in DESC_VARIANTS:
-                    description = q.get(field)
+                for field, label in variants:
+                    if field == "oracle_description":
+                        description = effective_oracle_description(q)
+                        if q.get("oracle_leak") and q.get("oracle_rewrite"):
+                            rewrites_used += 1
+                    else:
+                        description = q.get(field)
                     if not description:
                         skipped += 1
                         continue
                     body = {"model": model, "messages": build_refined_prompt(description, spec)}
                     if temperature is not None:
                         body["temperature"] = temperature
+                    if provider is not None:
+                        body["provider"] = provider_obj(provider)
                     for run in range(num_runs):
                         for i in range(num_candidates):
                             f.write(json.dumps({
@@ -179,9 +200,31 @@ def build_refined_candidates_batch(llm_dir:        str,
                                 "body":      body,
                             }) + "\n")
                             written += 1
+    note = f", {rewrites_used} oracle rewrite(s) used" if rewrites_used else ""
     print(f"{llm_dir}/{category}: {written} refined candidate request(s) -> {out_path} "
-          f"({skipped} empty branch(es) skipped)")
+          f"({skipped} empty branch(es) skipped{note})")
     return out_path
+
+
+def build_refined_coder_candidates_batch(llm_dir, category, **kwargs):
+    """Refined candidates for the coder YES/NO branches only (desc1/desc2). Separate stage so these
+    can be sampled while the oracle-description decision is still open. Output:
+    {category}/refined/refined_coder_candidates_batch_request.jsonl; post-process with
+    postprocess_refined_candidates(result_name="refined_coder_candidates_batch_result.jsonl")."""
+    return build_refined_candidates_batch(
+        llm_dir, category, variants=CODER_VARIANTS,
+        request_name="refined_coder_candidates_batch_request.jsonl", **kwargs)
+
+
+def build_refined_oracle_candidates_batch(llm_dir, category, **kwargs):
+    """Refined candidates for the oracle's true description only. Output:
+    {category}/refined/refined_oracle_candidates_batch_request.jsonl; post-process with
+    postprocess_refined_candidates(result_name="refined_oracle_candidates_batch_result.jsonl").
+    Both stages write disjoint per-(run,task,qkey,branch) files into the same run dirs, so scoring
+    reads whichever branches are present."""
+    return build_refined_candidates_batch(
+        llm_dir, category, variants=ORACLE_VARIANTS,
+        request_name="refined_oracle_candidates_batch_request.jsonl", **kwargs)
 
 
 if __name__ == "__main__":
