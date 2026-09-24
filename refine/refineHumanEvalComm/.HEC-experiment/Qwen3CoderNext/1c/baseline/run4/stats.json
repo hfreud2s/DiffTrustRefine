@@ -1,0 +1,452 @@
+[
+  {
+    "key": "humanevalcomm_1-prompt1c",
+    "task_id": 1,
+    "variant": "prompt1c",
+    "name": "separate_paren_groups",
+    "nb_candidates": 10,
+    "incoherence": 0.568,
+    "error": 0.377
+  },
+  {
+    "key": "humanevalcomm_10-prompt1c",
+    "task_id": 10,
+    "variant": "prompt1c",
+    "name": "make_palindrome",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_101-prompt1c",
+    "task_id": 101,
+    "variant": "prompt1c",
+    "name": "words_string",
+    "nb_candidates": 10,
+    "incoherence": 0.23,
+    "error": 0.482
+  },
+  {
+    "key": "humanevalcomm_105-prompt1c",
+    "task_id": 105,
+    "variant": "prompt1c",
+    "name": "by_length",
+    "nb_candidates": 10,
+    "incoherence": 0.112,
+    "error": 0.151
+  },
+  {
+    "key": "humanevalcomm_11-prompt1c",
+    "task_id": 11,
+    "variant": "prompt1c",
+    "name": "string_xor",
+    "nb_candidates": 10,
+    "incoherence": 0.516,
+    "error": 0.925
+  },
+  {
+    "key": "humanevalcomm_111-prompt1c",
+    "task_id": 111,
+    "variant": "prompt1c",
+    "name": "histogram",
+    "nb_candidates": 10,
+    "incoherence": 0.302,
+    "error": 0.45
+  },
+  {
+    "key": "humanevalcomm_115-prompt1c",
+    "task_id": 115,
+    "variant": "prompt1c",
+    "name": "max_fill",
+    "nb_candidates": 10,
+    "incoherence": 0.205,
+    "error": 0.15
+  },
+  {
+    "key": "humanevalcomm_116-prompt1c",
+    "task_id": 116,
+    "variant": "prompt1c",
+    "name": "sort_array",
+    "nb_candidates": 10,
+    "incoherence": 0.3,
+    "error": 0.878
+  },
+  {
+    "key": "humanevalcomm_12-prompt1c",
+    "task_id": 12,
+    "variant": "prompt1c",
+    "name": "longest",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_122-prompt1c",
+    "task_id": 122,
+    "variant": "prompt1c",
+    "name": "add_elements",
+    "nb_candidates": 10,
+    "incoherence": 0.148,
+    "error": 0.394
+  },
+  {
+    "key": "humanevalcomm_126-prompt1c",
+    "task_id": 126,
+    "variant": "prompt1c",
+    "name": "is_sorted",
+    "nb_candidates": 10,
+    "incoherence": 0.43,
+    "error": 0.625
+  },
+  {
+    "key": "humanevalcomm_13-prompt1c",
+    "task_id": 13,
+    "variant": "prompt1c",
+    "name": "greatest_common_divisor",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.189
+  },
+  {
+    "key": "humanevalcomm_130-prompt1c",
+    "task_id": 130,
+    "variant": "prompt1c",
+    "name": "tri",
+    "nb_candidates": 10,
+    "incoherence": 0.515,
+    "error": 0.986
+  },
+  {
+    "key": "humanevalcomm_136-prompt1c",
+    "task_id": 136,
+    "variant": "prompt1c",
+    "name": "largest_smallest_integers",
+    "nb_candidates": 10,
+    "incoherence": 0.478,
+    "error": 0.288
+  },
+  {
+    "key": "humanevalcomm_137-prompt1c",
+    "task_id": 137,
+    "variant": "prompt1c",
+    "name": "compare_one",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_148-prompt1c",
+    "task_id": 148,
+    "variant": "prompt1c",
+    "name": "bf",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.003
+  },
+  {
+    "key": "humanevalcomm_15-prompt1c",
+    "task_id": 15,
+    "variant": "prompt1c",
+    "name": "string_sequence",
+    "nb_candidates": 10,
+    "incoherence": 0.13,
+    "error": 0.658
+  },
+  {
+    "key": "humanevalcomm_152-prompt1c",
+    "task_id": 152,
+    "variant": "prompt1c",
+    "name": "compare",
+    "nb_candidates": 10,
+    "incoherence": 0.348,
+    "error": 0.304
+  },
+  {
+    "key": "humanevalcomm_157-prompt1c",
+    "task_id": 157,
+    "variant": "prompt1c",
+    "name": "right_angle_triangle",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.002
+  },
+  {
+    "key": "humanevalcomm_161-prompt1c",
+    "task_id": 161,
+    "variant": "prompt1c",
+    "name": "solve",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_162-prompt1c",
+    "task_id": 162,
+    "variant": "prompt1c",
+    "name": "string_to_md5",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_19-prompt1c",
+    "task_id": 19,
+    "variant": "prompt1c",
+    "name": "sort_numbers",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_22-prompt1c",
+    "task_id": 22,
+    "variant": "prompt1c",
+    "name": "filter_integers",
+    "nb_candidates": 10,
+    "incoherence": 0.529,
+    "error": 0.455
+  },
+  {
+    "key": "humanevalcomm_23-prompt1c",
+    "task_id": 23,
+    "variant": "prompt1c",
+    "name": "strlen",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_26-prompt1c",
+    "task_id": 26,
+    "variant": "prompt1c",
+    "name": "remove_duplicates",
+    "nb_candidates": 10,
+    "incoherence": 0.247,
+    "error": 0.23
+  },
+  {
+    "key": "humanevalcomm_27-prompt1c",
+    "task_id": 27,
+    "variant": "prompt1c",
+    "name": "flip_case",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_28-prompt1c",
+    "task_id": 28,
+    "variant": "prompt1c",
+    "name": "concatenate",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.772
+  },
+  {
+    "key": "humanevalcomm_34-prompt1c",
+    "task_id": 34,
+    "variant": "prompt1c",
+    "name": "unique",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_37-prompt1c",
+    "task_id": 37,
+    "variant": "prompt1c",
+    "name": "sort_even",
+    "nb_candidates": 10,
+    "incoherence": 0.444,
+    "error": 0.671
+  },
+  {
+    "key": "humanevalcomm_43-prompt1c",
+    "task_id": 43,
+    "variant": "prompt1c",
+    "name": "pairs_sum_to_zero",
+    "nb_candidates": 10,
+    "incoherence": 0.197,
+    "error": 0.099
+  },
+  {
+    "key": "humanevalcomm_47-prompt1c",
+    "task_id": 47,
+    "variant": "prompt1c",
+    "name": "median",
+    "nb_candidates": 10,
+    "incoherence": 0.422,
+    "error": 0.311
+  },
+  {
+    "key": "humanevalcomm_48-prompt1c",
+    "task_id": 48,
+    "variant": "prompt1c",
+    "name": "is_palindrome",
+    "nb_candidates": 10,
+    "incoherence": 0.498,
+    "error": 0.553
+  },
+  {
+    "key": "humanevalcomm_49-prompt1c",
+    "task_id": 49,
+    "variant": "prompt1c",
+    "name": "modp",
+    "nb_candidates": 10,
+    "incoherence": 0.425,
+    "error": 0.393
+  },
+  {
+    "key": "humanevalcomm_5-prompt1c",
+    "task_id": 5,
+    "variant": "prompt1c",
+    "name": "intersperse",
+    "nb_candidates": 10,
+    "incoherence": 0.495,
+    "error": 0.378
+  },
+  {
+    "key": "humanevalcomm_52-prompt1c",
+    "task_id": 52,
+    "variant": "prompt1c",
+    "name": "below_threshold",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_54-prompt1c",
+    "task_id": 54,
+    "variant": "prompt1c",
+    "name": "same_chars",
+    "nb_candidates": 10,
+    "incoherence": 0.004,
+    "error": 0.002
+  },
+  {
+    "key": "humanevalcomm_6-prompt1c",
+    "task_id": 6,
+    "variant": "prompt1c",
+    "name": "parse_nested_parens",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.382
+  },
+  {
+    "key": "humanevalcomm_60-prompt1c",
+    "task_id": 60,
+    "variant": "prompt1c",
+    "name": "sum_to_n",
+    "nb_candidates": 10,
+    "incoherence": 0.471,
+    "error": 0.772
+  },
+  {
+    "key": "humanevalcomm_61-prompt1c",
+    "task_id": 61,
+    "variant": "prompt1c",
+    "name": "correct_bracketing",
+    "nb_candidates": 10,
+    "incoherence": 0.464,
+    "error": 0.616
+  },
+  {
+    "key": "humanevalcomm_62-prompt1c",
+    "task_id": 62,
+    "variant": "prompt1c",
+    "name": "derivative",
+    "nb_candidates": 10,
+    "incoherence": 0.005,
+    "error": 0.099
+  },
+  {
+    "key": "humanevalcomm_64-prompt1c",
+    "task_id": 64,
+    "variant": "prompt1c",
+    "name": "vowels_count",
+    "nb_candidates": 10,
+    "incoherence": 0.048,
+    "error": 0.029
+  },
+  {
+    "key": "humanevalcomm_65-prompt1c",
+    "task_id": 65,
+    "variant": "prompt1c",
+    "name": "circular_shift",
+    "nb_candidates": 10,
+    "incoherence": 0.143,
+    "error": 0.179
+  },
+  {
+    "key": "humanevalcomm_68-prompt1c",
+    "task_id": 68,
+    "variant": "prompt1c",
+    "name": "pluck",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_7-prompt1c",
+    "task_id": 7,
+    "variant": "prompt1c",
+    "name": "filter_by_substring",
+    "nb_candidates": 10,
+    "incoherence": 0.503,
+    "error": 0.678
+  },
+  {
+    "key": "humanevalcomm_74-prompt1c",
+    "task_id": 74,
+    "variant": "prompt1c",
+    "name": "total_match",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_78-prompt1c",
+    "task_id": 78,
+    "variant": "prompt1c",
+    "name": "hex_key",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.045
+  },
+  {
+    "key": "humanevalcomm_79-prompt1c",
+    "task_id": 79,
+    "variant": "prompt1c",
+    "name": "decimal_to_binary",
+    "nb_candidates": 10,
+    "incoherence": 0.048,
+    "error": 0.018
+  },
+  {
+    "key": "humanevalcomm_8-prompt1c",
+    "task_id": 8,
+    "variant": "prompt1c",
+    "name": "sum_product",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.841
+  },
+  {
+    "key": "humanevalcomm_85-prompt1c",
+    "task_id": 85,
+    "variant": "prompt1c",
+    "name": "add",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.0
+  },
+  {
+    "key": "humanevalcomm_95-prompt1c",
+    "task_id": 95,
+    "variant": "prompt1c",
+    "name": "check_dict_case",
+    "nb_candidates": 10,
+    "incoherence": 0.0,
+    "error": 0.01
+  }
+]
