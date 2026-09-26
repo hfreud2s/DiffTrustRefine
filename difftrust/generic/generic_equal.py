@@ -34,6 +34,8 @@ class NumericTypeHandler(EqualHandler):
 
     def handle(self, obj1, obj2, builder, visited):
         """Return the string representation of the object."""
+        if isinstance(obj1, int) and isinstance(obj2, int):
+            return obj1 == obj2
         obj1 = float(obj1)
         obj2 = float(obj2)
         diff = abs(obj1 - obj2)
